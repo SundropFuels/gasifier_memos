@@ -1,0 +1,213 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+In order to audit the laboratory gasification system and ensure that our gas analysis data is giving us accurate conversion results, a carbon balance was performed.  Samples of char from the ash knockout and the filters were also collected and sent to Huffman Laboratories for analyses (WHAT ANALYSES?).  \#\#\% of the carbon put into the system was accounted for in the gaseous and solid products, and it was determined that the conversion calculations obtained from the mass spec are accurate.
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Experimental Methods}
+
+Since analyses were being done on the char to obtain information about slag formation and waste disposal at the pilot and commercial scales, run conditions which have historically lead to higher conversions were chosen to mirror the desired conversion at large scales.  Biomass flow rate was 2 lbs/hr, and the SiC tube skin temperature was set to 1450 $^\circ$C.  The experiment was run as long as possible to maximize the amount of char that was produced for sampling.  Detailed information about the run conditions can be found in Appendix \ref{ap_setpoints}.  Feedstock was taken from barrel 101534, which was produced during Mascoma run MS1231.
+
+Carbon content is typically higher in the filters compared to that in the ash knockout, so the char from each section was collected and weighed separately.  Each sample was analyzed by the LECO for carbon content and moisture was found using Karl-Fischer titration.
+
+The experiment was interrupted and restarted twice because of plugs, so three separate analyses were performed on each steady state section using Sundrop Fuels' analysis software.  The total conversion from the software is calculated using Equation \ref{eq_total}.  These conversions can be compared to the overall conversion calculated by comparing the amount of carbon in the char versus the amount of carbon fed into the system as biomass as shown in Equation \ref{eq_x_solids}.  This will show both the accuracy of the conversion calculated by the software as well as the ability of the system to reach similar steady states for identical run conditions.
+
+\begin{equation}
+	X_{tot} = \frac{\dot{n}_{C out,gas} - \dot{n}_{C_{in,CO_2}}}{\dot{n}_{C in,biomass}}
+	\label{eq_total}
+\end{equation}
+
+\begin{equation}
+	X_{solids} = 1- \frac{m_{C_{out, solids}}}{m_{C_{in, biomass}}}
+	\label{eq_x_solids}
+\end{equation}
+
+Also, a carbon balance is performed using Equation \ref{eq_balance}.  This shows the percentage of inlet carbon that is accounted for in the gaseous and solids products.
+
+\begin{equation}
+	B_C = \frac{m_{C_{in, biomass}} + m_{C_{in, CO_2}}}{m_{C_{out, solids}} + m_{C_{out, gas}}}
+	\label{eq_balance}
+\end{equation}
+
+\section*{Results and Discussion}
+
+\subsection*{Comparing Conversions}
+
+The conversions were calculated separately for each of the three runs, and are given in Table \ref{conversions} as X$_{tot}$.  The average total conversion was 0.823, and the standard deviation was 0.00737.  This shows that there was good repeatability between the runs.
+
+Conversion was also calculated using Equation \ref{eq_x_solids}.  Carbon content of the char is shown in Table \ref{tbl_char}, and carbon content in the biomass is given in Table \ref{tbl_biomass}.  The conversion found using solids analyses was found to be \#\#\#\#...
+
+\begin{table}
+	\centering
+	\caption{Conversion calculations for the mass balance experiment using analysis software (X$_{tot}$) and carbon analysis data from the char and biomass (X$_{solids}$).}
+	\label{conversions}
+	\begin{tabular}{c c c c}
+	\toprule
+	\multirow{2}{*}{Run ID}	&	\multirow{2}{*}{X$_{tot}$}	& 	X$_{tot}$				&\multirow{2}{*}{X$_{solids}$}	\\ 
+	{}					&	{}						& 	Average				&	{}						\\
+	\midrule
+	511					&	0.820					&	\multirow{3}{*}{0.823}	&	\multirow{3}{*}{\#\#\#\#}	\\
+	512					&	0.817					&	{}					&	{}						\\
+	513					&	0.831					&	{}					&	{}						\\
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Carbon content for collected samples from the ash knockout and filter char.}
+	\label{tbl_char}
+	\begin{tabular}{c c c c}
+	\toprule
+	\multicolumn{2}{c}{Ash Knockout}	&	\multicolumn{2}{c}{Filters}	\\
+	Mass (lb)	&	C (\% wt)	&	Mass (lb)	&	C (\% wt)	\\
+	\midrule
+	0.429	&	\#\#\#\#	&	0.655	&	\#\#\#\#	\\
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{}
+	\label{tbl_biomass}
+	\begin{tabular}{c c c c}
+	\toprule
+	\multicolumn{4}{c}{Biomass In}	\\
+	Fed (lb)	&	H$_2$O (\%wt)	&	C (\%wt)	&	C Fed (lb)	\\
+	\midrule
+	9.17		&	3.08			&	57.8		&	5.14		\\	
+	\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection*{Carbon Balance}
+
+The carbon balance was calculated using Equation \ref{eq_balance}, and is a representation of the fraction of carbon in the inlet that is accounted for in all products by solids and gas analyses.  
+
+\begin{table}
+	\centering
+	\caption{}
+	\label{tbl_balance}
+	\begin{tabular}{c c c c c}
+	\toprule
+	\multicolumn{2}{c}{C In (lbs)}	&	\multicolumn{2}{c}{C Out (lbs)}	&	\multirow{2}{*}{$B_C$}	\\
+	Biomass	&	CO$_2$	&	Solids	&	Gas						&	{}			\\
+	\midrule
+	5.14		&	1.20		&	\#\#\#	&	5.37						&	\#\#\#		\\
+	\bottomrule
+	\end{tabular}
+\end{table}
+\balance
+\section*{Conclusion}
+
+The mass balance runs were completed satisfactorily and samples were produced to send out for third party analyses.  The carbon balance performed accounted for \#\#\#\# of the carbon fed to the system.  This shows that the molar flow rates of each product calculated using mass spec analysis are accurate and can provide accurate data to calculate conversion numbers for experiments.  Also, the fact that the total conversions from the analysis software and solids analysis match within \#\#\#\# shows that the analysis software is calculating accurate conversions.  We can assume that our conversion numbers going forward in the future will be accurate until another mass balance run is performed as a check.
+
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+\section{Experimental Setpoints}
+\label{ap_setpoints}
+
+\begin{tabular}{c c c c c c c c c}
+	\toprule
+	\multirow{2}{*}{Run ID} &  Temp &  Pressure &  Biomass &  Steam &  Steam &  Entrainment & Downbed & Argon \\
+	{}					& $^\circ$C & psig	& lbs/hr	& mL/min	& $^\circ$C	& SLPM N$_2$	&	SLPM CO$_2$	& SLPM	\\
+	\midrule
+	511    &       1450 &        50 &             2 &     12.08 &       300 &       12.08 &                3.3 &            2 \\
+	512    &       1450 &        50 &             2 &     12.08 &       300 &       12.08 &                3.3 &            2 \\
+	513    &       1450 &        50 &             2 &     12.08 &       300 &       12.08 &                3.3 &            2 \\
+	\bottomrule
+\end{tabular}
+
+
+\section{Additional Results}
+
+\begin{center}
+
+\begin{tabular}{ccccc}
+	\toprule
+	Run ID &            Feed Start &             Feed Stop &            Steady State Start &             Steady State Stop \\
+	\midrule
+	511    & 2014-06-09 10:36 & 2014-06-09 12:24 & 2014-06-09 11:03 & 2014-06-09 12:23 \\
+	512    & 2014-06-09 12:53 & 2014-06-09 14:29 & 2014-06-09 13:04 & 2014-06-09 14:28 \\
+	513    & 2014-06-09 14:58 & 2014-06-09 16:27 & 2014-06-09 15:08 & 2014-06-09 16:26 \\
+	\bottomrule
+\end{tabular}
+
+\vspace{5 mm}
+
+\begin{tabular}{c c c c c c}
+	\toprule
+	\multirow{2}{*}{Run Id} &  Space Time &  \multirow{2}{*}{X Good} &  \multirow{2}{*}{X Total} &  \multirow{2}{*}{CH$_4$ Yield} &  Tar Loading \\
+	{}						& Seconds		& {}						& {}							& {}						& mg/Sm$^3$ \\			
+	\midrule
+	511    &         3.66 &    0.794 &   0.812 &       0.00791 &          30.0 \\
+	512    &         3.66 &    0.792 &   0.817 &       0.00723 &          24.9 \\
+	513    &         3.65 &    0.804 &   0.831 &       0.00827 &          32.8 \\
+	\bottomrule
+\end{tabular}
+
+\end{center}
+
+
+\section{Symbol Definitions}
+\label{ap_symbols}
+
+\begin{center}
+	\begin{tabular}{r l}
+	\toprule
+	Symbol					&	Definition	\\
+	\midrule
+	$B_C$					&	Total carbon balance	\\
+	$m_{C_{in, i}}$			&	Total mass of carbon into the system as species $i$	\\
+	$m_{C_{out, gas}}$			&	Total mass of carbon in gas exiting the system	\\
+	$m_{C_{out, solids}}$		&	Total mass of carbon in char collected after the experiment was completed	\\
+	$\dot{n}_{C_{in,i}}$		&	Molar flow rate of carbon entering the system as species $i$	\\
+	$\dot{n}_{C_{out,gas}}$		&	Molar flow rate of carbon in all gaseous species exiting the system		\\
+	$\dot{n}_{C_{out,i}}$		&	Molar flow rate of carbon in species $i$ exiting the system		\\
+	$X_{solids}$				&	Total conversion calculated using carbon contents from biomass and char	\\
+	$X_{tot}$					&	Total conversion calculated using analysis software	\\
+	\bottomrule
+	\end{tabular}
+\end{center}
+
+\end{document}
+
