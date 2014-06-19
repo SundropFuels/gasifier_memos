@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.26)  19 JUN 2014 10:32
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.26)  19 JUN 2014 10:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -287,12 +287,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Warning: No \author given.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 42.
+(Font)              <10.95> on input line 44.
 
-Underfull \vbox (badness 2556) has occurred while \output is active []
+Underfull \vbox (badness 1297) has occurred while \output is active []
 
 
-Overfull \hbox (0.76553pt too wide) in paragraph at lines 107--115
+Overfull \hbox (0.76553pt too wide) in paragraph at lines 109--117
  [][] 
  []
 
@@ -303,7 +303,7 @@ Package balance Warning: You have called \balance in second column
 <logo.jpg, id=1, 542.025pt x 405.515pt>
 File: logo.jpg Graphic file (type jpg)
  <use logo.jpg>
-Package pdftex.def Info: logo.jpg used on input line 138.
+Package pdftex.def Info: logo.jpg used on input line 140.
 (pdftex.def)             Requested size: 76.05666pt x 56.9055pt.
 
 
@@ -319,12 +319,12 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 File: logo.jpg Graphic file (type jpg)
 
 <use logo.jpg>
-Package pdftex.def Info: logo.jpg used on input line 142.
+Package pdftex.def Info: logo.jpg used on input line 144.
 (pdftex.def)             Requested size: 76.05666pt x 56.9055pt.
  [2]
 File: logo.jpg Graphic file (type jpg)
  <use logo.jpg>
-Package pdftex.def Info: logo.jpg used on input line 212.
+Package pdftex.def Info: logo.jpg used on input line 214.
 (pdftex.def)             Requested size: 76.05666pt x 56.9055pt.
  [3
 
@@ -348,7 +348,7 @@ b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on gasifier_mass_bal_201406_memo.pdf (3 pages, 173708 bytes).
+Output written on gasifier_mass_bal_201406_memo.pdf (3 pages, 173736 bytes).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)
  41 compressed objects within 1 object stream
