@@ -10,6 +10,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{booktabs}
+\usepackage{pgfplots}
 
 \marginsize{.75in}{.75in}{.75in}{1in}
 \pagestyle{fancy}
@@ -94,7 +95,13 @@ Results for total and good conversions are shown in Figures \ref{plot_total} and
 
 \begin{figure}
 \centering
-\includegraphics[width = 8cm]{x_tot.png}
+\begin{tikzpicture}
+	\begin{axis} [xlabel = Space Time (s), ylabel = Total Conversion, legend pos = north west]
+	\addplot[mark size = 2.5, scatter/classes={HighMoisture={mark=square,blue},LowMoisture={mark=o,red}},scatter, only marks, scatter src = explicit symbolic] 
+		table [x=space_time_avg, y = X_tot_avg, col sep = comma, meta=label] {moisture_integrals.csv};
+	\legend{High Moisture, Low Moisture}
+	\end{axis}
+\end{tikzpicture}
 \caption{Total conversion for biomass moisture experiments.}
 \label{plot_total}
 \end{figure}
@@ -116,7 +123,13 @@ Results for total and good conversions are shown in Figures \ref{plot_total} and
 
 \begin{figure}
 \centering
-\includegraphics[width = 8cm]{x_good.png}
+\begin{tikzpicture}
+	\begin{axis} [xlabel = Space Time (s), ylabel = Good Conversion, legend pos = north west]
+	\addplot[mark size = 2.5, scatter/classes={HighMoisture={mark=square,blue},LowMoisture={mark=o,red}},scatter, only marks, scatter src = explicit symbolic] 
+		table [x=space_time_avg, y = X_good_avg, col sep = comma, meta=label] {moisture_integrals.csv};
+	\legend{High Moisture, Low Moisture}
+	\end{axis}
+\end{tikzpicture}
 \caption{Good conversion calculations for biomass moisture experiments.}
 \label{plot_good}
 \end{figure}
@@ -142,7 +155,13 @@ Analyzing all of the tests together using ANOVA shows that higher moisture conte
 
 \begin{figure}
 	\centering
-	\includegraphics[width = 8cm]{ch4.png}
+	\begin{tikzpicture}
+	\begin{axis} [xlabel = Space Time (s), ylabel = Methane Yield, legend pos = north east, scaled y ticks = false,y tick label style={/pgf/number format/fixed}]
+	\addplot[mark size = 2.5, scatter/classes={HighMoisture={mark=square,blue},LowMoisture={mark=o,red}},scatter, only marks, scatter src = explicit symbolic] 
+		table [x=space_time_avg, y = CH4_yield_avg, col sep = comma, meta=label] {moisture_integrals.csv};
+	\legend{High Moisture, Low Moisture}
+	\end{axis}
+	\end{tikzpicture}
 	\caption{Methane yield results for biomass moisture experiments.}
 	\label{plot_ch4}
 \end{figure}
@@ -164,7 +183,13 @@ Analyzing all of the tests together using ANOVA shows that higher moisture conte
 
 \begin{figure}
 	\centering
-	\includegraphics[width = 8cm]{tar.png}
+	\begin{tikzpicture}
+	\begin{axis} [xlabel = Space Time (s), ylabel = Tar Loading (mg/Sm$^3$), legend pos = north east]
+	\addplot[mark size = 2.5, scatter/classes={HighMoisture={mark=square,blue},LowMoisture={mark=o,red}},scatter, only marks, scatter src = explicit symbolic] 
+		table [x=space_time_avg, y = tar_loading_avg, col sep = comma, meta=label] {moisture_integrals.csv};
+	\legend{High Moisture, Low Moisture}
+	\end{axis}
+	\end{tikzpicture}
 	\caption{Tar loads for biomass moisture experiments.}
 	\label{plot_tar}
 \end{figure}
