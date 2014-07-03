@@ -11,6 +11,7 @@
 \usepackage{multicol}
 \usepackage{booktabs}
 \usepackage{pgfplots}
+\usepackage{capt-of}
 
 \marginsize{.75in}{.75in}{.75in}{1in}
 \pagestyle{fancy}
@@ -221,7 +222,7 @@ It's possible that there exists some sort of bias in the moisture measurements t
 
 To understand if the perceived difference in conversion for higher moisture biomass is due to analysis errors instead of physical effects, we can look at the dry carbon content for each biomass sample.  Each sample is tested for carbon content with included moisture content.  The dry carbon content is then reported by correcting for the moisture content which is found by the Karl-Fischer titration tests.  If there was a bias in the measured moisture content based on the moisture level, one would expect to be able to detect an effect of moisture level on dry carbon content.
 
-ANOVA was run on the dry carbon contents to see if there was a difference in the means, and results are given in Table \ref{anova_moist}.  The average carbon content is 54.72\% on a dry basis for the low moisture tests and 55.13\% for high moisture biomass.  The probability that the means are different is well above an alpha value of 0.05, so it is safe to assume that moisture readings do not lead to a bias in conversion calculations.
+ANOVA was run on the dry carbon contents to see if there was a difference in the means, and results are given in Table \ref{anova_moist}.  The average carbon content is 54.72\% on a dry basis for the low moisture tests and 55.13\% for high moisture biomass.  The P-value suggests that the effect is not significant, so it is safe to assume that moisture readings do not lead to a bias in conversion calculations.
 
 \begin{table}
 	\centering
@@ -241,7 +242,7 @@ ANOVA was run on the dry carbon contents to see if there was a difference in the
 
 It was found that higher biomass moisture content has a positive effect on carbon conversion.  Chemically, this may be due to the proximity of surface bound water molecules to the biomass leading to faster reaction down more beneficial pathways.  It is also possible that there is a physical effect in which the bound moisture may be rapidly expanded to steam, causing biomass particles to expand or fracture.  This would raise the overall surface area of the biomass and lead to faster heat transfer rates.
 
-At long space time regimes, there higher moisture content leads to lower tar and methane production.  An effect is not detected at mid-range space times and reverses so that higher moisture content leads to higher levels of methane and tars at very short space times.  It may be that,  at high flow rates, any benefits that surface moisture has on reducing tar and methane production may be outweighed by the vaporizing moisture leading to even shorter residence times.
+At long space time regimes, higher moisture content leads to lower tar and methane production.  An effect is not detected at mid-range space times and reverses so that higher moisture content leads to higher levels of methane and tars at very short space times.  It may be that,  at high flow rates, any benefits that surface moisture has on reducing tar and methane production may be outweighed by the vaporizing moisture leading to even shorter residence times.
 
 While results may be due to an effect from the nature of the bound moisture in the biomass, they could also be due to the fact that there was simply more steam taking part in the reactions.  The inlet steam flow rates were not lowered to make up for the extra inlet water in the wet biomass.  Tests should be conducted in the future which take the extra water in the biomass into account and lower the steam flow rate to ensure all tests have similar total water flow rates.
 
@@ -261,7 +262,7 @@ Experiments have shown that increasing biomass moisture content and keeping all 
 \section{Experimental Set Points Dry Biomass}
 \label{app_dry_sp}
 
-\begin{center}
+\begin{minipage}{\textwidth}
 \begin{tabular}{ccccccccc}
 \toprule
 Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & Downbed	 & Argon \\
@@ -299,10 +300,23 @@ Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & 
 252    &       1350 &     11.07 &             3 &     18.12 &       300 &       22.65 &                4.9 &           2 \\
 253    &       1350 &     10.50 &             3 &     18.12 &       300 &       31.71 &                4.9 &           2 \\
 \bottomrule
-\end{tabular}
-\end{center}
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
 
-\newpage
+\end{tabular}
+\end{minipage}
+
+
 \section{Experimental Set Points Wet Biomass}
 \label{app_wet_sp}
 
@@ -337,11 +351,29 @@ Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & 
 418    &       1350 &     19.35 &             4 &     24.16 &       300 &       24.16 &                6.6 &           2 \\
 420    &       1350 &     18.39 &             4 &     24.16 &       300 &       18.12 &                6.6 &           2 \\
 421    &       1350 &     18.39 &             4 &     24.16 &       300 &       30.20 &                6.6 &           2 \\
-\midrule
+\bottomrule
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	&	{}	\\
 \end{tabular}
 \end{center}
 
-\section{Experimental Results}
+\section{Experimental Results Dry Biomass}
 
 \begin{center}
 \begin{tabular}{ccccc}
@@ -381,8 +413,25 @@ Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & 
 252    &     0.7784 &      0.6848 &        0.05555 &            940.4 \\
 253    &     0.7809 &      0.6824 &        0.05550 &             1187 \\
 \bottomrule
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
 \end{tabular}
+\end{center}
 
+\section{Experimental Results Wet Biomass}
+
+\begin{center}
 \begin{tabular}{ccccc}
 \toprule
 \multirow{2}{*}{Run ID} &  \multirow{2}{*}{Total Conversion} &  \multirow{2}{*}{Good Conversion} &  \multirow{2}{*}{Methane Yield} & Tar Loading \\
@@ -418,6 +467,8 @@ Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & 
 420    &     0.8419 &      0.7206 &        0.06958 &             2730 \\
 421    &     0.8369 &      0.6948 &        0.07522 &             4338 \\
 \bottomrule
+{}	&	{}	&	{}	&	{}	&	{}	\\
+{}	&	{}	&	{}	&	{}	&	{}	\\
 \end{tabular}
 \end{center}
 
@@ -425,83 +476,93 @@ Run ID &  Temp 		&  Moisture 	&  Biomass 	&  Steam 	&  Steam 		&  Entrainment & 
 \section{ANOVA Results}
 \label{app_anova}
 
-\begin{table}[H]
+\begin{minipage}{\textwidth}
+
 	\centering
-	\caption{Effects on methane yield for 2 lb/hr tests.}
+	\captionof{table}{Effects on methane yield for 2 lb/hr tests.}
 	\label{tar2}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	\color{red}{\textless 0.0001} \\
 	Moisture				&	\color{red}{0.0001} \\
 	Space Time * Moisture	&	0.4605 \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
 
-\begin{table}
 	\centering
 	\caption{Effects on tar loading for 2 lb/hr tests.}
 	\label{tar2}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	0.2853 \\
 	Moisture				&	\color{red}{0.0280} \\
 	Space Time * Moisture	&	0.6986 \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
 
-\begin{table}
 	\centering
 	\caption{Effects on methane yield for 3 lb/hr tests.}
 	\label{tar2}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	\color{red}{\textless 0.0001} \\
 	Moisture				&	0.6059 \\
 	Space Time * Moisture	&	0.0918 \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
 
-\begin{table}
 	\centering
 	\caption{Effects on tar loading for 3 lb/hr tests.}
 	\label{tar3}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	\color{red}{\textless0.0001} \\
 	Moisture				&	0.2829 \\
 	Space Time * Moisture	&	0.3581 \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
 
-\begin{table}
 	\centering
 	\caption{Effects on methane yield for 4 lb/hr tests.}
 	\label{tar4}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	0.0638 \\
 	Moisture				&	\color{red}{0.0277} \\
 	Space Time * Moisture	&	0.7186 \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
 
-\begin{table}
 	\centering
 	\caption{Effects on tar loading for 4 lb/hr tests.}
 	\label{tar4}
 	\begin{tabular}{c c}
+	\toprule
 	Effect				&	Prob \textless F	\\
-	\hline
+	\midrule
 	Space Time			&	\color{red}{0.0024} \\
 	Moisture				&	\color{red}{ 0.0110} \\
 	Space Time * Moisture	&	\color{red}{0.0170}  \\
+	\bottomrule
+	{}	&	{}	\\
 	\end{tabular}
-\end{table}
+
+\end{minipage}
 
 \end{document}
 
