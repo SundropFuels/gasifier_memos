@@ -85,6 +85,47 @@ A correction must be made to the water flowrate, as much of the water at the exi
 	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
 \end{equation}
 
+\subsection*{Conversion}
+There were a number of measures for conversion of the biomass species into useful products.  Because some of the experiments fed carbon dioxide and this could end up in the final carbon products as other species via reactions with biomass or water gas shift, the inlet carbon dioxide needed to be subtracted from the inlet and outlet to only count converion of biomass species.  The first measure of conversion was ``total" conversion, which determined conversion of the carbon in the biomass into gas species measured by the mass spectrometer:
+
+\begin{equation}
+	X_{tot} = \frac{\sum_{i}\dot{n}_{i,C}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A second measure of conversion was the yield to CO and CO$_2$.  This was the most important conversion metric, as these two species are the precursors to synthetic liquid products in the full gasification+SMR process.  It will be referred to here as ``carbon yield," although it has been referred to in the past as ``good conversion" because it measures yield only of desired products.
+
+\begin{equation}
+	Y_{CO+CO_{2}} = \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A third measure of conversion, included due to its prominence at the RDF, was the yield to CO, CO$_2$, and CH$_4$.  Historically, this was used when the only analytical instrument was an NDIR, and the ``total" conversion was limited by these three species.  For historical reasons, this is known as ``standard conversion."  Currently, it plays little into overall analysis, but has been included here for completeness.
+
+\begin{equation}
+	X_{std} =  \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}+\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+\subsection*{Undesired species}
+
+There were three measures of undesired species: methane yield, tar loading, and inclusive tar loading.  Methane yield was simply the fraction of total biomass carbon entering the reactor that exited as methane, correcting again for the inlet carbon dioxide:
+
+\begin{equation}
+	Y_{CH_{4}} = \frac{\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+Tar loading attempted to measure the total amount of ``tar" which would lead to fouling and catalyst degradation downstream.  This was measured in a mass flow per total standard exit volumetric flowrate (kg Nm$^{-3}$).  These were selected as measured components with six carbons or more: benzene, toluene, and naphthalene.  This was in some ways preferable to the more inclusive measure described below, as the alkanes were simple diluents (as opposed to catalyst poisons) and the MS had some early calibration errors with C$_3$ hydrocarbons.
+
+\begin{equation}
+	C_{tar} = \frac{\dot{m}_{C_{6}H_{6}}+\dot{m}_{C_{7}H_{8}+\dot{m}_{C_{10}H_{8}}}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Inclusive tar loading included all carbon species measured by the MS other than CO, CO$_2$, or CH$_4$.  The list of ``tars" for inclusive conversion would then be: C$_2$H$_6$, C$_2$H$_4$, C$_2$H$_2$, C$_3$H$_8$, C$_3$H$_6$, C$_6$H$_6$, C$_7$H$_8$, and C$_{10}$H$_8$.
+
+\begin{equation}
+	C_{tar,I} = \frac{\sum_{tars}\dot{m}_{i}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Better measurements of tars was achievable with the dedicated tar sampling probe.  This was [DESCRIBE]
+
 %\begin{equation}
 %a=b
 %\end{equation}
