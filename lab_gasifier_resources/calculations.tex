@@ -1,0 +1,107 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Calculations}
+
+\subsection*{Outlet molar gas flowrate}
+
+The total molar outlet flowrate of the gas in the system was calculated through a mass balance over the argon (Figure \ref{fig-Ar_balance}).  Because it is inert and was not contained in any of the reactive feeds, argon provided an excellent tracer for determining molar flowrates in the exit gas stream where other methods of flow analysis can be challenging due to the low overall flow rates.  Because there would be no reaction, a species balance over the argon yields no change in the total number of moles from inlet to outlet:
+
+\begin{equation}
+	n_{Ar,0} = n_{Ar}
+\end{equation}
+
+The number of moles of argon exiting the reactor ($n_{Ar}$) was just the total molar flowrate multiplied by the mole fraction of argon in that stream ($y_{Ar}$), which was known from MS measurements.  The total outlet gas flowrate could then be solved for:
+
+\begin{equation}
+	N = \frac{n_{Ar,0}}{y_{Ar}}
+\end{equation}
+
+\subsection*{Space time and minimum residence time}
+Space time is defined as the volume of the reactor divided by the superficial volumetric flowrate:
+
+\begin{equation}
+	\tau = \frac{V}{\dot{V}_{0}}
+\end{equation}
+
+Determining the superficial volumetric flowrate when there are solids, however, leads to some ambiguity that must be resolved.  Here, it was assumed that the solids volume was so low as to be safely ignored ([RANGE]), so that only a sum of the gas volumes must be performed.  The gases are assumed ideal, but a mixing temperature must be calculated.  An energy balance was performed over the gases.  As with the volume sum, the contribution of the solids at the inlet of the reactor was ignored.  It was assumed that gas mixing was faster than gas-solid heat transfer, establishing the ``inlet" gas flowrate immediately after entrance to the reactor but before there was time for significant interaction with the particles or the hot wall.  In any case, the assumptions are relatively arbitrary and are of little consequence --- space time was simply used for guidance and rigorous analysis has looked closer to the minimum residence time and modeled residence times.
+
+The mixing temperature was given by the energy balance:
+
+\begin{equation}
+	\sum_{i \ne biomass}\dot{n}_{i}\int_{T_{in,i}}^{T_{mix}}C_{p}dT = 0
+\end{equation}
+
+This balance was solved using numerical methods for $T_{mix}$. The ideal gas law was then applied to find the space time:
+
+\begin{equation}
+	\tau = \frac{VP}{\sum_{i \ne biomass}\dot{n}_{i}RT_{mix}}
+\end{equation}
+
+Here, $P$ was the system pressure and $R$ was the ideal gas constant.
+
+A minimum residence time was calculated by taking the sum of the exit flowrates of all species (as determined by the Ar balance), determining a volumetric flowrate, and dividing the volume of the reactor by this volumetric flowrate.  Essentially, this assumed that all volume change due to reactions, temperature increase, and pressure drop occurred instantly at the top of the reactor.  This then gave the lower bound on the residence time (with space time representing an upper bound); because much of the gas evolution was during the pyrolysis phase of reaction as well as around half of the temperature increase, it is probable that the actual residence time was much closer to this minimum number than to the space time.  
+
+A correction must be made to the water flowrate, as much of the water at the exit of the reactor was removed in the VLS system before it was measured in the MS.  To account for this, the \emph{inlet} water is used in place of the outlet water.  While a single mole of gas would be predicted generally to account for two moles of product on reaction, the excess steam feed above stoichiometric levels was great enough that this effect can be discounted [ESTIMATE].  Additionally, a correction for temperature needed to be made.  As the exit gas temperature was very difficult to measure, the gas temperature was simply taken as that of the reactor walls.  This would be expected to skew the results when exit temperatures vary significantly within a single wall temperature data series, with those points having lower exit temperatures appearing to have shorter minimum residence times than they should.  However, this variance would only arise when kinetic controls are not important, which is precisely when one would want to consider residence time. [SIZE OF EFFECT]  The minimum residence time was then:
+
+\begin{equation}
+	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
+\end{equation}
+
+%\begin{equation}
+%a=b
+%\end{equation}
+
+\section*{Results and Discussion}
+
+
+
+\section*{Conclusion}
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+
+
+\end{document}
+
