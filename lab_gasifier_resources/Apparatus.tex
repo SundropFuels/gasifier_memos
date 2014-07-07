@@ -1,0 +1,63 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Experimental Apparatus}
+The experiments were performed in the Sundrop Fuels Longmont Laboratory Small Gasifier apparatus, shown schematically in Figure \ref{fig-lab_gasifier}.  The system is essentially a ``drop-tube" test unit, consisting of a vertically-mounted heated tube with inlets for solids and gases and a downstream system to cool the gas, remove solids and condensed liquids, control pressure, and condition samples for compositional analysis.  Reactants flow into the top of the system and products out of the bottom of the system, with conveyance due both to gravity and pressure from the entering gases.
+
+Biomass is fed into the system by a custom designed brush feeder, shown schematically in Figure \ref{fig-brush_feeder}.  The feeder consists of a pressure vessel and a rotating brush over an outlet hole.  The brush is oriented so that the axis of rotation for the brush is parallel to the plane of the outlet hole.  Biomass is loaded batch-wise into the feeder, which is then sealed and pressurized with inert gas.  There are two gas inlets for the feeder: one flows from the top of the loaded biomass bed through the outlet hole (``down-bed"), and a second enters at the level of the brush and perpendicular to its rotational axis, with flow also exiting through the outlet hole (``cross-brush").  To feed, the brush rotates, pulling biomass with it and then pushing it into the hole.  The flowing gas then entrains the biomass in dilute-phase flow in the outlet line, with shear stress from the gas on the particles in the brush providing extra force for disengagement at the outlet orifice.  
+
+Mass rate of flow is affected both by the rotation speed of the brush and the amount of gas flowing in each of the gas inlets.  This rate is, in general, also dependent on overall system pressure, type of biomass, size and morphology of biomass, and the moisture level of the biomass.  Control of the mass flow rate is achieved by measuring the rate of change of the mass in the feeder via weigh cells [TAG] and adjusting the rate of rotation of the brush with a PID control loop.  There are minimum levels of flow rate for the gas that are dependent on pressure and the properties of the specific biomass, and these have been determined experimentally.  These impose a number of constraints on experimental planning.  Details of the mass flow control scheme can be found in Appendix {ref-mass_flow_control_appendix}.   
+
+
+\section*{Results and Discussion}
+
+
+
+\section*{Conclusion}
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+
+
+\end{document}
+
