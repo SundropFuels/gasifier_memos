@@ -14,6 +14,8 @@
 % REQUIRED PACKAGES FOR TIKZ DRAWINGS %
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usetikzlibrary{spy}
+\usetikzlibrary{decorations.fractals}
 
 \marginsize{.75in}{.75in}{.75in}{1in}
 \pagestyle{fancy}
@@ -143,10 +145,46 @@
 %% %%%%%%%%  %%
 
 \begin{center}
+\begin{tikzpicture}[scale=0.2,
+	spy using outlines={rectangle, magnification=5, width=7cm, height=8cm, connect spies}]
+
+	% Vessel %
+	\draw (-6,-	16) -- (-6,16) arc (180:90:3 and 2) -- (3,18) arc (90:0:3 and 2) -- (6,16) -- (6,-16) arc (0:-90:3 and 2) -- (-3,-18) arc  (-90:-180:3 and 2);
+	\draw [fill=brown!70!white] (-6,-16) -- (-6,0) -- (6,0) -- (6,-16) arc (0:-90:3 and 2) -- (-3,-18) arc  (-90:-180:3 and 2);
+	% Base %
+	\draw (-7,-30) rectangle (-6,10);
+	\draw (6,-30) rectangle (7,10);
+	\draw (-8,-31) rectangle (8,-30);
+	% Scale %
+	\draw (-12,-35) rectangle (12,-31) node [pos=.5]{Scale};
+	% Motor %
+	\draw (-1,-30) rectangle (1,-24);
+	% Shaft %
+	\draw [fill=white] (-.25/2,-24) rectangle (0.25/2,-17.25);
+	% Brush %
+	\foreach \y in {-16.5, -16.57, ..., -17} \draw (-1,\y) [ultra thin] -- (1,\y);
+	\draw [fill=white] (-.2,-17) rectangle (.2,-16.4);
+	% Cup %
+	\draw [fill=white] (-1,-17) -- ++(2,0) -- ++(0,.6) -- ++(0.25,0) -- ++(0,-.4) -- ++(0,-.45) -- ++(-2.5,0) -- ++(0,0.45) -- ++(0,0.4) -- ++(0.25,0) -- cycle;
+	% Flex Lines %
+	\draw [fill=white] (-1,-16.6) -- ++(-1,0) arc (90:180:1) -- ++(0,-8) arc (0:-90:1) -- ++ (-10,0)  node [align=center] {Entrainment \\ Gas Inlet} -- ++(0,-.2) -- ++(10.2,0) arc(-90:0:1) -- ++ (0,8) arc (180:90:.8 and 1) -- ++(1,0) --cycle ;
+	\draw [fill=white] (1,-16.6) -- ++(1,0) arc (90:0:1) -- ++(0,-8) arc (180:270:1) -- ++ (10,0) node [align=center] {Biomass to \\ Reactor} -- ++(0,-.2) -- ++(-10.2,0) arc(-90:-180:1) -- ++ (0,8) arc (0:90:.8 and 1) -- ++(-1,0) --cycle ;
+	\spy [blue] on (0,-3)
+	in node at (28,0);
+\end{tikzpicture}
+\end{center}
+
+
+%% %%%%%%%  %%
+%% Ash Collection %%
+%% %%%%%%%  %%
+
+\begin{center}
 \begin{tikzpicture}[scale=0.3]
 
 \end{tikzpicture}
 \end{center}
+
 
 \end{document}
 
