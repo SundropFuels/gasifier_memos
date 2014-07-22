@@ -1,0 +1,86 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Experimental Apparatus}
+The experiments were performed in the Sundrop Fuels Longmont Laboratory Small Gasifier apparatus, shown schematically in Figure \ref{fig-lab_gasifier}.  The system is essentially a ``drop-tube" test unit, consisting of a vertically-mounted heated tube with inlets for solids and gases and a downstream system to cool the gas, remove solids and condensed liquids, control pressure, and condition samples for compositional analysis.  Reactants flow into the top of the system and products out of the bottom of the system, with conveyance due both to gravity and pressure from the entering gases.
+
+Biomass is fed into the system by a custom designed brush feeder, shown schematically in Figure \ref{fig-brush_feeder}.  The feeder consists of a pressure vessel and a rotating brush over an outlet hole.  The brush is oriented so that the axis of rotation for the brush is parallel to the plane of the outlet hole.  Biomass is loaded batch-wise into the feeder, which is then sealed and pressurized with inert gas.  There are two gas inlets for the feeder: one flows from the top of the loaded biomass bed through the outlet hole (``down-bed"), and a second enters at the level of the brush and perpendicular to its rotational axis, with flow also exiting through the outlet hole (``cross-brush").  To feed, the brush rotates, pulling biomass with it and then pushing it into the hole.  The flowing gas then entrains the biomass in dilute-phase flow in the outlet line, with shear stress from the gas on the particles in the brush providing extra force for disengagement at the outlet orifice.  The cross-brush and down-bed gas are fed to the system through mass flow controllers [TAG] and [TAG], respectively.  These may use either N$_2$ or CO$_2$ as the entraining gas, depending on the design of experiments.
+
+Mass rate of flow is affected both by the rotation speed of the brush and the amount of gas flowing in each of the gas inlets.  This rate is, in general, also dependent on overall system pressure, type of biomass, size and morphology of biomass, and the moisture level of the biomass.  Control of the mass flow rate is achieved by measuring the rate of change of the mass in the feeder via weigh cells [TAG] and adjusting the rate of rotation of the brush with a PID control loop.  There are minimum levels of flow rate for the gas that are dependent on pressure and the properties of the specific biomass, and these have been determined experimentally.  These impose a number of constraints on experimental planning.  Details of the mass flow control scheme can be found in Appendix \ref{ref-mass_flow_control_appendix}.  
+
+The steam generation and superheating system is depicted in Figure \ref{fig-steam_system}.  Deionized water is retrieved from the general Longmont Laboratory supply and loaded batch-wise into the water holding reservoir [TAG].  From there, an HPLC reciprocating pump ([TAG], [MODEL]) meters flow of liquid water up to the steam generator.  The steam generator consists of a cartridge-style heater in a [SIZE] tube ([TAG], [MODEL/POWER]) packed with [SIZE] spheres of [MATERIAL].  Water flows into the tube and contacts the hot heat transfer media, vaporizing into steam by the time it exits the cartridge heater.  Following this heater is the steam superheater, which has a similar design.  There are two cartridge-style heaters ([TAG], [MODEL/POWER]) over which the steam flows, increasing the steam temperature by the exit to a determined point.  Control of the steam generator is achieved by setting the temperature of the control element [NEED MORE HERE -- ALSO, LIMITS AND SAFETIES].
+
+Biomass and steam enter the reactor tube through a lance, which both divides the flow prior to the hot zone and provides a nozzle for flow to mix at the entrance of the hot zone (Figure \ref{fig-lance}).  The lance is composed of two concentric tubes.  The center tube ([OD]/[ID]) carries the biomass and entraining gas.  At the inlet to this tube, there is a full-port ball valve [TAG], allowing reactant feed to the system to be cut off instantly in the case of an emergency.  The outer tube carries the steam feed.  [STAR SHAPED INSERT?]  The outlets of both the inner and outer tube are at the same axial position, which has been located approximately 2" above the start of the furnace hot zone.  The exiting gases create a jet that entrains flow within the reactor tube and encourages mixing of the steam, entraining gas, and biomass.  There is also the possibility of adding further gas (either CO$_2$ or N$_2$) to the reactor to adjust the residence time on the outside of the lance.  Flow is controlled with [TAG, MODEL].  The outside of the tube is surrounded by stacked rings of porous refractory material ([MAN/MODEL, SIZE]), which rest on a Swagelok ferrule attached to the bottom of the outer lance tube.  These rings protect the reactor tube from thermal and mechanical contact with the lance; they also align the lance to keep it centered within the reactor tube.
+
+The core of the small gasifier system is the reactor tube and furnace (Figure \ref{fig-furnace}).  The furnace is an electrically heated box furnace.  The elements are composed of MoSi$_2$, giving a maximum operating temperature of [TEMP].  There are three independently controlled vertical heating zones in the reactor, each 8" long and having the ability to output 10 kW of power, giving a total heated length of 24".  The furnace is insulated with [SIZE/TYPE both sides and top/bottom].  Passing through the center of the furnace is the reactor tube, which is constructed of $\alpha$-sintered silicon carbide (SiC).  Depending on the experiment, the material could be either Saint-Gobain Hexoloy SE or Saint-Gobain Hexoloy SE-optimized.  The furnace could accept tubes as large as 4" in OD; for these experiments, the tube can range in size from 1.5" OD/1" ID - 2.5" OD/2" OD, with the majority of experiments performed in the 2" OD/1.5" ID size.  The tube is connected to the rest of the system through packing gland ``bucket seals."  These consist of a gland into which the tube is inserted, with graphite packing filling the space between the tube OD and the gland ID.  A gland follower is used to compress the packing, making a tight seal around the tube.  A flange on the gland allows for connection to piping upstream or downstream of the reactor tube.  Temperatures are measured at three points along the furnace wall by R-type thermocouples in SiC sheaths spring-loaded against the tube ([TAGS/MODELS]).  While some experiments have shown a high bias in the temperatures reported by these thermocouples, corrections can be made when doing analysis [REF].  A thermocouple is also inserted into the bucket seal apparatus to measure the gas temperature at the reactor exit [TAG/MODEL].  The bucket seal has a tap for drawing off samples for tar analysis; the details of this system are described further below.
+
+The quenching, solids, and liquids removal portion of the system is shown in Figure \ref{fig-downstream}.  Products leaving the reactor tube enters a quenching zone, where water is injected by [PUMP/MODEL] through two nozzles to control the temperature at the exit of the quench zone as measured by a thermocouple ([TAG/MODEL]).  A PID loop implemented in LabVIEW is used for control.  Reaction products then enter the ``ash knockout" vessel ([DIMENSIONS, MATERIALS]), which contains a labyrinth of baffles to force heavy solids to disentrain from the gas stream for subsequent collection.  A 2" schedule [SCH] pipe exits the side of the ash knockout vessel and enters the first of two hot filtration units.  This unit contains three sintered metal ([MAN/SIZE/MATERIAL]) filter elements with a pore size of [SIZE].  Small particulates are removed as a filter cake, with gas passing upward through 1/2" tubing into a second filter vessel, where a single sintered metal filter element ([MAN/SIZE/MATERIAL/PORE SIZE]) is used to remove most of the remaining solids from the gas stream.  Both the ash knockout vessel and the filter housings are heat-traced and insulated, with on/off control loops maintaining the temperature above 200 $^{\circ}$C.  This prevents condensation of water or tars from condensing in the pores of the filters.
+
+Beyond the hot filter systems, the gas is further conditioned in two vapor-liquid separator (``VLS") units.  These units consist of a chamber [SIZE] partially filled with water.  The gas enters in a dip-tube with an outlet below the water level.  Condensable species (primarily water) are knocked-out, with the remaining gas allowed to pass through a side outlet near the top of the vessel.  Cooling, provided by chilled [WATER?] flowing through copper coils inside of each VLS, allow for tuning the vapor pressure (and thus, knockout efficiency) of the VLS units.  The VLS units are arranged in series, with the second operating a temperature below the vent temperature of the gas to ensure unsaturated conditions at the vent.
+
+Beyond the VLS systems, there is a second set of filters in series.  These are wound fiber filters ([MAN/SIZE/MATERIAL]) whose purpose is to remove any final particulates before entering the analysis loops, the pressure control valve, and the vent leg. These filters are immediately followed by an offtake port for gas analysis and the final pressure control valve.  This valve ([MAN/MODEL/SIZE]) is adjusted by a LabVIEW PID loop measuring the exit pressure of the reactor ([TAG/MAN/MODEL]), allowing the system to be maintained at a steady level between 10 psig and 75 psig.  After exiting the pressure control valve, the remaining gas products are vented through the building roof to the atmosphere.
+
+Data acquisition and control are automated using the National Instruments LabVIEW platform.  NI CompactRIO DCS controllers perform data logging, PID control, and general instrument and controller I/O.  A LabVIEW HMI is used by operators to change setpoints and monitor process conditions and health.  Automated alarms alert operators to potentially dangerous or out-of-spec conditions, with automated interlocks interceding to maintain safe operations when necessary.  Data is logged by a proprietary Sundrop Fuels SQL database, with subsequent analysis by proprietary Sundrop Fuels code.
+
+Gas analysis is performed by three methods -- mass spectrometry (MS), gas chromatography (GC), and non-dispersive infrared spectrometry (NDIR).  The gas is sampled at the outlet of the second wound fiber filter and passed through a conditioning loop, which is shown in Figure \ref{fig-gas_conditioning}.  This loop regulates the gas pressure seen by the instruments and further filters the gas so as to remove any chance of particulates fouling the analytical equipment.  The MS (ThermoScientific PrimaPro) is the main method of gas analysis, measuring for the major components of the gas stream (CO, CO$_2$, CH$_4$, H$_2$, N$_2$, H$_2$O, Ar) as well as trace components (C$_2$H$_6$, C$_2$H$_4$, C$_2$H$_2$, C$_3$H$_8$, C$_3$H$_6$, C$_6$H$_6$, C$_7$H$_8$, C$_10$H$_8$, H$_2$S).  It allows for high accuracy, relatively frequent (every 20--25 seconds) sampling with months between calibrations.  Calibration checks are performed weekly to ensure data accuracy.  The GC (Varian/Agilent [MODEL]) was the primary mode of gas analysis before acquisition of the MS, but is still used as a check on the accuracy of the MS.  It must be calibrated daily, and it has a sampling time of around 3 minutes.  It measures for the same components as the MS, with the exception of benzene, toluene, naphthalene, and hydrogen sulfide.  The NDIR (California Analytical [MODEL]) can only measure for CO, CO$_2$, and CH$_4$ and will drift by whole percent without very frequent calibration (i.e. multiple times daily).  It has a very fast response time (seconds) and high sampling frequency (1 Hz), so it allows the operators to see if product gas is evolved immediately after biomass feed is started.  As such, it is primarily used to detect problems in feeder or system operation.
+
+Tars analysis [TALK TO ADRIAN]
+
+
+\section*{Analytical Equipment}
+
+ 
+
+
+\section*{Results and Discussion}
+
+
+
+\section*{Conclusion}
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+
+
+\end{document}
+

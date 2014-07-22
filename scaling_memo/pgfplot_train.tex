@@ -1,0 +1,152 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.5}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+	title=Driving force exploration,
+	xlabel={$\frac{\Delta H_{max}}{AT^{4}\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{pp_H2O_avg}*.5} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A/T^4}, y = X_good_avg, meta = tic520_sp,]  {plot_tables/latest_data_20140527_actual.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{axis}[
+	title=Driving force exploration,
+	xlabel={$\frac{\tau_{min}}{e^{\frac{-E_{a}}{RT}}}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{pp_H2O_avg}*.5} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {tau_min/e^-Ea/RT}, y = X_good_avg, meta = tic520_sp,]  {plot_tables/latest_data_20140527_actual.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\begin{tabular}{cc}
+\centering
+\begin{tikzpicture}[baseline, trim axis left]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={dH_max/A}, y=X_good_avg, meta = pp_H2O_avg] {plot_tables/tic520_sp1350.csv};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline, trim axis right]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={dH_max/A}, y=X_good_avg, meta = pp_H2O_avg] {plot_tables/tic520_sp1450.csv};
+\end{axis}
+\end{tikzpicture}
+\\
+
+\end{tabular}
+
+\begin{tabular}{cc}
+\centering
+\begin{tikzpicture}[baseline, trim axis left]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={tau_min}, y=X_good_avg, meta = pp_H2O_avg] {plot_tables/tic520_sp1350.csv};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline, trim axis right]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={tau_min}, y=X_good_avg, meta = pp_H2O_avg] {plot_tables/tic520_sp1450.csv};
+\end{axis}
+\end{tikzpicture}
+\\
+
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Now for the methane
+
+\begin{tabular}{cc}
+\centering
+\begin{tikzpicture}[baseline, trim axis left]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	%ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={dH_max/A}, y=CH4_yield_corr, meta = pp_H2O_avg] {plot_tables/tic520_sp1350.csv};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline, trim axis right]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	%ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={dH_max/A}, y=CH4_yield_corr, meta = pp_H2O_avg] {plot_tables/tic520_sp1450.csv};
+\end{axis}
+\end{tikzpicture}
+\\
+
+\end{tabular}
+
+\begin{tabular}{cc}
+\centering
+\begin{tikzpicture}[baseline, trim axis left]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	%ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={tau_min}, y=CH4_yield_corr, meta = pp_H2O_avg] {plot_tables/tic520_sp1350.csv};
+\end{axis}
+\end{tikzpicture}
+&
+\begin{tikzpicture}[baseline, trim axis right]
+\begin{axis}[
+	small,
+	colorbar,
+	xlabel={$\frac{\Delta H_{max}}{A\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	%ymin=0.4, ymax=1.0,
+]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={tau_min}, y=CH4_yield_corr, meta = pp_H2O_avg] {plot_tables/tic520_sp1450.csv};
+\end{axis}
+\end{tikzpicture}
+\\
+
+\end{tabular}
+
+
+\end{document}

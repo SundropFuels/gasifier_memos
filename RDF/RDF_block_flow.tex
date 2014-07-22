@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows, decorations.pathmorphing,backgrounds,positioning,fit}
+\begin{document}
+
+\begin{tikzpicture}
+ [block/.style={rectangle, draw =blue!50,fill=blue!20, inner sep=4pt, minimum size=4mm},
+  invisible/.style = {circle, inner sep = 0pt, minimum size = 0mm}]
+
+
+\node[block]	(gasifier)									{Gasifier};
+\node[invisible] (lance_bm)		[above=of gasifier]			{};
+\node[block]	(MAC_feeder)		[left=of lance_bm]			{MAC feeder};
+\node[block]	(biomass_supply)	[left=of MAC_feeder]			{Biomass supply};
+\node[block]	(entrainment_gas)	[above=of MAC_feeder]		{Entrainment gas};
+\node[block]	(superheaters)		[left=of gasifier]			{Superheaters};
+\node[block]	(boiler)			[left=of superheaters]		{Boiler};
+\node[block]	(water_supply)		[left=of boiler]				{Water supply};
+\node[invisible] (tar_pulloff)		[below=of gasifier]			{};
+\node[block]	(tar_sampling)		[right=of tar_pulloff]			{Tar sampling};
+\node[block]	(quench)			[below=of tar_pulloff]		{Quench};
+\node[block]	(ash_knockout)		[below=of quench]			{Ash knockout};
+\node[block]	(ash_collection)		[left=of ash_knockout]		{Ash collection};
+\node[block]	(baghouse)		[below=of ash_knockout]		{Baghouse};
+\node[invisible]	(analysis_pulloff)	[below=of baghouse]		{};
+\node[block]	(gas_analysis)		[left=of analysis_pulloff]		{Gas analysis};
+\node[block]	(pressure_control)	[below=of analysis_pulloff]	{Pressure control};
+\node[block]	(flare)			[below=of pressure_control]	{Flare};
+
+\draw[->]		(entrainment_gas)	to 						(MAC_feeder);
+\draw[->]		(biomass_supply)	to 						(MAC_feeder);
+\draw[-]		(MAC_feeder)		to 						(lance_bm);
+\draw[->]		(lance_bm)		to 						(gasifier);
+\draw[->]		(water_supply) 		to 						(boiler);
+\draw[->]		(boiler)			to 						(superheaters);
+\draw[->]		(superheaters)		to 						(gasifier);
+\draw[->]		(gasifier)			to 						(quench);
+\draw[->]		(tar_pulloff)		to 						(tar_sampling);
+\draw[->]		(quench)			to 						(ash_knockout);
+\draw[->] 		(ash_knockout)		to 						(ash_collection);
+\draw[->] 		(ash_knockout)		to 						(baghouse);
+
+\draw[->] 		(analysis_pulloff) 	to 						(gas_analysis);
+\draw[->] 		(baghouse) 		to 						(pressure_control);
+\draw[->] 		(pressure_control) 	to 						(flare);
+
+\end{tikzpicture}
+
+
+
+\end{document}

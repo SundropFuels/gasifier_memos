@@ -1,0 +1,79 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Experimental Apparatus}
+The Receiver Development Facility (RDF) in the Sunulator 2 configuration was a pilot platform for testing out Sundrop Fuels' proprietary RPReactor\texttrademark located in Broomfield, CO.  The plant, shown pictorially in Figure \ref{fig-pic_of_RDF} and as a block flow diagram in Figure \ref{fig-RDF_block_flow}, centered around a SiC single gasifier tube and electrically heated furnace mounted in a 60' tall tower.  The plant capacity with a single tube was 150 lb/hr of biomass, and it had a maximum temperature capability of 1500 $^{\circ}$C and a maximum operating pressure capability of 100 psig.  The plant was designed to operate on a wide variety of biomass feedstocks, although in practice it was primarily operated on rice hulls with some limited experimentation on ground wood.  The plant was fully staffed and capable of 24/7 operation.  
+
+The general scheme is shown in the block diagram (Figure \ref{fig-RDF_block_flow}).  Biomass was delivered to the site in large bags with closeable spouts on the bottom (``supersacks'') and lifted into a bulk-bag unloader (National Bulk Equipment [MODEL]).  The bulk-bag unloader fed the material through a sifting screen (Kason [MODEL, SIZE]) and into an auger conveyor; this, in turn, transported the material into a staging hopper.  A pneumatic conveying system then transported the material from the staging hopper into the storage hopper at the top of the feeder lockhopper system.  
+
+This feed lockhopper system is shown in Figure \ref{fig-MAC_feeder}, and it was manufactured by MAC Equipment/Clyde [GET THIS RIGHT].  This system consisted of three hoppers separated by solids isolating valves ([SPHERIVALVE INFO]), a screw feeder and controller ([MAC ROTOSCREW]), and gas entrainment, pressurization, and purging systems.  The lockhopper system worked as follows:  While the middle hopper [VESSEL NUM] was at atmospheric pressure, [TOP SV] would open to allow solids to flow into [MIDDLE HOPPER] from [STORAGE HOPPER].  Once [MIDDLE HOPPER] achieved the desired level of fill, [TOP SV] would close and [MIDDLE HOPPER] would be purged with N$_2$ to remove any oxygen and pressurized to the same pressure as [BOTTOM HOPPER].  Once the pressurization was complete, [BOTTOM SV] would open to allow biomass to flow into [BOTTOM HOPPER].  After filling was complete, [BOTTOM SV] would close and [MIDDLE HOPPER] would be de-pressurized, allowing for the cycle to be repeated.  Flow out of [BOTTOM HOPPER] was through the RotoScrew[TM], which volumetrically controlled the rate at which biomass left the system.  Correlation of volumetric rates with mass rates was performed through calibration experiments, which are described in \ref{bib-RDF_cal_doc}.  Nitrogen, supplied from a cryogenic tank system and controlled through a mass flow controller [TAG], was used to entrain the biomass out of the RotoScrew[TM] tip and up to the biomass gasifier.
+
+To aid in gasification, steam was added to the system as a high-temperature oxidant.  Boiler feed water was fed under level-control to a boiler [TAG], which generated saturated steam at [CONDITIONS].  This was passed to a set of two superheaters; the first [TAG] had the purpose of pre-heating the steam so that it did not condense as it passed through the insulated line moving up the tower.  The second was located on the same tower level as the gasifier, and it consisted of Inconel 625 tubes in an electrically heated clamshell furnace (Thermcraft, 60 kW total power).  This furnace maintained the tubes between [TEMPERATURES] and achieved outlet steam temperatures of [OUTLET RANGE].
+
+Biomass and steam were injected into the reactor furnace through a ``lance", which is shown in detail in Figure \ref{fig-lance}. The lance consisted of a central biomass tube, four steam conveying tubes, and a protected mixing zone at the injection point (the ``can").  The center tube was offset from the four steam conveying tubes, and the entire assembly above the can was insulated to prevent loss of heat and condensation of the steam.  The lance went through a number of iterations over the life of experiments.  The can was originally intended to both provide a uniform steam plenum as well as prevent jets of steam and biomass from contacting the tube wall and creating high thermal stresses.  Modeling, however, showed that the plenum itself lead to poorer mixing than the four simple tube outlets would, leading to a removal of the bottom of the can.  Additionally, it was surmised after some operation that the thin clearance [DIM] of the can from the SiC tube wall allowed for thermal contact with the tube; the high heat sink created by the well-mixed steam likely created very high thermal stresses in the tube wall, causing the tube to break.  At that time [DATES!] the wall of the can was cut away as well, leaving just the biomass tube and the four steam nozzles.  These were positioned so that the biomass and steam were entering just at the inner edge of the hot zone of the furnace [NEED TO DETERMINE WHEN THIS WAS CUT BACK, AND CODE INTO THE DATABASE].  Finally, there was the ability to add ``sweep" gas around the lance into the gasifier; this was a mixture of Ar (to perform a tracer-based mass balance) and N$_2$ (to adjust residence time); these were controlled by [TAGs], respectively.  The Ar was provided from cryogenic dewars and the N$_2$ was provided from a cyrogenic tank system.
+
+Biomass, steam, and entraining gases were injected by the lance into the gasifier tube.  This was an $\alpha$-sintered SiC tube (4.125" OD, 3.5" ID, Saint-Gobain SE grade) that was heated by an electric furnace (Figure \ref{fig-RDF_gasifier}).  The furnace consisted of three heating zones with SiC heating elements.  The top zone (Zone 1) was originally intended to maintain uniformity in the bottom two zones, and was much smaller; after some initial experiments where conversions were lower in the RDF than expected, the lance was raised to be above this section.  It was 20" long and had 20 kW of heating capacity.  Zones 2 and 3 were each 38" long and had 65 kW of heating capability each, giving 150 kW of total heating capacity for the entire furnace.  Each zone was independently controlled by a PID-loop reading R-type thermocouples located between the elements at the center of the respective zone.  Heat was transferred to the SiC tube by radiation and some natural convection, where it was conducted through the SiC wall and into the process.  Biomass was heated by radiation and convection, where it reacted to products collectively known as ``syngas".  Temperatures on the tube walls were measured at five positions by spring-loaded, SiC-sheathed R-type thermocouples (PyroMation [MODEL]).  At the exit of the SiC tube, a K-type thermocouple (Omega KMQXL) was placed to measure the gas temperature, and there was a tar-sampling port to allow collection of condensable tar samples.  This is discussed in detail further below.
+
+Products from the biomass gasifier flowed into a quenching vessel [TAG], which was cylindrical with a conical bottom.  The cylindrical portion was lined with refractory to prevent steam condensation due to heat loss as well as overheating of the vessel material of construction.  Water was injected and atomized through nozzles [DIM, NUMBER], which vaporized when contacting the hot products and adiabatically cooled these products to an acceptable temperature for the baghouse ([TEMP]).  Heavy solids in the product stream were inertially removed and passed through the bottom of the quench vessel to an ash-knockout vessel ([TAG]).  This vessel was separated from the quench vessel by a SpheriValve[CHECK], allowing for on-stream solids collection.  Gas products and small entrained solids were passed through a side outlet from the quench vessel to a baghouse ([Flex-Kleen NUMS]), where the small entrained solids were removed.  The resulting clean gas was sampled for gas analysis (described in detail below), after which it encountered a pressure control valve [TAG].  The pressure control valve was controlled by a PID-loop against the pressure at the gasifier outlet [TAG].  Finally, the gas products were combusted in an enclosed ground flare ([MODEL]), and the resulting products of combustion were vented to atmosphere.
+
+Supervisory control and data acquisition were performed at the plant using a National Instruments LabVIEW system with CompactRIO DCS modules.  Data were archived using a proprietary SQL database system and analysis was performed with proprietary software.  Emergency safety systems were monitored with a discrete PLC (Allen-Bradley MicroLogix [NUM]).
+
+The gas analysis system is shown schematically in Figure \ref{fig-gas_analysis}.  It consisted of two primary analyzers and a conditioning system to ensure high quality gas delivered to those analyzers.  The main analyzer was a gas chromatograph (``GC") (Varian [MODEL]), which was capable of measuring levels of H$_2$, CO, CO$_2$, CH$_4$, N$_2$, O$_2$, C$_2$H$_6$, C$_2$H$_4$, C$_2$H$_2$, C$_3$H$_8$, and C$_3$H$_6$.  This was checked for calibration accuracy multiple times daily.  As this analyzer had a relatively long sampling time (~3 minutes), it was supplemented by a non-dispersive infrared analyzer (``NDIR") that was capable of measuring CO, CO$_2$, and CH$_4$.  While it was less accurate and suffered more from calibration drift, it provided a rapid indication (i.e. within 10-15 seconds) of reaction levels and biomass feed.  The conditioning loop for the analyzers consisted of [CONDITIONING LOOP].
+
+The tar analysis system [TAR ANALYSIS DESCRIPTION].
+
+
+
+
+\section*{Results and Discussion}
+
+
+
+\section*{Conclusion}
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+
+
+\end{document}
+

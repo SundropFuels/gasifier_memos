@@ -1,0 +1,181 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{breqn}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Carbon Balance Experiment \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+
+\section*{Calculations}
+
+\subsection*{Outlet molar gas flowrate}
+
+The total molar outlet flowrate of the gas in the system was calculated through a mass balance over the argon (Figure \ref{fig-Ar_balance}).  Because it is inert and was not contained in any of the reactive feeds, argon provided an excellent tracer for determining molar flowrates in the exit gas stream where other methods of flow analysis can be challenging due to the low overall flow rates.  Because there would be no reaction, a species balance over the argon yields no change in the total number of moles from inlet to outlet:
+
+\begin{equation}
+	n_{Ar,0} = n_{Ar}
+\end{equation}
+
+The number of moles of argon exiting the reactor ($n_{Ar}$) was just the total molar flowrate multiplied by the mole fraction of argon in that stream ($y_{Ar}$), which was known from MS measurements.  The total outlet gas flowrate could then be solved for:
+
+\begin{equation}
+	N = \frac{n_{Ar,0}}{y_{Ar}}
+\end{equation}
+
+\subsection*{Space time and minimum residence time}
+Space time is defined as the volume of the reactor divided by the superficial volumetric flowrate:
+
+\begin{equation}
+	\tau = \frac{V}{\dot{V}_{0}}
+\end{equation}
+
+Determining the superficial volumetric flowrate when there are solids, however, leads to some ambiguity that must be resolved.  Here, it was assumed that the solids volume was so low as to be safely ignored ([RANGE]), so that only a sum of the gas volumes must be performed.  The gases are assumed ideal, but a mixing temperature must be calculated.  An energy balance was performed over the gases.  As with the volume sum, the contribution of the solids at the inlet of the reactor was ignored.  It was assumed that gas mixing was faster than gas-solid heat transfer, establishing the ``inlet" gas flowrate immediately after entrance to the reactor but before there was time for significant interaction with the particles or the hot wall.  In any case, the assumptions are relatively arbitrary and are of little consequence --- space time was simply used for guidance and rigorous analysis has looked closer to the minimum residence time and modeled residence times.
+
+The mixing temperature was given by the energy balance:
+
+\begin{equation}
+	\sum_{i \ne biomass}\dot{n}_{i}\int_{T_{in,i}}^{T_{mix}}C_{p}dT = 0
+\end{equation}
+
+This balance was solved using numerical methods for $T_{mix}$. The ideal gas law was then applied to find the space time:
+
+\begin{equation}
+	\tau = \frac{VP}{\sum_{i \ne biomass}\dot{n}_{i}RT_{mix}}
+\end{equation}
+
+Here, $P$ was the system pressure and $R$ was the ideal gas constant.
+
+A minimum residence time was calculated by taking the sum of the exit flowrates of all species (as determined by the Ar balance), determining a volumetric flowrate, and dividing the volume of the reactor by this volumetric flowrate.  Essentially, this assumed that all volume change due to reactions, temperature increase, and pressure drop occurred instantly at the top of the reactor.  This then gave the lower bound on the residence time (with space time representing an upper bound); because much of the gas evolution was during the pyrolysis phase of reaction as well as around half of the temperature increase, it is probable that the actual residence time was much closer to this minimum number than to the space time.  
+
+A correction must be made to the water flowrate, as much of the water at the exit of the reactor was removed in the VLS system before it was measured in the MS.  To account for this, the \emph{inlet} water is used in place of the outlet water.  While a single mole of gas would be predicted generally to account for two moles of product on reaction, the excess steam feed above stoichiometric levels was great enough that this effect can be discounted [ESTIMATE].  Additionally, a correction for temperature needed to be made.  As the exit gas temperature was very difficult to measure, the gas temperature was simply taken as that of the reactor walls.  This would be expected to skew the results when exit temperatures vary significantly within a single wall temperature data series, with those points having lower exit temperatures appearing to have shorter minimum residence times than they should.  However, this variance would only arise when kinetic controls are not important, which is precisely when one would want to consider residence time. [SIZE OF EFFECT]  The minimum residence time was then:
+
+\begin{equation}
+	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
+\end{equation}
+
+\subsection*{Conversion}
+There were a number of measures for conversion of the biomass species into useful products.  Because some of the experiments fed carbon dioxide and this could end up in the final carbon products as other species via reactions with biomass or water gas shift, the inlet carbon dioxide needed to be subtracted from the inlet and outlet to only count converion of biomass species.  The first measure of conversion was ``total" conversion, which determined conversion of the carbon in the biomass into gas species measured by the mass spectrometer:
+
+\begin{equation}
+	X_{tot} = \frac{\sum_{i}\dot{n}_{i,C}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A second measure of conversion was the yield to CO and CO$_2$.  This was the most important conversion metric, as these two species are the precursors to synthetic liquid products in the full gasification+SMR process.  It will be referred to here as ``carbon yield," although it has been referred to in the past as ``good conversion" because it measures yield only of desired products.
+
+\begin{equation}
+	Y_{CO+CO_{2}} = \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A third measure of conversion, included due to its prominence at the RDF, was the yield to CO, CO$_2$, and CH$_4$.  Historically, this was used when the only analytical instrument was an NDIR, and the ``total" conversion was limited by these three species.  For historical reasons, this is known as ``standard conversion."  Currently, it plays little into overall analysis, but has been included here for completeness.
+
+\begin{equation}
+	X_{std} =  \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}+\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+\subsection*{Undesired species}
+
+There were three measures of undesired species: methane yield, tar loading, and inclusive tar loading.  Methane yield was simply the fraction of total biomass carbon entering the reactor that exited as methane, correcting again for the inlet carbon dioxide:
+
+\begin{equation}
+	Y_{CH_{4}} = \frac{\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+Tar loading attempted to measure the total amount of ``tar" which would lead to fouling and catalyst degradation downstream.  This was measured in a mass flow per total standard exit volumetric flowrate (kg Nm$^{-3}$).  These were selected as measured components with six carbons or more: benzene, toluene, and naphthalene.  This was in some ways preferable to the more inclusive measure described below, as the alkanes were simple diluents (as opposed to catalyst poisons) and the MS had some early calibration errors with C$_3$ hydrocarbons.
+
+\begin{equation}
+	C_{tar} = \frac{\dot{m}_{C_{6}H_{6}}+\dot{m}_{C_{7}H_{8}+\dot{m}_{C_{10}H_{8}}}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Inclusive tar loading included all carbon species measured by the MS other than CO, CO$_2$, or CH$_4$.  The list of ``tars" for inclusive conversion would then be: C$_2$H$_6$, C$_2$H$_4$, C$_2$H$_2$, C$_3$H$_8$, C$_3$H$_6$, C$_6$H$_6$, C$_7$H$_8$, and C$_{10}$H$_8$.
+
+\begin{equation}
+	C_{tar,I} = \frac{\sum_{tars}\dot{m}_{i}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Better measurements of tars was achievable with the dedicated tar sampling probe.  This was [DESCRIBE]
+
+\subsection*{Maximum heat duty}
+Maximum heat duty was a measure of the maximum enthalpy change achievable if there was 100\% conversion to CO and all of the reaction products reached the exit temperature of the reactor.  This assumed carbon dioxide participation in water-gas shift was negligible.  This is a reasonalbe assumption, as the equilibrium constant for water gas shift ranged between [RANGE] for the conditions at which these experiments were performed.  The regions where water gas shift would be likely were below the reaction zone, and are less material to the total heat duty.  To calculate the heat duty, a material and energy balance needed to be performed across the reactor for all of the species.  The details of this are provided in a separate reference \ref{ref-material_balance}, with the results summarized here.
+
+\begin{dmath}
+	\Delta H_{max} = \sum_{products}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{out}}C_{p,i}dT\right] -   \sum_{reactants}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{in,i}}C_{p,i}dT\right]
+\end{dmath} 
+
+The biomass was broken into its constituent biopolymers (i.e. cellulose, hemi-cellulose, and lignin) for the purposes of the material balances; the lignin was, in turn, broken down in equal fractions into the Lig-C, Lig-O, and Lig-H subunits.  The relative amounts were determined from carbohydrate and ultimate analysis of the biomass.  The mass balances to determine the product flowrates are summarized below; consistent with the rest of this document, inlet values have a subscript $0$, i.e. $n_{i,0}$ for species $i$ and outlet values lack the $0$ in the subscript.
+
+\begin{dgroup}
+	\begin{dmath}
+	n_{H_{2}} = 6n_{CELL}  + 5n_{HCE} + 18n_{LIG-C} + 21n_{LIG-O} + 27n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO} = 6n_{CELL}  + 5n_{HCE} + 15n_{LIG-C} + 20n_{LIG-O} + 22n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO_{2}} = n_{CO_{2},0}
+	\end{dmath}
+	\begin{dmath}
+	n_{CH_{4}} = 0
+	\end{dmath}
+	\begin{dmath}
+	n_{H_{2}O} =n_{H_{2}O} -  n_{CELL}  - n_{HCE} - 15n_{LIG-C} - 10n_{LIG-O} - 13n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{Ar} = n_{Ar,0}
+	\end{dmath}
+\end{dgroup}
+
+The reference temperature ($T^{\circ}$) was set at 25 $^{\circ}$C, and heat capacity polynomials were taken from NASA data \ref{ref-NASA}.
+
+%\begin{equation}
+%a=b
+%\end{equation}
+
+\section*{Results and Discussion}
+
+
+
+\section*{Conclusion}
+
+
+
+\newpage
+\appendix
+\onecolumn
+
+
+
+\end{document}
+
