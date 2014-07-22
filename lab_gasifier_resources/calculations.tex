@@ -11,6 +11,7 @@
 \usepackage{multicol}
 \usepackage{booktabs}
 \usepackage{amsmath}
+\usepackage{breqn}
 
 \marginsize{.75in}{.75in}{.75in}{1in}
 \pagestyle{fancy}
@@ -125,6 +126,38 @@ Inclusive tar loading included all carbon species measured by the MS other than 
 \end{equation}
 
 Better measurements of tars was achievable with the dedicated tar sampling probe.  This was [DESCRIBE]
+
+\subsection*{Maximum heat duty}
+Maximum heat duty was a measure of the maximum enthalpy change achievable if there was 100\% conversion to CO and all of the reaction products reached the exit temperature of the reactor.  This assumed carbon dioxide participation in water-gas shift was negligible.  This is a reasonalbe assumption, as the equilibrium constant for water gas shift ranged between [RANGE] for the conditions at which these experiments were performed.  The regions where water gas shift would be likely were below the reaction zone, and are less material to the total heat duty.  To calculate the heat duty, a material and energy balance needed to be performed across the reactor for all of the species.  The details of this are provided in a separate reference \ref{ref-material_balance}, with the results summarized here.
+
+\begin{dmath}
+	\Delta H_{max} = \sum_{products}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{out}}C_{p,i}dT\right] -   \sum_{reactants}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{in,i}}C_{p,i}dT\right]
+\end{dmath} 
+
+The biomass was broken into its constituent biopolymers (i.e. cellulose, hemi-cellulose, and lignin) for the purposes of the material balances; the lignin was, in turn, broken down in equal fractions into the Lig-C, Lig-O, and Lig-H subunits.  The relative amounts were determined from carbohydrate and ultimate analysis of the biomass.  The mass balances to determine the product flowrates are summarized below; consistent with the rest of this document, inlet values have a subscript $0$, i.e. $n_{i,0}$ for species $i$ and outlet values lack the $0$ in the subscript.
+
+\begin{dgroup}
+	\begin{dmath}
+	n_{H_{2}} = 6n_{CELL}  + 5n_{HCE} + 18n_{LIG-C} + 21n_{LIG-O} + 27n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO} = 6n_{CELL}  + 5n_{HCE} + 15n_{LIG-C} + 20n_{LIG-O} + 22n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO_{2}} = n_{CO_{2},0}
+	\end{dmath}
+	\begin{dmath}
+	n_{CH_{4}} = 0
+	\end{dmath}
+	\begin{dmath}
+	n_{H_{2}O} =n_{H_{2}O} -  n_{CELL}  - n_{HCE} - 15n_{LIG-C} - 10n_{LIG-O} - 13n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{Ar} = n_{Ar,0}
+	\end{dmath}
+\end{dgroup}
+
+The reference temperature ($T^{\circ}$) was set at 25 $^{\circ}$C, and heat capacity polynomials were taken from NASA data \ref{ref-NASA}.
 
 %\begin{equation}
 %a=b
