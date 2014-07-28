@@ -1,6 +1,8 @@
 \documentclass[11pt,twocolumn]{article}
 \usepackage{caption}
 \usepackage{anysize}
+\usepackage{amsmath}
+\usepackage{breqn}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -10,11 +12,15 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage{booktabs}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.5}
+\usepgfplotslibrary{dateplot}
+\usepackage{subcaption}
 
-\marginsize{.75in}{.75in}{.75in}{1in}
+\marginsize{.75in}{.75in}{0.75in}{1in}
 \pagestyle{fancy}
 \rhead{\today}
-\lhead{\includegraphics[height=2.0cm]{logo.jpg}}
+\lhead{\includegraphics[height=1.0cm]{logo.jpg}}
 \rfoot{\thepage}
 \cfoot{}
 \renewcommand{\headrulewidth}{0pt} %removes line from fancy header
@@ -22,7 +28,7 @@
 \renewcommand{\abstractname}{Summary}
 \setlength{\columnsep}{25pt}
 \date{}
-\title{Laboratory Gasification Memo\\Empirical scale-up model for tubular biomass gasification \vspace{-6ex}}
+\title{Laboratory Gasification Memo\\Empirical study of the controlling physics for tubular biomass gasification \vspace{-6ex}}
 
 \begin{document}
 
@@ -30,7 +36,7 @@
   \begin{@twocolumnfalse}
     \maketitle
     \begin{abstract}
-    
+    The experimental data from the RDF pilot plant and Longmont Laboratory small gasifier were surveyed to understand the controlling phenomena in Sundrop Fuels' gasification process.  Kinetic controls would have shown a strong dependence on overall residence time, as well as an exponential dependence on temperature.  Heat transfer controls would have shown a strong dependence on the surface specific heat duty in the reactor as well as a fourth-power dependence on the temperature.  Analysis of the data showed that there was no connection between carbon yield and residence time at the RDF, and that the connection in the Longmont Laboratory was spurious and explainable by other factors.  Similar analysis showed a strong connection between carbon yield and heat duty at both the RDF and Longmont Laboratory, an expected collapse of the data on temperature normalization, and a consistent behavior between both scales.  It was conclusively determined that heat transfer was the controlling factor, although additional experiments are being run in the Longmont Laboratory small gasifier to remove any doubt.  A similar story was told by the methane yield for the Longmont Laboratory, but the RDF methane yield showed consistent high values uncorrelated with either heat transfer or kinetic controls.  Secondary factors for carbon yield included particle size, concentration of steam (or possibly pressure), and Re; in addition to these, partial pressure of carbon dioxide was important to methane yield.  These effects should be explored in future experimentation.
 
 
     \end{abstract}
@@ -47,24 +53,404 @@ In order to determine the controlling phenomenon in Sundrop Fuels' RPReactor\tex
 
 \section*{Experimental Methods}
 
+The Longmont Laboratory and RDF gasifier systems have been described elsewhere, and will be described in full in the report extension to this memo.  The worked-up data are available in JMP or CSV formats, and will be provided on request.  Methods of experimentation will be provided in non-draft versions of this memo.
+
+\subsection*{Calculations}
+
+\subsubsection*{Outlet molar gas flowrate}
+
+The total molar outlet flowrate of the gas in the system was calculated through a mass balance over the argon (Figure \ref{fig-Ar_balance}).  Because it is inert and was not contained in any of the reactive feeds, argon provided an excellent tracer for determining molar flowrates in the exit gas stream where other methods of flow analysis can be challenging due to the low overall flow rates.  Because there would be no reaction, a species balance over the argon yields no change in the total number of moles from inlet to outlet:
+
+\begin{equation}
+	n_{Ar,0} = n_{Ar}
+\end{equation}
+
+The number of moles of argon exiting the reactor ($n_{Ar}$) was just the total molar flowrate multiplied by the mole fraction of argon in that stream ($y_{Ar}$), which was known from MS measurements.  The total outlet gas flowrate could then be solved for:
+
+\begin{equation}
+	N = \frac{n_{Ar,0}}{y_{Ar}}
+\end{equation}
+
+\subsubsection*{Space time and minimum residence time}
+Space time is defined as the volume of the reactor divided by the superficial volumetric flowrate:
+
+\begin{equation}
+	\tau = \frac{V}{\dot{V}_{0}}
+\end{equation}
+
+Determining the superficial volumetric flowrate when there are solids, however, leads to some ambiguity that must be resolved.  Here, it was assumed that the solids volume was so low as to be safely ignored ([RANGE]), so that only a sum of the gas volumes must be performed.  The gases are assumed ideal, but a mixing temperature must be calculated.  An energy balance was performed over the gases.  As with the volume sum, the contribution of the solids at the inlet of the reactor was ignored.  It was assumed that gas mixing was faster than gas-solid heat transfer, establishing the ``inlet" gas flowrate immediately after entrance to the reactor but before there was time for significant interaction with the particles or the hot wall.  In any case, the assumptions are relatively arbitrary and are of little consequence --- space time was simply used for guidance and rigorous analysis has looked closer to the minimum residence time and modeled residence times.
+
+The mixing temperature was given by the energy balance:
+
+\begin{equation}
+	\sum_{i \ne biomass}\dot{n}_{i}\int_{T_{in,i}}^{T_{mix}}C_{p}dT = 0
+\end{equation}
+
+This balance was solved using numerical methods for $T_{mix}$. The ideal gas law was then applied to find the space time:
+
+\begin{equation}
+	\tau = \frac{VP}{\sum_{i \ne biomass}\dot{n}_{i}RT_{mix}}
+\end{equation}
+
+Here, $P$ was the system pressure and $R$ was the ideal gas constant.
+
+A minimum residence time was calculated by taking the sum of the exit flowrates of all species (as determined by the Ar balance), determining a volumetric flowrate, and dividing the volume of the reactor by this volumetric flowrate.  Essentially, this assumed that all volume change due to reactions, temperature increase, and pressure drop occurred instantly at the top of the reactor.  This then gave the lower bound on the residence time (with space time representing an upper bound); because much of the gas evolution was during the pyrolysis phase of reaction as well as around half of the temperature increase, it is probable that the actual residence time was much closer to this minimum number than to the space time.  
+
+A correction must be made to the water flowrate, as much of the water at the exit of the reactor was removed in the VLS system before it was measured in the MS.  To account for this, the \emph{inlet} water is used in place of the outlet water.  While a single mole of gas would be predicted generally to account for two moles of product on reaction, the excess steam feed above stoichiometric levels was great enough that this effect can be discounted [ESTIMATE].  Additionally, a correction for temperature needed to be made.  As the exit gas temperature was very difficult to measure, the gas temperature was simply taken as that of the reactor walls.  This would be expected to skew the results when exit temperatures vary significantly within a single wall temperature data series, with those points having lower exit temperatures appearing to have shorter minimum residence times than they should.  However, this variance would only arise when kinetic controls are not important, which is precisely when one would want to consider residence time. [SIZE OF EFFECT]  The minimum residence time was then:
+
+\begin{equation}
+	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
+\end{equation}
+
+\subsubsection*{Conversion}
+There were a number of measures for conversion of the biomass species into useful products.  Because some of the experiments fed carbon dioxide and this could end up in the final carbon products as other species via reactions with biomass or water gas shift, the inlet carbon dioxide needed to be subtracted from the inlet and outlet to only count converion of biomass species.  The first measure of conversion was ``total" conversion, which determined conversion of the carbon in the biomass into gas species measured by the mass spectrometer:
+
+\begin{equation}
+	X_{tot} = \frac{\sum_{i}\dot{n}_{i,C}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A second measure of conversion was the yield to CO and CO$_2$.  This was the most important conversion metric, as these two species are the precursors to synthetic liquid products in the full gasification+SMR process.  It will be referred to here as ``carbon yield," although it has been referred to in the past as ``good conversion" because it measures yield only of desired products.
+
+\begin{equation}
+	Y_{CO+CO_{2}} = \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+A third measure of conversion, included due to its prominence at the RDF, was the yield to CO, CO$_2$, and CH$_4$.  Historically, this was used when the only analytical instrument was an NDIR, and the ``total" conversion was limited by these three species.  For historical reasons, this is known as ``standard conversion."  Currently, it plays little into overall analysis, but has been included here for completeness.
+
+\begin{equation}
+	X_{std} =  \frac{\dot{n}_{CO}+\dot{n}_{CO_{2}}+\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+\subsection*{Undesired species}
+
+There were three measures of undesired species: methane yield, tar loading, and inclusive tar loading.  Methane yield was simply the fraction of total biomass carbon entering the reactor that exited as methane, correcting again for the inlet carbon dioxide:
+
+\begin{equation}
+	Y_{CH_{4}} = \frac{\dot{n}_{CH_{4}}-\dot{n}_{CO_{2},0}}{\dot{n}_{C,0}-\dot{n}_{CO{2},0}}
+\end{equation}
+
+Tar loading attempted to measure the total amount of ``tar" which would lead to fouling and catalyst degradation downstream.  This was measured in a mass flow per total standard exit volumetric flowrate (kg Nm$^{-3}$).  These were selected as measured components with six carbons or more: benzene, toluene, and naphthalene.  This was in some ways preferable to the more inclusive measure described below, as the alkanes were simple diluents (as opposed to catalyst poisons) and the MS had some early calibration errors with C$_3$ hydrocarbons.
+
+\begin{equation}
+	C_{tar} = \frac{\dot{m}_{C_{6}H_{6}}+\dot{m}_{C_{7}H_{8}+\dot{m}_{C_{10}H_{8}}}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Inclusive tar loading included all carbon species measured by the MS other than CO, CO$_2$, or CH$_4$.  The list of ``tars" for inclusive conversion would then be: C$_2$H$_6$, C$_2$H$_4$, C$_2$H$_2$, C$_3$H$_8$, C$_3$H$_6$, C$_6$H$_6$, C$_7$H$_8$, and C$_{10}$H$_8$.
+
+\begin{equation}
+	C_{tar,I} = \frac{\sum_{tars}\dot{m}_{i}}{N\left(\frac{P_{std}}{P}\right)\left(\frac{T}{T_{std}}\right)}
+\end{equation}
+
+Better measurements of tars was achievable with the dedicated tar sampling probe.  This was [DESCRIBE]
+
+\subsubsection*{Maximum heat duty}
+Maximum heat duty was a measure of the maximum enthalpy change achievable if there was 100\% conversion to CO and all of the reaction products reached the exit temperature of the reactor.  This assumed carbon dioxide participation in water-gas shift was negligible.  This is a reasonalbe assumption, as the equilibrium constant for water gas shift ranged between [RANGE] for the conditions at which these experiments were performed.  The regions where water gas shift would be likely were below the reaction zone, and are less material to the total heat duty.  To calculate the heat duty, a material and energy balance needed to be performed across the reactor for all of the species.  The details of this are provided in a separate reference \ref{ref-material_balance}, with the results summarized here.
+
+\begin{dmath}
+	\Delta H_{max} = \sum_{products}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{out}}C_{p,i}dT\right] -   \sum_{reactants}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{in,i}}C_{p,i}dT\right]
+\end{dmath} 
+
+The biomass was broken into its constituent biopolymers (i.e. cellulose, hemi-cellulose, and lignin) for the purposes of the material balances; the lignin was, in turn, broken down in equal fractions into the Lig-C, Lig-O, and Lig-H subunits.  The relative amounts were determined from carbohydrate and ultimate analysis of the biomass.  The mass balances to determine the product flowrates are summarized below; consistent with the rest of this document, inlet values have a subscript $0$, i.e. $n_{i,0}$ for species $i$ and outlet values lack the $0$ in the subscript.
+
+\begin{dgroup}
+	\begin{dmath}
+	n_{H_{2}} = 6n_{CELL}  + 5n_{HCE} + 18n_{LIG-C} + 21n_{LIG-O} + 27n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO} = 6n_{CELL}  + 5n_{HCE} + 15n_{LIG-C} + 20n_{LIG-O} + 22n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{CO_{2}} = n_{CO_{2},0}
+	\end{dmath}
+	\begin{dmath}
+	n_{CH_{4}} = 0
+	\end{dmath}
+	\begin{dmath}
+	n_{H_{2}O} =n_{H_{2}O} -  n_{CELL}  - n_{HCE} - 15n_{LIG-C} - 10n_{LIG-O} - 13n_{LIG-H}
+	\end{dmath}
+	\begin{dmath}
+	n_{Ar} = n_{Ar,0}
+	\end{dmath}
+\end{dgroup}
+
+The reference temperature ($T^{\circ}$) was set at 25 $^{\circ}$C, and heat capacity polynomials were taken from NASA data \ref{ref-NASA}.
+
+%\begin{equation}
+%a=b
+%\end{equation}
 
 
 \section*{Results and Discussion}
 
 \subsection*{Overall data survey}
 To get a general feel for the ranges and trends in the data at both scales, some survey data is presented here.  First, the variation in the data over time was examined to determine whether there were system changes during that would confound interpretation of the other system variables.  Figure \ref{fig-Lab-Xg-dates} shows the carbon yield for the laboratory gasifier over the 18 months of operation of that system.  While the variation was greater in the first 6 months of operation than in the past year, there are no clear trends or structure to the data over the course of operation.  It will be seen below that the variation in the first 6 months can be attributed to other factors.  Likewise, an examination of the methane yield (Figure \ref{fig-Lab-CH4-dates}) shows no significant structure or change in variation during the period of operation.  Figures \ref{fig-RDF-Xg-dates} and \ref{fig-RDF-CH4-dates} show the analogous information for the RDF.  It is important here to recall that the RDF campaigns were run at a range of temperatures across its 8 months of main operation, starting with SiC between 1400 $^{\circ}$C and 1450 $^{\circ}$C and concluding with a metal tube at 1200 $^{\circ}$C.  These temperature ranges are color-coded in the figures.  Within the temperature series for carbon yield, there is no structure at 1200 ${^\circ}$C but some reduction in variation at the higher temperatures.  As will be seen, this corresponded with the introduction of the de-gasser; there were few replicates to verify consistent performance across time. [CH4 data]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[compat=1.5.1,
+	date coordinates in=x,
+        	xticklabel style= {rotate=45, anchor=north east},
+	xlabel={Experiment date},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+]
 
-[REPLICATION ANALYSIS]
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={ss_start},y={X_good_avg}, meta = tic520_sp,] {csv/LAB_hidden_removed_all.csv};
+
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Carbon yield over time in Laboratory gasifier}
+\label{fig-Lab-Xg-dates}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+
+\begin{tikzpicture}
+\begin{axis}[compat=1.5.1,
+        date coordinates in=x,
+        	xticklabel style= {rotate=45, anchor=north east},
+	xlabel={Experiment date},
+	ylabel={$Y_{CH_{4}}$},
+	ymin = 0.0, ymax = 0.15,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit] table [col sep = comma, x={ss_start},y={CH4_yield_corr}, meta = tic520_sp,] {csv/LAB_hidden_removed_all.csv};
+\end{axis}
+\end{tikzpicture}
+
+\caption{Methane yield over time in Laboratory gasifier}
+\label{fig-Lab-CH4-dates}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+To get a feel for the level of variance that should be expected in the data, a replicate comparison was performed over the data set.  While experiments were not all run in the same campaigns, over the course of the operation of the gasifier a variety of experimental points were performed at similar conditions.  These included not only the process conditions (e.g. flowrates, temperatures, pressures) but also material properties (e.g. moisture, particle size, carbon content).  The comparisons are shown in Table \ref{tab-replication_analysis}.
+
+\begin{table*}
+\centering
+\begin{tabular}{l c c c c}
+Run Numbers &	Average Carbon Yield	&	2*Standard Error	&	Average Methane Yield	&	2*Standard Error	\\
+\hline
+88,93,96,104 &	0.613	& 0.022	&	0.0585	&	1.29X10$^{-3}$ \\
+94,101,105	&	0.668	&	0.023	&	0.0606	&	8.82X10$^{-4}$ \\
+239,240,241,242&	0.499	&	0.012	&	0.0838	&	2.93X10$^{-3}$ \\
+283,297,298,299&	0.635	&	0.017	&	0.1270	&	3.10X10$^{-3}$ \\
+264,267,278&		0.600	&	0.012	&	0.0841	&	8.08X10$^{-4}$ \\
+404,405,406&		0.696	&	0.011	&	0.0675	& 	2.08X10$^{-3}$ \\
+302,305&			0.697	&	0.017	&	0.0420	&	1.70X10$^{-3}$ \\
+194,196,199&		0.799	&	0.006	&	0.0140	&	8.35X10$^{-4}$ \\
+381,385,388&		0.830	&	0.004	&	0.0258	&	2.79X10$^{-3}$ \\
+212,213,227&		0.792	&	0.002	&	0.0379	&	3.94X10$^{-3}$ \\
+377,383,384&		0.535	&	0.011	&	0.0992	&	5.04X10$^{-3}$ \\
+111,125,129,130&	0.888	&	0.172	&	0.0002	&	1.61X10$^{-4}$ \\
+\end{tabular}
+\caption{Replicate table for Longmont Laboratory experiments}
+\label{tab-replication_analysis}
+
+\end{table*}
+
+
 
 Figure \ref{fig-Lab-Xg-mdot} shows the variation in carbon yield with mass flow of the biomass for the Longmont Laboratory gasifier.  Mass flow is generally a good proxy for overall heat duty.  However, in this system, entraining gas requirements are strongly dependent on the mass flow rate, and the gasification reaction itself generates a significant amount of gas.  Both of these would suggest that $t_{min}$ also decreases with increasing mass flow rate, confounding the two effects.  The trends in the data were as one would suspect for either controlling factor.  Increasing mass flow rate led to a decrease in the overall carbon yield, and higher temperatures and smaller particles led to higher carbon yields.  There were relatively low levels of variance in similar temperature/particle size points at each mass flow rate (5\%-10\%) between 1.5 lb/hr and 4.0 lb/hr, suggesting some other reaction conditions had minor effects on performance.  However, at 1.0 lb/hr there was a wide range (0.5-0.95) of carbon yield, indicating that there were a number of other factors at work in those experiments.  As the 1.0 lb/hr experiments had the greatest potential for choosing process conditions (i.e. the minimum required entrainment gas flow rates were the lowest), it was likely that there was further differentiation between kinetic and heat transfer indicating variables there.  This was explored in detail in the next section.  Figure \ref{fig-Lab-CH4-mdot} shows the methane yield as a function of mass flow rate of the biomass.  It was, as well, typical of what one would expect for either set of controlling physics.  Of note is that there was significant separation between the temperature curves, much more than seen for the carbon yield.  This was likely due to the high temperature kinetics of the methane decomposition and hydro-methanation reactions and the changes in water-gas shift equilibrium at those temperatures.  This is discussed in some detail below, but will be addressed in much more detail in a later memo.  Also of note is that the spread in the data is again much greater for the 1.0 lb/hr case, suggesting that there were more interesting effects than just indicated by the mass flow rate.  Again, this was be a focus of the investigation below.  Finally, it should be noted that the current economic simulations assume a methane mole fraction in the syngas of 0.5\%, which translates to just about a 2\% methane yield.  Only conditions at a nominal wall temperature of 1450 $^{\circ}$C achieved this requirement.  If lower operating temperatures are desired, something must be done to fundamentally change reactor performance.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Biomass flow rate (lb hr$^{-1}$)},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+	colorbar horizontal,
+	colorbar style ={xlabel={Temperature ($^{\circ}$C)}},
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50 2}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {mass_flow_brush_feeder_avg}, y = X_good_avg, meta = tic520_sp,]  {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Mass flow rate effect on carbon yield in Longmont Laboratory gasifier}
+\label{fig-Lab-Xg-mdot}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hbp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Biomass flow rate (lb hr$^{-1}$)},
+	ylabel={$Y_{CH_{4}}$},
+	ymin = 0.0, ymax = 0.15,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50 2}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {mass_flow_brush_feeder_avg}, y = CH4_yield_corr, meta = tic520_sp,]  {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Mass flow rate effect on methane yield in Longmont Laboratory gasifier}
+\label{fig-Lab-CH4-mdot}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 Figure \ref{fig-RDF-Xg-mdot} shows the trends in carbon yield for the RDF data with mass flow rate of biomass.  The trends are much as one would expect.  The data is structured in downward trending series, with the series designated by the temperature of the tube wall, and the conversions range from around 85\% at the lowest biomass flowrates/highest temperatures to 40\% for the lowest temperatures.  As would be expected for either heat transfer or kinetic controls, the higher temperature series have generally higher conversion than the lower temperature series.  Unfortunately, mass flow rate is not a definitive proxy for either controlling mode.  Increasing mass flow rate would be expected to decrease residence time, as additional entraining gas and reaction products would increase velocities throughout the tube.  Increasing mass flow rate would clearly increase overall reactor heat duty as well.  To distinguish the effects, a closer examination was undertaken in the next section.  Figure {fig-RDF-CH4-mdot} shows the variation in the methane yield as a function of mass flow rate of biomas for the RDF data.  In stark contrast to the laboratory data, there is no clear trend in the methane yield with mass flowrate of biomass for any of the temperatures displayed.  It remains unclear why this was, when expectations would suggest increasing conversion of CH4 with increasing levels of carbon yield; the data is explored further to this end later in this memo.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Biomass flow rate (lb hr$^{-1}$)},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+	restrict y to domain=0:1.0,]
+]
+
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y = X_good_C,]  {csv/RDF_hidden_removed_1200.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= X_good_C,]   {csv/RDF_hidden_removed_1350.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= X_good_C,]   {csv/RDF_hidden_removed_1400.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= X_good_C,]   {csv/RDF_hidden_removed_1450.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Mass flow rate effect on carbon yield in the RDF gasifier}
+\label{fig-RDF-Xg-mdot}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Biomass flow rate (lb hr$^{-1}$)},
+	ylabel={$Y_{CH_{4}}$},
+	ymin = 0.05, ymax = 0.2,
+	restrict y to domain=0:1.0,]
+]
+
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y = CH4_yield,]  {csv/RDF_hidden_removed_1200.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= CH4_yield,]   {csv/RDF_hidden_removed_1350.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= CH4_yield,]   {csv/RDF_hidden_removed_1400.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {actual_MFR}, y= CH4_yield,]   {csv/RDF_hidden_removed_1450.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Mass flow rate effect on methane yield in the RDF gasifier}
+\label{fig-RDF-CH4-mdot}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 In addition to overall mass flowrate of biomass, space time is a typical measure for general reactor performance.  For a plug flow reactor with no volume expansion, it is directly related to the integrated rate; kinetically controlled systems generally have performance curves that increase at ever decreasing rates with space time.  When volume expansion is included, the relationship is more complicated, but the same trends seem to apply.  Figure \ref{fig-Lab-Xg-tau} shows the carbon yield for the Longmont Laboratory gasifier as a function of space time; temperature is indicated by color and particle size is indicated by marker size.  The trends were clearly as one would expect for a gasification reaction.  There was an increase in carbon yield with space time, and that increase slowed as carbon yield approached 90\%.  Moreover, there were series contained within the data: increased temperature lead to higher carbon yields at a given space time, and the trends for the largest particles were at the lowest end of each of these series.  Looking closer, there was a significant level of spread in the data: for the 1450 $^{\circ}$C data, there is a range of 10\%--15\%, much greater than the repeatability level of [REPEAT FIG].  This indicated that if space time was a major factor, there were other important factors causing the additional variance within each of the temperature series.  This additional variance was a major focus of the analysis described below.  Additionally, the carbon yield appeared to saturate between 3.0 s and 4.0 s of space time, and it saturated at different levels for each temperature.  If not a spurious effect, this would indicate either a shift in reaction kinetics (with strong temperature dependence) or an equilibrium limitation.  If kinetic control were indicated by further analysis, this would suggest that detailed investigation of this late stage would be critical for pushing carbon yield to maximal levels. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Space time (s)},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50 2}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {space_time_avg}, y = X_good_avg, meta = tic520_sp,]  {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Space time effect on carbon yield in Longmont Laboratory gasifier}
+\label{fig-Lab-Xg-tau}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 Figure \ref{fig-Lab-CH4-tau} shows the dependence of methane yield on space time.  The trends were, as with the carbon yield, what one might expect for kinetic control of performance.  In general, increases in space time led to reductions in the methane yield, with higher temperatures and smaller particle sizes giving lower levels as well.  However, the trends are not completely monotonic.  At low space time (~0.5 s), the 1350 $^{\circ}$C series shows lower values in yield than its counterparts at 1.5 s - 2.0 s.  Methane is generated early in the set of pyrolysis and gasification reactions, so a maximum between these two points (missing in the data) could indicate this behavior.  The 1450 $^{\circ}$C series may have shown a maximum near 2.0 s as well.  However, it would be expected that this series would achieve its maximum at \emph{lower} space time than the 1350 $^{\circ}$C series, on the account of the expected exponential increase in kinetics with temperature.  Additionally, there are a set of points at 0.5 s with much higher levels of methane yield.  An alternate explanation would be that space time was a poor proxy for residence time, and that $t_{min}$ would show more clear structure in the data.  Finally, it is possible that the deviations in the expected structure of the data are signs that the system was not really under kinetic control.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hbp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Space time (s)},
+	ylabel={$Y_{CH_{4}}$},
+	ymin = 0.0, ymax = 0.15,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50 2}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {space_time_avg}, y = CH4_yield_corr, meta = tic520_sp,]  {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Space time effect on methane yield in Longmont Laboratory gasifier}
+\label{fig-Lab-CH4-tau}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 The space time effect is examined for the RDF in Figures \ref{fig-RDF-Xg-tau} and \ref{fig-RDF-CH4-tau}.  Clearly, as shown before, the higher temperature experiments resulted in higher carbon yields.  However, at both the higher and the lower temperatures, there appeared to be no effect at all of the space time on the carbon yield.  As space time is, in general, a good proxy for the residence time, this is a first suggestion that the residence time (and thus, the reaction kinetics) may not be the controlling factor.  An argument could be made that gas release from the biomass is not a constant function of reaction progress; following that line of reasoning, a large fraction of the product gas could be released relatively early in the reactor, skewing some high biomass flowrate results with long spacetimes to shorter residence times.  For kinetic controls, it is the residence time that truly matters, so the space time metric may obfuscate a real residence time effect.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Space time (s)},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+	restrict y to domain=0:1.0,]
+]
+
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {space_time_avg}, y = X_good_C,]  {csv/RDF_hidden_removed_1200.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {space_time_avg}, y= X_good_C,]   {csv/RDF_hidden_removed_1350.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {space_time_avg}, y= X_good_C,]   {csv/RDF_hidden_removed_1400.csv};
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {space_time_avg}, y= X_good_C,]   {csv/RDF_hidden_removed_1450.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Space time effect on carbon yield in the RDF gasifier}
+\label{fig-RDF-Xg-tau}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={Space time(s)},
+	ylabel={$Y_{CH_{4}}$},
+	ymin = 0.05, ymax = 0.2,
+	restrict y to domain=0:1.0,]
+]
+
+\addplot+[only marks, ] table [col sep = comma, x = {space_time_avg}, y= CH4_yield,]   {csv/RDF_hidden_removed_1200.csv};
+\addplot+[only marks, ] table [col sep = comma, x = {space_time_avg}, y= CH4_yield,]   {csv/RDF_hidden_removed_1350.csv};
+\addplot+[only marks, ] table [col sep = comma, x = {space_time_avg}, y= CH4_yield,]   {csv/RDF_hidden_removed_1400.csv};
+\addplot+[only marks, ] table [col sep = comma, x = {space_time_avg}, y= CH4_yield,]   {csv/RDF_hidden_removed_1450.csv};
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Space time effect on methane yield in the RDF gasifier}
+\label{fig-RDF-CH4-tau}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 To work around this objection, a ``minimum residence time" ($t_{min}$) was calculated, as was described above.  Because this was based on the outlet gas flowrate as measured in the system, it provides a lower bound on the residence time in the system.  Space time provides the corresponding upper bound.  Because models of the pyrolysis phase of the reaction [REF] have shown a large fraction of the total gas release at low temperatures [RANGE], it is likely that $t_{min}$ provided a better estimate of the actual residence time in the system than $\tau$.  In any case, if neither showed a strong correlation with the gasifier performance, it would be unlikely that reaction kinetics were the dominant phenomenon.
 
@@ -74,51 +460,627 @@ As the general overview of the data from the Longmont Laboratory and the RDF mad
 
 In the Longmont Laboratory system, these variables were themselves closely correlated. It is clear from Figure \ref{fig-Lab-dH_max-tmin} that most of the points lie within a tight band that suggested a monotonically decreasing connection between the variables, and the correlation coefficient was [CORR COEFF].  This was a result of two factors: there was a minimum entrainment gas flow rate that was a strong function of the biomass flow rate, and the experiments as designed were looking at a range of factors independently (e.g. space time, mass flow rate, pressure, temperature, particle size) but were not explicitly looking at the heat duty.  It is a recommendation of this memo that controlled experiments exploring these variables be performed to confirm the conclusions of this document.  A key result of this was that, for many of the data views explored below, it could be reasonably inferred that either kinetic control or heat transfer control was important.  However, given the limitations of the current data set, there were three areas on the correlation plot (denoted Slice 1, Slice 2, and Slice 3) where there was a large change in one variable with only small changes in the other variable.  These were exploited in the analysis below to gain some insight into the possible controlling factors.  This creative technique was applied to other data plots as the individual effects were examined in more detail.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={$t_{min}$ (s)},
+	ylabel={$\frac{\Delta H_{max}}{A}$ (kW m$^{-2})$},
+	ymin =20.0, ymax = 150.0,
+	restrict y to domain=0:200.0,]
+]
+
+\addplot+[scatter, only marks, ] table [col sep = comma, x = {tau_min}, y= {dH_max/A},]   {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Correlation between minimum residence time and maximum surface specific heat duty for the Longmont Laboratory gasifier}
+\label{fig-Lab-dH_max-tmin}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={$t_{min}$ (s)},
+	ylabel={$\frac{\Delta H_{max}}{A}$ (kW m$^{-2})$},
+	ymin =20.0, ymax = 150.0,
+	restrict y to domain=0:200.0,
+	restrict x to domain=0:10.0,
+]
+
+\addplot+[only marks, ] table [col sep = comma, x = {tau_min}, y= {dH_max/A},]   {csv/RDF_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Correlation between minimum residence time and maximum surface specific heat duty for the RDF gasifier}
+\label{fig-RDF-dH_max-tmin}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 At the RDF, the separation between the variables was much more distinct (Figure \ref{fig-RDF-dH_max-tmin}).  At 1450 $^{\circ}$C there was essentially no correlation between the variables, providing an excellent opportunity for testing the effects independently.  Likewise, at 1250 $^{\circ}$C there is only minor correlation, and the correlation is positive.  This is in the opposite direction of the Longmont Laboratory data and again provides a good opportunity for independent comparison.  At 1400 $^{\circ}$C the variables do appear to be correlated somewhat [CORR COEFF] in a similar fashion to the Longmont Laboratory data, providing less opportunity for discrimination.
 
 \subsubsection*{Investigation of kinetic controls}
 
-$t_{min}$ was used as the chief proxy of actual residence time.  For the Longmont Laboratory gasifier, Figure \ref{fig-Lab-Xg-tau-temps} shows the effect of $t_{min}$ on carbon yield for the two temperatures with the highest density of data (1350 $^{\circ}$C and 1450 $^{\circ}$C).  From a first look, it appeared that the system performed exactly as one would have expected for a kinetically controlled system.  Higher temperatures gave higher carbon yields at similar $t_{min}$ values, with the difference being around 10\%.  Increasing residence time gave increasing conversion in a saturating curve, and the larger particles followed a distinct series from the smaller particles.  The saturation was at ~90\% for the 1450 $^{\circ}$C experiments and between 80\%--85\% for the 1350 $^{\circ}$C experiments, again suggesting a kinetic shift or an equilibirium limitation.
+$t_{min}$ was used as the chief proxy of actual residence time.  For the Longmont Laboratory gasifier, Figure \ref{fig-Lab-Xg-tmin-temps} shows the effect of $t_{min}$ on carbon yield for the two temperatures with the highest density of data (1350 $^{\circ}$C and 1450 $^{\circ}$C).  From a first look, it appeared that the system performed exactly as one would have expected for a kinetically controlled system.  Higher temperatures gave higher carbon yields at similar $t_{min}$ values, with the difference being around 10\%.  Increasing residence time gave increasing conversion in a saturating curve, and the larger particles followed a distinct series from the smaller particles.  The saturation was at ~90\% for the 1450 $^{\circ}$C experiments and between 80\%--85\% for the 1350 $^{\circ}$C experiments, again suggesting a kinetic shift or an equilibirium limitation.
 
-A closer look, however, raised doubts about these conclusions.  First, the spread in the data was relatively large, especially in the 1450 $^{\circ}$C plot: 10--15 percentage points at $t_{min}$ between 0.1 s and 0.5 s, and nearly 30 percentage points at the highest residence times.  This variance at a minimum suggested secondary effects, and it hinted at the possibility that minimum residence time may not be the right controlling variable.  As shown on the plot, data sets with very close $t_{min}$ values but large spreads in the carbon yield were selected.  For the set labelled ``Slice 1", Figure \ref{fig-Lab-Xg-tmin-temps-slice1} shows the variation of carbon yield with the heat transfer proxy, $\frac{\Delta H_{max}}{A}$.  There is a 50\% variation in this variable, and the carbon yield showed a clear linear relationship to it.  [OTHER SLICES] [possible secondary effects/other explanations]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {tau_min}, y = X_good_avg, meta ={c_H2O},]  {csv/LAB_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\draw[gray] (0.09,0.55) rectangle (0.13, 0.7) node [anchor = north west] {Slice 1} ;
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {tau_min}, y = X_good_avg, meta = {c_H2O},]  {csv/LAB_hidden_removed_1350.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1350 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-Lab-Xg-tmin-temps}
+\caption{Variation in carbon yield with minimum residence time in the Longmont Laboratory gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%			
+
+
+A closer look, however, raised doubts about these conclusions.  First, the spread in the data was relatively large, especially in the 1450 $^{\circ}$C plot: 10--15 percentage points at $t_{min}$ between 0.1 s and 0.5 s, and nearly 30 percentage points at the highest residence times.  This variance at a minimum suggested secondary effects, and it hinted at the possibility that minimum residence time may not be the right controlling variable.  As shown on the plot, data sets with very close $t_{min}$ values but large spreads in the carbon yield were selected.  For the set labelled ``Slice 1", Figure \ref{fig-Lab-Xg-tmin-temps-slice1} shows the variation of carbon yield with the heat transfer proxy, $\frac{\Delta H_{max}}{A}$.  There is a 50\% variation in this variable, and the carbon yield showed a clear linear relationship to it.  Slice 2 shows the same variation with the heat duty (Figure \ref{fig-Lab-Xg-tmin-temps-slice2}); there is also a displayed variation with the concentration of steam.  Other areas on the curve had too many other simulataneously changing variables to select enough points at constant $t_{min}$ for statistical confidence.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = X_good_avg, meta ={c_H2O},]  {csv/LAB_hidden_removed_1450_slice1_tmin.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\label{fig-Lab-Xg-tmin-temps-slice1}
+		\caption{Slice 1}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = X_good_avg, meta = {c_H2O},]  {csv/LAB_hidden_removed_1450_slice1_tmin.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\label{fig-Lab-Xg-tmin-temps-slice2}
+		\caption{Slice 2}	
+	\end{subfigure}
+
+\label{fig-Lab-Xg-tmin-slices}
+\caption{Variation in carbon yield within constant $t_{min}$ slices}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Further examination showed that there was a curious dip in the carbon yield at $t_{min}$ between 0.5 s and 0.6 s for both temperature curves, which then increased again at the saturation level between 0.6 s and 0.7 s.  While this could have been noise in the data, repeatability metrics for the Longmont Laboratory have been exceptionally good [MEASURE], suggesting that effects seen were real.  Unless there would exist reactions that would reduce the levels of both CO and CO$_{2}$ that initiate at higher temperatures, there would be no way for a kinetically controlled system to show this temporary decrease in carbon yield with increasing residence time.  As these are the oxides of carbon with the lowest enthalpy levels and highest entropy levels, it would be surprising if such reactions existed.  The saturation behavior itself was also somewhat surprising; at 1350 $^{\circ}$C, an increase of 40\% in the minimum residence time led to essentially no change in carbon yield; a similar effect was seen at 1450 $^{\circ}$C.  There was a large difference (90\% vs 80\%) in the final conversion levels.  Not only would this suggest a substantial and sudden decrease in the reaction rate, the difference in saturation levels for temperature would suggest that the new controlling kinetics had an extraordinately large activation energy giving quasi-equlibrium levels of carbon yield.  None of these effects on their own would be convincing evidence against a kinetic explanation for the data, but taken together they suggest that an alternate explanation be investigated.  This is especially bolstered by the sliced data, which showed a strong dependence on the proxy variable for heat transfer control, a leading candidate for a different explanation of the data.
 
 As was mentioned above, the RDF data provided a better opportunity to distinguish between the two candidate controlling phenomena, as $t_{min}$ and $\frac{\Delta H_{max}}{A}$ were not tightly correlated for any of the temperature series.  Figure \ref{fig-RDF-Xg-tmin} shows the effect of minimum residence time on carbon yield, split into different plots for each major temperature series (1450 $^{\circ}$C, 1400 $^{\circ}$C, and 1200 $^{\circ}$C.  It became clear in these plots that any potential correlation between the carbon yield and the minimum residence time was unlikely; all three series had what appeared to be randomly distributed data.  There might be a slight upward trend for the 1400 $^{\circ}$C series, but there are two points (with 0.85 and 0.81 carbon yields) that have very high carbon yields for relatively short residence times.  The other two series, 1200 $^{\circ}C$ and 1450 $^{\circ}$C show no trend at all.  Although the data from the Longmont Laboratory made a less compelling argument for the lack of kinetic control, the RDF data made a fairly strong case that residence time was not a determining factor.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = X_good_C,]  {csv/RDF_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = X_good_C,]  {csv/RDF_hidden_removed_1400.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1400 $^{\circ}$C}	
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = X_good_C,]  {csv/RDF_hidden_removed_1200.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1200 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-RDF-Xg-tmin-temps}
+\caption{Variation in carbon yield with minimum residence time in the RDF gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Another key metric for performance is the yield of methane, which should be below 2\% to match the current commercial scale design for economic reasons.  Figure \ref{fig-Lab-CH4-tmin-temps} shows the methane yield for both 1450 $^{\circ}$C and 1350 $^{\circ}$C operating conditions as a function of minimum residence time.  As with the carbon yield, the trends were much where they would be expected for the Lab data for kinetic control on a first examination.  Higher temperatures yielded less methane, and larger particles perform somewhat worse than small particles.  From a kinetic perspective, it was not entirely clear why this would be the case, as the methane decomposition reactions should not be surface specific and hydro-methanation reactions should be; if anything, lower levels of methane might be expected for larger particles.  There was a significant spread in the data at similar residence times, encompassing up to 2.5 percentage points at some values of $t_{min}$.  Again, due to the repeatability of the data [VALUE], this suggested either a secondary effect at work or a spurious correllation.  Closer examination revealed further pathology.  In the 1450 $^{\circ}$C data, there is a ``cliff" at 0.5 s of minimum residence time where the methane yield suddenly goes from between 0.00 and 0.02 to only values of 0.00.  This lack of variation suggested that either the points beyond 0.5 s had a constant value of the variable driving the secondary effect, or that the overall association with residence time was false. [LOOK AT SECONDARY VARIABLES]  The data at 1350 $^{\circ}$C showed the expected downard trend in methane yield, but also had an interesting \emph{increase} in methane yield between 0.1 s and 0.3 s.  Likewise, there were a number of points well below the general trend at 0.3 s.  These deviations could be a sign of a maximum in methane yield between 0.1 s and 0.3 s -- they should certainly be compared with the kinetic models, and some experimental points run in the space with few points.  They could also signal that the strong trend seen in all of the other data points was instead the result of the overall strong coupling between the surface specific heat duty and the minimum residence time for most of these experiments.  The latter would align well with the conclusions drawn from the carbon yield data at both the Longmont Laboratory and the RDF.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.00, ymax = 0.15,
+			]
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {tau_min}, y = CH4_yield_corr, meta ={c_H2O},]  {csv/LAB_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.00, ymax = 0.15,
+			]
+
+			
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {tau_min}, y = CH4_yield_corr, meta = {c_H2O},]  {csv/LAB_hidden_removed_1350.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1350 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-Lab-CH4-tmin-temps}
+\caption{Variation in methane yield with minimum residence time in the Longmont Laboratory gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
 
 Methane yield at the RDF was, in general, significantly more difficult to interpret than in the Longmont Laboratory.  For starters, it was much higher (9\% - 18\%) than in the Longmont Laboratory.  It also did not show the expected trends.  Figure \ref{fig-RDF_CH4-tmin-temps} shows the data.  At 1200 $^{\circ}$, it \emph{increases} with minimum space time; this was entirely surprising, as increasing time in the ranges (0.3 s -- 1.1 s) should allow the methane to be further destroyed rather than accumulated.  At 1450 $^{\circ}$C, there did not appear to be a trend at all in the data.  It was clear that, at least for methane decomposition, this was not an effect controlled by residence time at the RDF.
 
-[AGGREGATE SLICES FROM TAU/DH CURVE]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = CH4_yield,]  {csv/RDF_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = CH4_yield,]  {csv/RDF_hidden_removed_1400.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1400 $^{\circ}$C}	
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$t_{min}$ (s)},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y = CH4_yield,]  {csv/RDF_hidden_removed_1200.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1200 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-RDF-CH4-tmin-temps}
+\caption{Variation in methane yield with minimum residence time in the RDF gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 Finally, to compare both the Longmont Laboratory and the RDF data, an aggregated data curve is shown for carbon yield at the only common operating temperature between the two scales (1450 $^{\circ}$C, Figure \ref{fig-Agg-Xg-tmin-1450}).  It can be clearly seen that there was no scale correspondence between the Longmont Laboratory and the RDF; that is, if kinetic controls played a key role, the nature of those controls would have changed with the scale, greatly diminishing the value of models developed at a laboratory level for predicting the performance at larger levels.  However, there is a more likely explanation.  Given the preponderance of data presented in this section, it could most reasonably be concluded that residence time (and thus, a kinetic phenomenon) was not the significant factor for determining performance at the range of scales and process conditions examined in these experiments.  Further experimentation will be done to confirm this conclusion, but the evidence is very strong that kinetics were not the set of performance determining physics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={$t_{min}$ (s)},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin =0.0, ymax = 1.0,
+	restrict y to domain=0:200.0,
+	restrict x to domain=0:10.0,
+]
+
+\addplot+[only marks,] table [col sep = comma, x = {tau_min}, y= {X_good_avg}]   {csv/Lab_RDF_agg_1450_LAB.csv};
+\addplot+[only marks,] table [col sep = tab, x = {tau_min}, y= {X_good_avg}]   {csv/Lab_RDF_agg_1450_RDF.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Effect of minimum residence time on carbon yield at RDF and Longmont Laboratory gasifiers}
+\label{fig-Agg-Xg-tmin-1450}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \subsubsection*{Investigation of heat transfer controls}
 
 If kinetic concerns were not the driving factors behind reactor performance, perhaps the system was controlled by heat transfer.  As explained above, the maximum achievable enthalpy change per surface area ($\frac{\Delta H_{max}}{A}$ was used as a surface specific heat duty; this is similar to the duty used in sizing a heat exchanger.  If the specific enthalpy of the system due to sensible heat changes and heats of reaction is a linear function of temperature, as has been seen in some of the thermodynamic simulations [REF], it would be expected that performance would decline linearly with increasing heat loading.  These effects were examined for both scales in the analysis that follows.
 
+Figure \ref{fig-Lab-Xg-dH-temps} shows the dependence of the carbon yield on the heat duty in the Longmont Laboratory gasifier.  Particle size was reflected by the marker size, and color indicated the concentration.  Of the numerous secondary effects, two variables appeared to be of importance and were themselves strongly correllated.  These were the concentration of steam and the total pressure; both appear to explain the major offset in series.  The detailed analysis for this will be presented in a future memo and report, but it would be secondary to the goals of this memo and so is omitted.  The concentration of steam was chosen for display here due to the lack of an apparent pressure effect in the RDF data.  For both temperature series, there were two distinct trends.  The trend with lower carbon yield had lower concentration of steam; the higher carbon yield was at higher levels of steam concentration.  Larger particles led to lower carbon yields, but the effect was not overly large -- between 5 and 10 percentage points of carbon yield.  Within the higher steam concentration series, the carbon yield generally increased with increasing concentration of steam, explaining some of the variance in the data.  With concentration of steam as the explaining variable this variance was generally smaller than that seen for the comparative analysis, with $t_{min}$, ranging from 5 to 10 percentage points of carbon yield.  The data were consistent with expectations for linear heat transfer controls.  A similar story was told by the 1350 $^{\circ}$C plot.  Carbon yield increased with concentration of steam in distinct series.  Particle size had a similar effect, with larger particles giving a lower overall carbon yield.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = X_good_avg, meta ={c_H2O},]  {csv/LAB_hidden_removed_1450.csv};
 
 
-[Lab for dHmax]
-[Go into secondary effects here]
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
 
-[RDF for dHmax]
-
-[Lab for methane yield]
-
-[RDF for methane yield]
-
-[Lab for tar yield]
-
-[Collapse for T4]
-
-[Aggregated lab/RDF data -- coup d' grace]
-
-
-\section*{Conclusion}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = X_good_avg, meta = {c_H2O},]  {csv/LAB_hidden_removed_1350.csv};
 
 
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1350 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-Lab-Xg-dH-temps}
+\caption{Variation in carbon yield with surface specific heat duty in the Longmont Laboratory gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+An important question here is \emph{why} both concentration of steam and particle size had an effect if the system was heat transfer controlled.  In a kinetically controlled system, it would be expected that the rate of gasification of solid particulates would be proportional to the concentration of the oxidant to some power.  This was not seen, though, for the residence time [FIGURE].  Likewise, film transfer controlled kinetics would see an inverse dependence on the particle diameter, and intrinsic surface controlled kinetics would see an inverse-square dependence on the particle diameter.  How would heat transfer depend on these variables?  For a system where convective heat transfer dominates, it would be unlikely that the concentration of steam would make much of a difference, as it has a similar thermal conductivity to the other gases in the system (except hydrogen).  However, in a system where radiation heat transfer dominates, the significantly higher absorption of water in the infrared range leads to noticeable improvements in the gas absorbtivity.  If radiation heat transfer dominated this system, that could be the source of the discrepancy.  As for particle size, convection from the particle phase to the gas phase is an inverse function of the particle radius.  If radiation was the dominant mode, increases in particle size could be seen to have an effect, but it would be partially damped by gas radiation.  Larger particles also have greater inertia (i.e. higher St), meaning that they may be dispersed less than smaller particles, giving a smaller effective enclosing surface area.  Looking at the effect of particle size, a 3.25 multiple in particle size ($d_{50}$ of 250 $\mu$m vs. 75 $\mu$m) led to an increase in carbon yield of around 10\%.  This is much less than what would be expected for kinetic controls, although it is possible that only a portion of the reactions were controlled by particle size considerations.  In that case, though, it would be expected that the particle size curves would converge at low $t_{min}$; this was not seen.  The alternative secondary effect, pressure, could also be explained from a heat transfer perspective.  The effectiveness of heat transfer between particles and the gas would be directly proportional to the pressure, and the convective heat transfer coefficient also increases with pressure in laminar flow regimes (but only slightly, as thermal conductivity increases slowly as a function of pressure).  Although qualitative, this analysis suggests plausible reasons for these secondary driving factors; they will be explored quantitatively in a future report.  The relative analysis, though, continues to lend weight to the hypothesis that the system was under heat transfer control as opposed to kinetic control.
+
+The RDF data told a similar story to the Longmont Laboratory data; these are shown for carbon yield in Figure [fig-RDF-Xg-dH-temps].  The linear trend was very clear in the 1400 $^{\circ}$C data as well as the 1450 $^{\circ}$C data.  Where there were differences in the particle size (30/80, 30/80 sieved, and -80 at the 1400 $^{\circ}$C level) there appeared to be minor differences in performance, although a statistical level of confidence could not be placed on that conclusion.  Additionally, the trend in concentration of steam, so important at the Longmont Laboratory scale, appeared to play less of a role in the RDF data.  Instead, a clear secondary trend can be seen with Reynolds number.  Increasing Reynolds number led to better performance, although the effect was somewhat muted.  A comparison of the Reynolds number between the two systems shed some light: in the Lab system, the Reynolds number at the inlet ranged between 980 and 2600, with about less than a 10\% increase in the outlet Re; at the RDF, the range was 3700--8800 at the inlet and 6500--16200 at the outlet.  The Lab system was largely laminar, which would indicate a constant convective heat transfer coefficient and poor mixing of optical layers.  The RDF was in transitional to turbulent flow, with an increasing convective heat transfer coefficient and much better mixing of optical layers.  As a result, the secondary effect seen by radiation to the steam in the Lab was likely offset by convective mixing in the RDF, making the performance more uniform.  This hypothesis should be explored experimentally at the Lab as well as at EERC, as it would have a large impact on recommendations for steam flow setpoints at scale.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = X_good_C,]  {csv/RDF_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = X_good_C,]  {csv/RDF_hidden_removed_1400.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1400 $^{\circ}$C}	
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CO+CO_{2}}$},
+				ymin = 0.4, ymax = 1.0,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = X_good_C,]  {csv/RDF_hidden_removed_1200.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1200 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-RDF-Xg-dH-temps}
+\caption{Variation in carbon yield with surface specific heat loading in the RDF gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Results at 1200 $^{\circ}$C showed a similar downward trend, but the spread was much larger and the overall effect was more muted.  However, with the markers coded as tube type, it was clear that the metal tube and the SiC tube actually had differences in performance.  This would not be entirely surprising, as the SiC has a different emissivity and the lances were different.  These effects will be explored in more detail in a future report.
+
+The main conclusion from the RDF carbon yield data is that it supports the assertion that heat transfer was the controlling factor.  Linear trends were seen with $\frac{\Delta H_{max}}{A}$, and there was no effect of residence time seen in this data.  It could be said with confidence that, in that system, the heat duty was the controlling factor.
+
+Figure {fig-Lab-CH4-dH-temps} shows the variation in methane yield for the Lab gasifier as a function of heat duty; particle size was again coded against marker size, the color variation showed the product of steam and CO$_2$ partial pressures.  The trends are again what one would expect: increases in the outlet methane load with increasing heat duty.  The effect here was markedly non-linear, but that would not be surprising.  The methane decomposition reactions begin to accelerate around 1100 $^{\circ}$C, and are very fast by 1250 $^{\circ}$C.  [REF]  Thus, at high duties with lower expected outlet gas temperatures, the methane yield should increase quickly.  This is in contrast to the carbon yield, where release of CO and CO$_2$ would be expected across the range of temperatures as various pyrolysis and gasification reactions initiate.  The data here also did not show the same ``cliff" in the 1450 $^{\circ}$C data as was seen when plotted against $t_{min}$; there is a logical extension of the envelope to the lowest levels of $\frac{\Delta H_{max}}{A}$.  Likewise, in the 1350 $^{\circ}$C data there was not the odd maximum seen at lower levels of $t_{min}$; the methane yield increased monotonically with heat duty.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.00, ymax = 0.15,
+			]
+
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = CH4_yield_corr, meta ={c_H2O},]  {csv/LAB_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.00, ymax = 0.15,
+			]
+			
+			\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A}, y = CH4_yield_corr, meta = {c_H2O},]  {csv/LAB_hidden_removed_1350.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1350 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-Lab-CH4-dH-temps}
+\caption{Variation in methane yield with surface specific heat duty in the Longmont Laboratory gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+This would be a good place to make clear the a heat transfer limitation does \emph{not} mean that reaction kinetics play no role.  Instead, with a large set of endothermic reactions in parallel, each reaction has its own value of an Arrhenius activation energy.  As the temperature increases, each of these reactions ``turns on" as its exponential rate expression gives some measureable rate of reaction.  Due to the exponential nature of the temperature dependence of reaction rates, though, small increases in temperature (~20 $^{\circ}$C--40 $^{\circ}$C) lead to a massive increase in the reaction rates.  Because the reactions are endothermic, once these rates pick up any increase in temperature beyond that point requires enough energy to complete that reaction step -- they system becomes limited by the rate at which heat can be transferred into it.  This is common for high temperature reactions, where intrinsic kinetics are often blisteringly fast.  For a true kinetic control, the rates would have to be relatively slow across the entire range of expected temperatures.  Otherwise, heat transfer to the system would increase the temperature to the point where the reaction rate was very fast, increasing the rate of energy usage by reaction and placing the system back in heat transfer control.  Thus, when modeling the system, close attention must be paid to the rate at which heat can be transferred into the reacting particle cloud., with the underlying reactions at the temperature where the rates for each become fast provide the effective heat capacity.
+
+While the choice of the secondary variable will be discussed in a later report, it is clear that most of the variation in performance can be ascribed to this combination variable.  CO$_2$ partial pressure alone showed most of the variation, but the points higher than the main set of trends for both the 1450 $^{\circ}$C data and the 1350 $^{\circ}$ data were better explained by the partial pressure of steam.  Hence, the choice of their product as a variable.  This was purely empirical, but it did seem to explain the overall data.  A plausible explanation for the dependence on partial pressure of steam was already put forward (i.e. it improved heat transfer).  For CO$_2$, this was a bit surprising, but there are good theoretical grounds.  At the temperature of reaction, water gas shift [EQN] is possible.  H$_2$ has been known in gasification to drive hydro-methanation reactions, where the hydrogen reacts with char particles to produce methane.  Increasing the level of CO$_2$ in the reactor can put backward equlibrium pressure on the reaction, reducing the amount of hydrogen available for these reactions.  The depressive effect of carbon dioxide on methane formation has been reported extensively in the literature. [REF]  From a design perspective, it suggests that using carbon dioxide as an entraining gas has benefits beyond conveyance of the gas.  It should be explored in more detail in future experiments.
+
+The methane yield at the RDF was puzzling for the heat duty in a similar way to the residence time plots (Figure {fig-RDF-CH4-dH-temps}).  There appeared to be no major trend in the data at any of the temperatures, and the levels were, again, much higher than those observed in the Longmont Laboratory.  It was unclear why both the Lab and the RDF would generate similar levels of CO and CO$_2$, but such different levels of methane.  It will be explored in more detail in a future report, but it should be noted that this is an open question.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = CH4_yield,]  {csv/RDF_hidden_removed_1450.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1450 $^{\circ}$C}
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = CH4_yield,]  {csv/RDF_hidden_removed_1400.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1400 $^{\circ}$C}	
+	\end{subfigure}
+
+	\begin{subfigure}[t]{0.5\textwidth}
+		\begin{tikzpicture}[baseline]
+		
+			\begin{axis}[	
+				xlabel={$\frac{\Delta H_{max}}{A}$ kW m$^{-2}$},
+				ylabel={$Y_{CH_{4}}$},
+				ymin = 0.05, ymax = 0.20,
+			]
+			
+			\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y = CH4_yield,]  {csv/RDF_hidden_removed_1200.csv};
+
+
+			\end{axis}
+		\end{tikzpicture}
+		\caption{1200 $^{\circ}$C}	
+	\end{subfigure}
+
+\label{fig-RDF-CH4-dH-temps}
+\caption{Variation in methane yield with surface specific heat loading in the RDF gasifier}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The individual temperature series clearly showed a strong dependence on the heat duty, as did the selected slices where $t_{min}$ was constant.  A final test for radiant heat transfer control would be to normalize the data by the fourth power of temperature; these are shown for carbon yield in Figure \ref{fig-Lab-Xg-dH-norm}. As suggested by earlier experiments on the actual wall temperatures relative to the element temperatures, the temperatures were adjusted downward by 50$^{\circ}$C. The plot was busy, so it requires a bit of explanation.  Partial pressure of steam was coded as color, and particle size was coded as marker size.  Temperature was shown by marker shape.  As can be seen, the normalization collapsed all of the temperature curves.  Not only do the temperature series generally coincide, but the size and partial pressure of steam curves do as well!  This was exceedingly strong evidence for heat transfer control that was mediated by radiation heat transfer.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={$\frac{\Delta H_{max}}{AT^{4}\sigma}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin = 0.4, ymax = 1.0,
+]
+
+\addplot+[scatter, only marks, scatter src = explicit, visualization depends on = {sqrt{\thisrow{d50 2}*.2} \as \perpointmarksize}, scatter/@pre marker code/.append style ={/tikz/mark size = \perpointmarksize}] table [col sep = comma, x = {dH_max/A/T^4}, y = X_good_avg, meta = tic520_sp,]  {csv/LAB_hidden_removed_all.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Carbon yield as a function of the radiant-temperature normalized heat transfer driving force}
+\label{fig-Lab-Xg-dH-norm}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As a final step, the laboratory and RDF carbon yields were aggregated at the common temperature of 1450 $^{\circ}$C as a function of heat duty (Figure \ref{fig-Agg-Xg-dH-1450}).  It is clear from the plot that the RDF and Lab data followed the same general trend, with the data overlapping in the region of common heat duty.  This was not only strong evidence for heat transfer control over kinetic control, but provides confidence that the phenomenon remains the same across reactor scales.  Importantly, it provides a reasonable empirical scale-up model for the EERC PDU system -- simply calculate the expected load, look it up on the normalized carbon yield chart, and determine what the expected performance will be.  Certainly, the higher Re in the EERC system could have an effect by improving heat transfer (convective coefficients should improve dramatically), but at least a minimum conversion level could be established.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[hp]
+\begin{tikzpicture}
+\begin{axis}[	
+	xlabel={$\frac{\Delta H_{max}}{A}$},
+	ylabel={$Y_{CO+CO_{2}}$},
+	ymin =0.0, ymax = 1.0,
+	restrict y to domain=0:200.0,
+	restrict x to domain=0:200.0,
+]
+
+\addplot+[only marks,] table [col sep = comma, x = {dH_max/A}, y= {X_good_avg}]   {csv/Lab_RDF_agg_1450_LAB.csv};
+\addplot+[only marks,] table [col sep = tab, x = {dH_max/A}, y= {X_good_avg}]   {csv/Lab_RDF_agg_1450_RDF.csv};
+
+
+\end{axis}
+\end{tikzpicture}
+
+\caption{Effect of minimum residence time on carbon yield at RDF and Longmont Laboratory gasifiers}
+\label{fig-Agg-Xg-dH-1450}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Conclusions}
+
+The Longmont Laboratory and RDF gasification experimental data was surveyed with an eye to determining the underlying physics controlling performance in these reactors.  A general survey showed no apparent time effects, allowing deeper introspection into $t_{min}$ and $\frac{\Delta H_{max}}{A}$, the proxy variables for kinetic and heat transfer controls, respectively.  Examination of the laboratory data showed tightly correlated minimum residence time and heat duty, but in those regions where the residence time was constant, there was a clear dependence on the heat duty.  When examined against heat duty, the carbon yield and methane yield both showed the expected behavior for a linear heat transfer resistance.  The residence time data also showed expected trends, but also exhibited a number of data pathologies, which, in combination with underlying secondary effects, cast doubt on residence time controls.  Examination of the RDF data confirmed these doubts, where no effect of residence time was seen on the carbon yield.  There was a significant effect at the RDF, however, of heat duty on the carbon yield, and comparison of the RDF and Lab data sets showed a consistent linear dependence on heat duty.  Additionally, normalization of the carbon yield vs. heat duty curves by the fourth power of the temperature collapsed the curves at each temperature on top of each other and retained the secondary features. This was seen as strong evidence of a radiation heat transfer control.  Methane yield at the RDF was uniformly high, and it was unknown as to the cause or why it did not show the expected tendencies as it did in the Longmont Laboratory data.
+
+Secondary effects existed in the data at both the Lab and the RDF.  Partial pressure of steam and particle size appeared to have a strong impact on the carbon yield and methane yield at the Lab, and hypotheses of heat transfer aiding effects were posited.  These should be tested in future experiments.  Increases in carbon dioxide concentrations decreased the methane yield in the lab as well; this would suggest that CO$_2$ concentration is an important overall design variable.  This effect should be tested explicitly in future experimental campaigns.  At the RDF, the strong dependence on partial pressure of steam was not seen, but was replaced by an apparent dependence on the Reynolds number.  The data will require more analysis to test various hypotheses around this effect, and future experiments can be planned at the EERC PDU if more data is required.
+
+The conclusion that it is heat duty, not residence time, that drives reactor performance significantly impacts the overall reactor design strategy.  There should be no effort to increase system residence times through increased pressures or volume to surface area ratios.  In fact, increases in tube diameter could be counter-productive, as the optical thickness will increase linearly with tube diameter (decreasing heat transfer effectiveness).  Additionally, the total volume of expensive high temperature material of construction will increase (approximately) with the square of the diameter, while the mass flow of biomass will only increase linearly.  Instead, the focus should be on improving heat transfer: better convective coefficients on the walls, higher surface-area-to-volume ratios (possibly with smaller tube diameters in tube sheets), improved emissivity, and better dispersion throughout the system to improve effective area.  The modeling effort should shift away from kinetic approaches and focus on understanding the heat transfer limitations in the system.  It is only through a full understanding of these limitations that the performance of the system can be maximized.
 
 \newpage
 \appendix
