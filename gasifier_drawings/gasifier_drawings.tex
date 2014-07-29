@@ -17,7 +17,7 @@
 \usetikzlibrary{spy}
 \usetikzlibrary{decorations.fractals}
 
-\title{Laboratory Gasification Diagrams}
+\title{}
 \date{}
 \begin{document}
 \maketitle
@@ -25,6 +25,8 @@
 %% %%%%%%%%%  %%
 %% Furnace and Tube %%
 %% %%%%%%%%%  %%
+
+\section*{Furnace and Tube}
 
 \begin{center}
 \begin{tikzpicture}[scale=0.3]
@@ -97,41 +99,43 @@
 %% Flow Diagram %%
 %% %%%%%%%  %%
 
-\begin{center}
-\begin{tikzpicture}[scale=1,
-	box/.style={rectangle,draw,align=center}
-	]
-	\node [box] (gasifier)	{Gasifier};
-	\node (lance)			[above=of gasifier]	{};
-	\node [box] (ako)		[below=of gasifier]	{Ash \\ Knockout};
-	\node [box] (filters)		[right=of ako]		{Candle \\Filters};
-	\node [box] (vls)		[right=of filters]	{VLS};
-	\node [box] (fabfilters)	[below=of vls]		{Cloth \\ Filters};
-	\node (tee)			[below=of fabfilters]	{};
-	\node [box] (pcv)		[below=of tee]		{PCV};
-	\node [box,rounded corners] (feeder)		[left=of lance]	{Biomass \\Feeder};
-	\node [box] (analytical)	[left=of tee]		{Analytical};
-	\node (vent)			[below=of pcv]		{Vent};
-	
-	\node [box] (gas)		[above left=of lance]	{Gas \\ Supply};
-	\node [box] (steam)		[above right=of lance]	{Steam \\ Generator};
-	
-	\draw [->] (feeder) [ultra thick] 				to (gasifier);
-	\draw [->] (gasifier) [ultra thick] 			to (ako);
-	\draw [->] (ako) [ultra thick] 				to (filters);
-	\draw [->] (filters) [ultra thick] 				to (vls);
-	\draw [->] (vls) [ultra thick] 				to (fabfilters);
-	\draw [->] (fabfilters) [ultra thick] 			to (pcv);
-	\draw [->] (tee.center) [ultra thick] 	to (analytical);
-	\draw [->] (pcv) [ultra thick]				to (vent) ;
-
-\end{tikzpicture}
-\end{center}
+%\begin{center}
+%\begin{tikzpicture}[scale=1,
+%	box/.style={rectangle,draw,align=center}
+%	]
+%	\node [box] (gasifier)	{Gasifier};
+%	\node (lance)			[above=of gasifier]	{};
+%	\node [box] (ako)		[below=of gasifier]	{Ash \\ Knockout};
+%	\node [box] (filters)		[right=of ako]		{Candle \\Filters};
+%	\node [box] (vls)		[right=of filters]	{VLS};
+%	\node [box] (fabfilters)	[below=of vls]		{Cloth \\ Filters};
+%	\node (tee)			[below=of fabfilters]	{};
+%	\node [box] (pcv)		[below=of tee]		{PCV};
+%	\node [box,rounded corners] (feeder)		[left=of lance]	{Biomass \\Feeder};
+%	\node [box] (analytical)	[left=of tee]		{Analytical};
+%	\node (vent)			[below=of pcv]		{Vent};
+%	
+%	\node [box] (gas)		[above left=of lance]	{Gas \\ Supply};
+%	\node [box] (steam)		[above right=of lance]	{Steam \\ Generator};
+%	
+%	\draw [->] (feeder) [ultra thick] 				to (gasifier);
+%	\draw [->] (gasifier) [ultra thick] 			to (ako);
+%	\draw [->] (ako) [ultra thick] 				to (filters);
+%	\draw [->] (filters) [ultra thick] 				to (vls);
+%	\draw [->] (vls) [ultra thick] 				to (fabfilters);
+%	\draw [->] (fabfilters) [ultra thick] 			to (pcv);
+%	\draw [->] (tee.center) [ultra thick] 	to (analytical);
+%	\draw [->] (pcv) [ultra thick]				to (vent) ;
+%
+%\end{tikzpicture}
+%\end{center}
 
 
 %% %%%%%%%%  %%
 %% Biomass Feeder %%
 %% %%%%%%%%  %%
+
+\section*{Biomass Feeder}
 
 \begin{center}
 \begin{tikzpicture}[scale=0.2,
@@ -174,6 +178,8 @@
 %% %%%%%%%%  %%
 %%  Ash Knockout   %%
 %% %%%%%%%%  %%
+
+\section*{Ash Knockout}
 
 \begin{center}
 \begin{tikzpicture}[scale=0.3]
@@ -229,6 +235,8 @@
 %%  Ash Filters   %%
 %% %%%%%%  %%
 
+\section*{Ash Filters}
+
 \begin{center}
 \begin{tikzpicture}[scale=0.3]
 
@@ -262,6 +270,8 @@
 %% %%% %%
 %%   VLS  %%
 %% %%% %%
+
+\section*{Vapor Liquid Separation}
 
 \begin{center}
 \begin{tikzpicture}[scale=0.3]
