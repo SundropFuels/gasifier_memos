@@ -41,7 +41,7 @@
 	% Furnace Box %
 	\draw (-12,-18) rectangle  (12,18);
 	% Hot Zone %
-	\filldraw [fill=red, fill opacity=0.0] (bottomlefthot) rectangle (toprighthot);
+	\filldraw [fill=red, fill opacity=0] (bottomlefthot) rectangle (toprighthot);
 	% Elements %
 	\foreach \y in {11, 3, -5}
 		\foreach \x in {-5, -1, 3}
@@ -89,8 +89,38 @@
 %% %%% %%	
 	
 \begin{center}
-\begin{tikzpicture}[scale=0.3]
-
+\begin{tikzpicture}[scale=.6]
+	% Bucket Seal %
+	\filldraw [gray!80] (-3.5,14) rectangle (3.5,15);
+	\filldraw [gray!80] (-3.5,8) rectangle (3.5,9);
+	\filldraw [gray!80] (-3.5,9.5) rectangle (3.5,10.5);
+	\filldraw [gray] (-2.25,10.5) rectangle (2.25,14);
+	\filldraw [gray] (-2,9) rectangle (2,9.5);
+	\filldraw [gray] (-2.5,15)  rectangle (2.5,15.25);
+	\filldraw [gray!80] (-3.5,15.25) rectangle (3.5,16.25);
+	% Furnace and Tube %
+	\fill [color=gray!40] (-5,0) rectangle (5,6);
+	\fill [color=red!80] (-5,0) rectangle (5,-2);
+	\fill [color=white] (-1,-2) rectangle (1,15.25);
+	% Lance Insulation %
+	\filldraw [gray!20] (-1,1) rectangle (1,13);
+	\fill [color=black] (-1.25,-2) rectangle (-1,15.25);
+	\fill [color=black] (1.25,-2) rectangle (1,15.25);
+	
+	% Annular Tube %
+	\draw [fill=white] (.25,0.5) -- ++ (0,14.5) -- ++ (0,5) -- ++ (2,0) -- ++ (0,.25) node (backup){} -- ++ (0,.25) -- ++ (-2,0) -- ++ (0,2) -- ++ (-.5,0) -- ++ (0,-3) -- ++ (-2,0) -- ++ (0,-.25) node (steam){} -- ++ (0,-.25) -- ++ (2,0) -- ++ (0,-4) -- ++ (0,-14.5);
+	% Center Tube %
+	\fill [color=white] (-1/8,0.5) rectangle (1/8,23);
+	\draw (-1/8,0.5) -- ++ (0,23);
+	\draw (1/8,0.5) -- ++ (0,23);
+	% Labels %
+	\draw [<-,ultra thick] (steam.center) -- ++ (-2,0) node [anchor=east] {Steam};
+	\draw [<-,ultra thick] (backup.center) -- ++ (2,0) node [anchor=west, align=center] {Makeup N$_2$ / CO$_2$ \\ Ar};
+	\draw [<-,ultra thick] (0,23.5) -- ++ (0,2) node [align=center, anchor=south] {Entrainment  N$_2$ / CO$_2$ \\ Biomass};
+	\draw [dashed, ultra thick] (.25,.5) -- ++ (7,0);
+	\draw [dashed, ultra thick] (0.25,0) -- ++ (7,0);
+	\draw (7.25,0.25) node [anchor=west] {0.5"};
+	
 \end{tikzpicture}
 \end{center}
 
@@ -185,14 +215,14 @@
 	\draw [fill=gray!10] (0,0) -- ++ (17,0) -- ++ (0,3.5) -- ++ (-6.75,0) -- ++ (0,12.5) -- ++ (-3.5,0) -- ++ (0,-12.5) -- ++ (-6.75,0) -- ++ (0,-3.5);
 	\draw [fill=white] (0,1.25) -- ++ (17,0) -- ++ (0,1) -- ++ (-8,0) -- ++ (0,11.75) -- ++ (1.25,0) -- ++ (0,1) -- ++ (-1.25,0) -- ++ (0,1) -- ++ (-1,0) -- ++ (0,-13.75) -- ++ (-8,0) -- ++ (0,-1);
 	% Top Element %
-	\foreach \y in {5.5, 6, ..., 15.5} \draw [fill=red!50] (8.225,\y) arc (-90:-270:0.1) --  ++ (.6,.25) arc (90:-90:0.1) --cycle;
-	\foreach \y in {5.75, 6.25, ..., 15.5} \draw [fill=red!50] (8.825,\y) arc (-90:90:0.1) --  ++ (-.6,.25) arc (90:270:0.1) --cycle;
+	\foreach \y in {5.5, 6, ..., 15.5} \draw [fill=red!80] (8.225,\y) arc (-90:-270:0.1) --  ++ (.6,.25) arc (90:-90:0.1) --cycle;
+	\foreach \y in {5.75, 6.25, ..., 15.5} \draw [fill=red!80] (8.825,\y) arc (-90:90:0.1) --  ++ (-.6,.25) arc (90:270:0.1) --cycle;
 	% Left Element %
-	\foreach \x in {0, .5, ..., 7} \draw [fill=red!50] (\x,1.45) arc (-180:0:0.1) --  ++ (.25,.6) arc (0:180:0.1) --cycle;
-	\foreach \x in {.25, .75, ..., 7} \draw [fill=red!50] (\x,2.05) arc (180:0:0.1) --  ++ (.25,-.6) arc (0:-180:0.1) --cycle;
+	\foreach \x in {0, .5, ..., 7} \draw [fill=red!80] (\x,1.45) arc (-180:0:0.1) --  ++ (.25,.6) arc (0:180:0.1) --cycle;
+	\foreach \x in {.25, .75, ..., 7} \draw [fill=red!80] (\x,2.05) arc (180:0:0.1) --  ++ (.25,-.6) arc (0:-180:0.1) --cycle;
 	% Right Element %
-	\foreach \x in {10, 10.5, ..., 16.75} \draw [fill=red!50] (\x,1.45) arc (-180:0:0.1) --  ++ (.25,.6) arc (0:180:0.1) --cycle;
-	\foreach \x in {9.75, 10.25, ..., 16.5} \draw [fill=red!50] (\x,2.05) arc (180:0:0.1) --  ++ (.25,-.6) arc (0:-180:0.1) --cycle;
+	\foreach \x in {10, 10.5, ..., 16.75} \draw [fill=red!80] (\x,1.45) arc (-180:0:0.1) --  ++ (.25,.6) arc (0:180:0.1) --cycle;
+	\foreach \x in {9.75, 10.25, ..., 16.5} \draw [fill=red!80] (\x,2.05) arc (180:0:0.1) --  ++ (.25,-.6) arc (0:-180:0.1) --cycle;
 	% Water %
 	\foreach \x in {0,1,...,16} \fill [fill=blue,fill opacity=0.3] (\x,2)  arc (180:360:.5 and .25) -- ++ (0,-.75) -- ++ (-1,0) -- ++ (0,.75);
 	\foreach \x in {0,1,...,16} \draw  (\x,2)  arc (180:360:.5 and .25);
