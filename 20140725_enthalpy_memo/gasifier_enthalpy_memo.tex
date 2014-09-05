@@ -25,7 +25,7 @@
 \renewcommand{\abstractname}{Summary}
 \setlength{\columnsep}{25pt}
 \date{}
-\title{Laboratory Gasification Memo\\Enthalpy Experiments \vspace{-6ex}}
+\title{Laboratory Gasification Memo\\Driving Force Discrimination Experiments \vspace{-6ex}}
 
 \begin{document}
 
@@ -34,7 +34,7 @@
     \maketitle
     \begin{abstract}
     
-In order to obtain an understanding if the main driving force for conversion of biomass to syngas is driven by residence time or heat transfer limitations, an experimental matrix was designed to test different levels of space time and the maximum possible enthalpy change of the reactants.  Experimental results shine light on fundamental driving forces for carbon conversion, and tar and methane production in the laboratory gasification system.  It was found that the total enthalpy load on the reactor was the primary driving force for carbon conversion, and lower loads led to higher conversions.  Differing residence times did not give expected results for carbon conversion if they were found to be statistically significant at all.  Finally, both residence time and enthalpy load are found to be significant factors in the production of methane and tars in the laboratory system.
+In order to obtain an understanding if the main driving force for conversion of biomass to syngas is driven by kinetic or heat transfer limitations, an experimental matrix was designed to test different levels of maximum residence time and the maximum possible enthalpy change of the reactants.  Experimental results shine light on fundamental driving forces for carbon conversion and tar and methane production in the laboratory gasification system.  It was found that the total enthalpy load on the reactor was the primary driving force for carbon conversion, and lower loads led to higher conversions.  Changing residence times did not affect carbon yield or carbon release.  Finally, both residence time and enthalpy load were found to be significant factors in the production of methane and tars in the laboratory system, and some explanation is given in the text.
 
     \end{abstract}
   \end{@twocolumnfalse}
@@ -53,7 +53,7 @@ In order to obtain an understanding if the main driving force for conversion of 
 		(1.5,-0.1) -- (1.5,0.1) node[below = 8pt] {2.35} node[below = 20pt]{Max Residence Time (s)}
 		(2.5,-0.1) -- (2.5,0.1) node[below = 8pt] {3.1}
 		(-0.1,0.5) -- (0.1,0.5) node[left = 6pt] {45}
-		(-0.1,1.5) -- (0.1,1.5) node[left = 6pt] {55.5} node[xshift = -35pt, rotate = 90]{$\Delta$H$_{Max}$/A (kW m$^{-3}$)}
+		(-0.1,1.5) -- (0.1,1.5) node[left = 6pt] {55.5} node[xshift = -35pt, rotate = 90]{$\Delta$H$_{Max}$/A (kW m$^{-2}$)}
 		(-0.1,2.5) -- (0.1,2.5) node[left = 6pt] {66};
 	\filldraw [black] (0.5,0.5) circle (1pt)
 		(2.5,0.5) circle (1pt)
@@ -65,25 +65,26 @@ In order to obtain an understanding if the main driving force for conversion of 
 \label{factorial}
 \end{figure}
 
-It was desired to create a two factorial matrix with a center point with the two axes representing maximum residence time (t$_{res,max}$) and maximum enthalpy change ($\Delta$H$_{max}$).  The matrix can be seen in Figure \ref{factorial}.  Partial pressure of steam and partial pressure of CO$_2$ was held constant for these experiments at 7 psi and 30 psi, respectively.  These values were chosen because a large number of previous gasification experiments had partial pressures of CO$_2$ and H$_2$O near these values.  
+It was desired to create a two factorial matrix with a center point with the two axes representing maximum residence time (t$_{res,max}$) and maximum enthalpy change ($\Delta$H$_{max}$).  The matrix can be seen in Figure \ref{factorial}.  Partial pressure of steam and partial pressure of CO$_2$ were held constant for these experiments at 7 psi and 30 psi, respectively.  These pressures were chosen because a large number of previous gasification experiments had partial pressures of CO$_2$ and H$_2$O near these values.  
 
 Because of the large number of possible set points in the laboratory gasifier system that would effect both the space time and maximum enthalpy simultaneously, it would have been difficult to manually design this experimental matrix.  To aid in the design, a large number of potential gasifier experiments were simulated using Sundrop Fuels' gasifier analysis software suite.  First, a flow rate of CO$_2$ was randomly assigned using a uniform distribution with a minimum possible flow rate of 3 SLPM and a maximum flow rate of 6.6 SLPM.  The partial pressure of CO$_2$ was set at 7 psi, and the appropriate flow rate of steam to lead to a partial pressure of 30 psi was found with Equation \ref{eq_steam}.
-
-The flow rate of Argon was set at 2 SLPM for all experiments.  Biomass flow rate was randomized uniformly between 2 lbs/hr and 4 lbs/hr.  The total flow rate of entrainment gas was set to be 6 SLPM for every 1 lb/hr of biomass, which was found to be a good minimum entrainment flow rate in previous experiments using the brush feeder.  The remainder of the entrainment gas which isn't CO$_2$ is nitrogen.
-
-Steam temperature is set at 500 $^\circ$C, and makeup nitrogen is uniformly randomized between 0 and 20 SLPM.  The total pressure is found using the partial pressure of steam and the total flow rate of gas into the system (Equation \ref{pressure}).  The maximum residence time and the maximum enthalpy change were calculated for each simulated run using Sundrop Fuel's gasifier analysis software.  Experiments which could not be run due to system limitations were removed from the potential runs, and enthalpy and maximum residence time targets were chosen to maximize the change in each measure.  Set points for all experiments are outlined in Appendix \ref{app_experiments}.
 
 \begin{equation}
 	\dot{n}_{H_2O} = \dot{n}_{CO_2} \times \frac{P_{H_2O}}{P_{CO_2}}
 	\label{eq_steam}
 \end{equation}
 
+The flow rate of Argon was set at 2 SLPM for all experiments.  Biomass flow rate was randomized uniformly between 2 lbs/hr and 4 lbs/hr.  The total flow rate of entrainment gas was set to be 6 SLPM for every 1 lb/hr of biomass, which was found to be a good minimum entrainment flow rate in previous experiments using the brush feeder.  The remainder of the entrainment gas which isn't CO$_2$ was set as nitrogen.
+
+Steam temperature was set at 500 $^\circ$C, and makeup nitrogen was uniformly randomized between 0 and 20 SLPM.  The total pressure was found using the partial pressure of steam and the total flow rate of gas into the system (Equation \ref{pressure}).  The maximum residence time and the maximum enthalpy change were calculated for each simulated run using Sundrop Fuel's gasifier analysis software.  Experiments which could not be run due to system limitations were removed from the potential runs, and enthalpy and maximum residence time targets were chosen to maximize the change in each measure.  Set points for all experiments are outlined in Appendix \ref{app_experiments}.
+
 \begin{equation}
 	P_{tot} = P_{H_2O} \times \frac{\dot{n}_{tot}}{\dot{n}_{H_2O}}
 	\label{pressure}
 \end{equation}
 
-
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \subsection*{Calculations}
 
@@ -108,12 +109,15 @@ Tar loading is a measure of the mass of tars detected by the mass spectrometer (
 	\label{eq_tar}
 \end{equation}
 
-Finally, the last measure discussed in this memo is methane yield.  It is a representation of the fraction of carbon in the biomass which is converted to methane, and it was calculated using Equation \ref{eq_ch4}.
+Finally, the last measure discussed in this memo is methane yield.  It is a representation of the fraction of carbon in the biomass which is converted to methane, and it was calculated using Equation \ref{eq_ch4}.  A table defining all variables used in this memo can be found in Appendix \ref{app_var}.
 
 \begin{equation}
 	Y_{CH_4} = \frac{\dot{n}_{CH_4}}{\dot{n}_{C_{biomass},in}}
 	\label{eq_ch4}
 \end{equation}
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section*{Results and Discussion}
 
@@ -121,9 +125,12 @@ Because only inlet conditions of the reactants were needed to calculate the maxi
 
 Plotted results are shown in Appendices \ref{app_plots_cyield}, \ref{app_plots_crel}, \ref{app_plots_tar}, and \ref{app_plots_ch4} for carbon yield, carbon release, tar loading, and methane yield using both the maximum and minimum residence times for visualization purposes.  ANOVA results are shown using only minimum residence time.  While the magnitude of the effects may be slightly different when using either minimum or maximum residence time, the time chosen for analysis does not change which factors are shown to be statistically significant when using ANOVA.
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
 \subsection*{Carbon Yield}
 
-Carbon yield results are plotted in Figures \ref{maxrt_vs_cyield}, \ref{minrt_vs_cyield}, \ref{dh_vs_cyield_maxrt}, and \ref{dh_vs_cyield_minrt} in Appendix \ref{app_plots_cyield}.  ANOVA results are given in Table \ref{anova_cyield}, and factors which had a statistically significant effect on carbon yield are highlighted in red.  At 1350 $^\circ$C, minimum residence time was not statistically significant while $\Delta H_{Max}$/A was.  Both minimum residence time and $\Delta H_{Max}$/A were statistically signficant at 1450 $^\circ$C.  However, as shown in the aforementioned plots, higher residence times led to lower carbon yields, if there was an effect.  Since this is the reverse of what would be expected, it's possible that the effect did not exist, or another factor was correlated with the changing residence times that is causing the difference in calculated carbon yields.  Further tests may be held in the future holding different factors constant to see if the effect seen goes away at 1450 $^\circ$C.
+Carbon yield results are plotted in Figures \ref{maxrt_vs_cyield}, \ref{minrt_vs_cyield}, \ref{dh_vs_cyield_maxrt}, and \ref{dh_vs_cyield_minrt} in Appendix \ref{app_plots_cyield}.  ANOVA results are given in Table \ref{anova_cyield}, and factors which had a statistically significant effect on carbon yield are highlighted in red.  At 1350 $^\circ$C, minimum residence time was not statistically significant while $\Delta H_{Max}$/A was.  Both minimum residence time and $\Delta H_{Max}$/A were statistically signficant at 1450 $^\circ$C.  However, as shown in the aforementioned plots, higher residence times led to lower carbon yields, if there was an effect.  Since it is very unlikely that the reaction would proceed backwards and lead to lower conversions at longer residence times, it's likely that the effect did not exist, or that another factor was correlated with the changing residence times that is causing the difference in calculated carbon yields.  Further tests may be held in the future holding different factors constant to see what is actually driving the variance.
 
 \begin{table}
 	\centering
@@ -141,9 +148,12 @@ Carbon yield results are plotted in Figures \ref{maxrt_vs_cyield}, \ref{minrt_vs
 	\label{anova_cyield}
 \end{table}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
 \subsection*{Carbon Release}
 
-Carbon release results are plotted in Figures \ref{maxrt_vs_crel}, \ref{minrt_vs_crel}, \ref{dh_vs_crel_maxrt}, and \ref{dh_vs_crel_minrt} in Appendix \ref{app_plots_crel}.  Results from ANOVA, shown in Table \ref{anova_crel} reflected what was seen in carbon yield measurements.  The total maximum enthalpy load was a significant factor in the carbon release at both 1450 $^\circ$C and 1350 $^\circ$C.  Again, while minimum residence time was statistically significant at 1450 $^\circ$C, longer residence times actually gave lower conversions.  Since this result is the opposite of what should be expected for longer residence times, further tests may be completed in the future to see if some other factor correlated with the changing residence times was causing the apparent dependency of conversion on residence time.
+Carbon release results are plotted in Figures \ref{maxrt_vs_crel}, \ref{minrt_vs_crel}, \ref{dh_vs_crel_maxrt}, and \ref{dh_vs_crel_minrt} in Appendix \ref{app_plots_crel}.  Results from ANOVA, shown in Table \ref{anova_crel} reflected what was seen in carbon yield measurements.  The total maximum enthalpy load was a significant factor in the carbon release at both 1450 $^\circ$C and 1350 $^\circ$C.  Again, while minimum residence time was statistically significant at 1450 $^\circ$C, longer residence times actually gave lower conversions.  Since this result contradicts kinetic considerations, further tests may be completed in the future to see if some other factor correlated with the changing residence times was causing the apparent dependency of conversion on residence time.
 
 \begin{table}
 	\centering
@@ -161,10 +171,12 @@ Carbon release results are plotted in Figures \ref{maxrt_vs_crel}, \ref{minrt_vs
 	\label{anova_crel}
 \end{table}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \subsection*{Tar Loading}
 
-Figures \ref{maxrt_vs_tar}, \ref{minrt_vs_tar}, \ref{dh_vs_tar_maxrt}, and \ref{dh_vs_tar_minrt} in Appendix \ref{app_plots_tar} show the results for tar loading values from each experiment in the campaign.  Longer residence times and lower enthalpy loads appear to lead to lower tars at 1350 $^\circ$C.  ANOVA results shown in Table \ref{anova_tar} show that both residence time and $\Delta H_{Max}$/A have statistically significant effects on the amount of tars produced at 1350 $^\circ$C, but not at 1450 $^\circ$C.  This is similar to past results at 1450 $^\circ$C where the tar levels are on the order of magnitude of variance between runs, so conclusions about difference in tar levels cannot be made.
+Figures \ref{maxrt_vs_tar}, \ref{minrt_vs_tar}, \ref{dh_vs_tar_maxrt}, and \ref{dh_vs_tar_minrt} in Appendix \ref{app_plots_tar} show the results for tar loading values from each experiment in the campaign.  Longer residence times and lower enthalpy loads appear to have led to lower tars at 1350 $^\circ$C.  ANOVA results shown in Table \ref{anova_tar} show that both residence time and $\Delta H_{Max}$/A had statistically significant effects on the amount of tars produced at 1350 $^\circ$C, but not at 1450 $^\circ$C.  This is similar to past results at 1450 $^\circ$C where the tar levels were on the same order of magnitude as the variance between runs, so conclusions about difference in tar levels cannot be made.
 
 \begin{table}
 	\centering
@@ -182,12 +194,14 @@ Figures \ref{maxrt_vs_tar}, \ref{minrt_vs_tar}, \ref{dh_vs_tar_maxrt}, and \ref{
 	\label{anova_tar}
 \end{table}
 
-It is important to note that residence time had a significant effect on tar loading at 1350 $^\circ$C, but it did not have a significant effect on conversion measures at this temperature.  It is possible that the actual temperature of the gaseous products leaving the reactor is at a temperature where there are still some kinetic limitations on tar cracking reactions, but the temperature is high enough where the primary solids pyrolysis reactions happen extremely quickly.  Increasing the heat transfer to the reactants, especially at the bottom of the reactor where fewer solids exist to efficiently transfer radiation energy from the walls of the reactor, may increase the outlet gas temperature to a point where these cracking reactions proceed extremely quickly and the dependence in residence time may vanish.
+It is important to note that residence time had a significant effect on tar loading at 1350 $^\circ$C, but it did not have a significant effect on conversion measures at this temperature.  It is possible that the actual temperature of the gaseous products leaving the reactor was at a temperature where there were still some kinetic limitations on tar cracking reactions, but the temperature was high enough where the primary solids pyrolysis reactions happened extremely quickly.  Increasing the heat transfer to the reactants, especially at the bottom of the reactor where fewer solids exist to efficiently transfer radiation energy from the walls of the reactor, may increase the outlet gas temperature to a point where these cracking reactions proceed extremely quickly and the dependence in residence time may vanish.
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \subsection*{Methane Yield}
 
-Methane yield showed similar results as tar loading.  Results are shown in Figures \ref{maxrt_vs_ch4}, \ref{minrt_vs_ch4}, \ref{dh_vs_ch4_maxrt}, and \ref{dh_vs_ch4_minrt} in Appendix \ref{app_plots_ch4}.  ANOVA results, shown in Table \ref{anova_ch4}, show that both residence time and $\Delta H_{Max}$/A are statistically significant for methane yield at 1350  $^\circ$C as well as 1450  $^\circ$C.  Longer space times and lower enthalpy loads lead to lower methane yields at both temperatures.
+Methane yield showed similar results as tar loading.  Results are shown in Figures \ref{maxrt_vs_ch4}, \ref{minrt_vs_ch4}, \ref{dh_vs_ch4_maxrt}, and \ref{dh_vs_ch4_minrt} in Appendix \ref{app_plots_ch4}.  ANOVA results, shown in Table \ref{anova_ch4}, show that both residence time and $\Delta H_{Max}$/A were statistically significant for methane yield at 1350  $^\circ$C as well as 1450  $^\circ$C.  Longer space times and lower enthalpy loads led to lower methane yields at both temperatures.
 
 \begin{table}
 	\centering
@@ -205,12 +219,19 @@ Methane yield showed similar results as tar loading.  Results are shown in Figur
 	\label{anova_ch4}
 \end{table}
  
-Like with tar loading, it's possible that the temperatures that the product gases are reaching are still at a low enough temperature where methane reforming is kinetically limited.  Increasing heat transfer in the reactor to the gas phase near the exit may raise the temperature of these gases to a point where methane reforming happens very rapidly and the dependency on space time may go away.  Further tests will need to be completed in the future to see if this is the case.
+Like with tar loading, it's possible that the temperatures that the product gases were reaching were still at a low enough temperature where methane reforming was kinetically limited.  Increasing heat transfer in the reactor to the gas phase near the exit may raise the temperature of these gases to a point where methane reforming happens very rapidly and the dependency on space time may go away.  Further tests will need to be completed in the future to see if this is the case.
 
+\subsection*{Normalized Heat Duty}
 
+One good test to see if the carbon conversions are driven by heat transfer is to normalize the heat duty by dividing it by the temperature of the reactor wall to the fourth power.  Since previous heat transfer tests have shown that the actual wall temperature is about 50 $^\circ$C lower than what is measured by the skin thermocouples during normal operation, the temperatures were lowered by 50 $^\circ$C.  Graphs showing carbon yield and carbon release plotted against this normalized heat duty are found in Appendix \ref{app_norm} in Figures \ref{normalized_cyield} and \ref{normalized_crel}.
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+\balance
 \section*{Conclusion}
 
-Experiments showed that residence time may influence carbon conversions much less than previously thought.  While residence time has a statistically significant effect on carbon yield and carbon release at 1450 $^\circ$C, the effect is opposite of what has been observed in the past and may be due to another factor correlated with residence time in the experimental design.  There is no statistically significant effect of residence time on either measure of conversion at 1350 $^\circ$C.  Enthalpy load, on the other hand, has a significant effect on carbon conversion at both temperatures.
+Experiments showed that residence time did not have an effect on carbon conversion.  While residence time showed a statistically significant effect on carbon yield and carbon release at 1450 $^\circ$C, the effect is opposite of what has been observed in the past and may be due to another untested factor correlated with residence time in the experimental design.  There was no statistically significant effect of residence time on either measure of conversion at 1350 $^\circ$C.  Heat duty, on the other hand, had a significant effect on carbon conversion at both temperatures.
 
 Residence time did, however, have an effect on tar loading at 1350 $^\circ$C and methane yield at both 1350 $^\circ$C and 1450 $^\circ$C.  Longer times led to lower amount of the undesired products.  Effects that enthalpy load had on tar and methane production mirrored those displayed by residence time.
 
@@ -219,6 +240,9 @@ Future experiments should be completed which will hold different factors constan
 \onecolumn
 \newpage
 \appendix
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section{Carbon Yield Plots}
 \label{app_plots_cyield}
@@ -329,7 +353,6 @@ Future experiments should be completed which will hold different factors constan
 \end{minipage}
 
 
-
 \begin{minipage}{\textwidth}
 \centering
 % dH/A vs X_good Colored by space_time %
@@ -339,7 +362,7 @@ Future experiments should be completed which will hold different factors constan
 		xlabel = $\Delta$H$_{Max}$/A (kW m$^{-2}$), 
 		ylabel= Carbon Yield,
 		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
-		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
 		colorbar horizontal, 
 		colorbar style = {
 			at={(1.15,-.35)},anchor=north,
@@ -365,7 +388,7 @@ Future experiments should be completed which will hold different factors constan
 		title =  1350 $^\circ$C,
 		xlabel = $\Delta$H$_{Max}$/A (kW m$^{-2}$), 
 		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
-		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
 ]
 	\addplot[
 		scatter, 
@@ -435,8 +458,8 @@ Future experiments should be completed which will hold different factors constan
 	\label{dh_vs_cyield_minrt}
 \end{minipage}
 
-
-
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section{Carbon Release Plots}
 \label{app_plots_crel}
@@ -494,8 +517,6 @@ Future experiments should be completed which will hold different factors constan
 \end{minipage}
 
 
-
-
 \begin{minipage}{\textwidth}
 \centering
 % Minimum Residence Time vs X_tot Colored by dH_max %
@@ -549,7 +570,6 @@ Future experiments should be completed which will hold different factors constan
 \end{minipage}
 
 
-
 \begin{minipage}{\textwidth}
 \centering
 % dH/A vs X_tot Colored by space_time %
@@ -559,7 +579,7 @@ Future experiments should be completed which will hold different factors constan
 		xlabel = $\Delta$H$_{Max}$/A (kW m$^{-2}$), 
 		ylabel= Carbon Release,
 		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
-		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
 		colorbar horizontal, 
 		colorbar style = {
 			at={(1.15,-.35)},anchor=north,
@@ -585,7 +605,7 @@ Future experiments should be completed which will hold different factors constan
 		title =  1350 $^\circ$C,
 		xlabel = $\Delta$H$_{Max}$/A (kW m$^{-2}$), 
 		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
-		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
 ]
 	\addplot[
 		scatter, 
@@ -655,6 +675,8 @@ Future experiments should be completed which will hold different factors constan
 	\label{dh_vs_crel_minrt}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section{Tar Loading Plots}
 \label{app_plots_tar}
@@ -871,6 +893,8 @@ Future experiments should be completed which will hold different factors constan
 	\label{dh_vs_tar_minrt}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section{Methane Yield Plots}
 \label{app_plots_ch4}
@@ -925,7 +949,7 @@ Future experiments should be completed which will hold different factors constan
 	{enthalpy_runs_1350.csv};
 	\end{axis}
 	\end{tikzpicture}
-	\captionof{figure}{Blah blah blah blah SDPFOICJPFOIJD}
+	\captionof{figure}{This plot showing methane yield vs. maximum residence time shows that there are effects on methane yield from both residence time and heat duty at both sets of temperatures.}
 	\label{maxrt_vs_ch4}
 \end{minipage}
 
@@ -980,7 +1004,7 @@ Future experiments should be completed which will hold different factors constan
 	{enthalpy_runs_1350.csv};
 	\end{axis}
 	\end{tikzpicture}
-	\captionof{figure}{Blah blah blah blah SDPFOICJPFOIJD}
+	\captionof{figure}{Methane yield plotted against minimum residence times shows a strong dependence on the minimum residence time.}
 	\label{minrt_vs_ch4}
 \end{minipage}
 
@@ -1036,7 +1060,7 @@ Future experiments should be completed which will hold different factors constan
 	{enthalpy_runs_1350.csv};
 	\end{axis}
 	\end{tikzpicture}
-	\captionof{figure}{Blah blah blah blah SDPFOICJPFOIJD}
+	\captionof{figure}{Methane yield plotted against $\Delta$H$_{Max}$/A and colored by maximum residence time.}
 	\label{dh_vs_ch4_maxrt}
 \end{minipage}
 
@@ -1090,8 +1114,66 @@ Future experiments should be completed which will hold different factors constan
 	{enthalpy_runs_1350.csv};
 	\end{axis}
 	\end{tikzpicture}
-	\captionof{figure}{Blah blah blah blah SDPFOICJPFOIJD}
+	\captionof{figure}{Methane yield plotted against $\Delta$H$_{Max}$/A and colored by minimum residence time.}
 	\label{dh_vs_ch4_minrt}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+\section{Temperature Normalized Heat Duty Plots}
+\label{app_norm}
+
+\begin{minipage}{\textwidth}
+\centering
+% dH/A vs Methane Yield Colored by minimum residence time %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		xlabel = $\frac{\Delta H_{Max}}{A T^4 \sigma}$, 
+		ylabel= Carbon Yield,
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=2}, 
+		scaled y ticks=false	
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = dH/A_normalized, 
+			y = X_good_avg, 
+			meta = tic510_sp]  
+	{enthalpy_runs.csv};
+	\end{axis}
+	\end{tikzpicture}
+	\captionof{figure}{Carbon yield is plotted against the heat duty which has been normalized by the temperature of the reactor wall to the fourth power.}
+	\label{normalized_cyield}
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\centering
+% dH/A vs Methane Yield Colored by minimum residence time %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		xlabel = $\frac{\Delta H_{Max}}{A T^4 \sigma}$, 
+		ylabel= Carbon Release,
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=2}, 
+		scaled y ticks=false	
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = dH/A_normalized, 
+			y = X_tot_avg, 
+			meta = tic510_sp]  
+	{enthalpy_runs.csv};
+	\end{axis}
+	\end{tikzpicture}
+	\captionof{figure}{Carbon release is plotted against the heat duty which has been normalized by the temperature of the reactor wall to the fourth power.}
+	\label{normalized_crel}
 \end{minipage}
 
 \newpage
@@ -1119,6 +1201,8 @@ Future experiments should be completed which will hold different factors constan
 \end{tabulary}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
 
 \section{Experimental Results}
 \label{app_results}
@@ -1155,5 +1239,41 @@ Run ID &  Temp. ($^\circ$C)  &  Max Res Time (s) &  Min Res Time (s) &  $\Delta$
 \end{tabulary}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+\section{Variable Legend}
+\label{app_var}
+
+
+\begin{minipage}{\textwidth}
+\centering
+\captionof{table}{}
+\begin{tabular}{r l}
+\toprule
+Variable					&	Definition	\\
+\midrule
+A						&	Surface area of the inside surface of the reactor tube		\\
+C$_{tar}	$				&	Tar loading in the product gas in mg Nm$^{-3}$	\\
+$\Delta$H$_{max}$			&	Maximum enthalpy change of the reactants assuming complete conversion	\\
+$\dot{m}_{i,out}$			&	Mass flow rate of specie $i$ flowing out of the reactor	\\
+$\dot{n}_{C_{biomass},in}$	&	Molar flow rate of carbon in the biomass flowing into the reactor	\\
+$\dot{n}_{C_{gas},out}$		&	Molar flow rate of carbon in all gaseous species flowing out of the reactor	\\
+$\dot{n}_{i,in}	$			&	Molar flow rate of gaseous species $i$ into the reactor	\\
+$\dot{n}_{i,out}$			&	Molar flow rate of gaseous species $i$ out of the reactor	\\
+P						&	Pressure	\\
+P${i}$					&	Partial pressure of specie $i$	\\
+P$_{std}$					&	Standard pressure	\\
+T						&	Temperature	\\
+T$_{std}$					&	Standard temperature	\\
+t$_{res,max}$				& 	Maximum residence time, or space time	\\
+t$_{res,min}$				&	Minimum possible residence time	\\
+$\dot{V}$					&	Volumetric flow rate	\\
+X$_{C}$					&	Carbon release from carbon in the biomass	\\
+Y$_{CH_4}$				&	Methane yield from carbon in the biomass \\
+Y$_{CO+CO_2}	$			&	Carbon yield to CO and CO$_2$ from carbon in the biomass	\\
+\bottomrule
+\end{tabular}
+\end{minipage}
 \end{document}
 
