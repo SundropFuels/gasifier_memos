@@ -13,7 +13,8 @@
 \usepackage{pgfplots}
 \usepackage{tabulary}
 \usepackage{placeins}
-
+%\usepackage{breqn}
+%
 \marginsize{.75in}{.75in}{.75in}{1in}
 \pagestyle{fancy}
 \rhead{\today}
@@ -87,6 +88,30 @@ Steam temperature was set at 500 $^\circ$C, and makeup nitrogen was uniformly ra
 %%%%%%%%%%%%%%%%%
 
 \subsection*{Calculations}
+
+The maximum and minimum residence times are both used for analyses in this memo.  Maximum residence time, sometimes referred to as space time, is calculated with Equation \ref{eq_maxrt}, which uses the inlet temperature of all reactants going into the reactor to calculate the volumetric flow rate of inlet gas.  Minimum residence time, calculated with Equation \ref{eq_minrt}, and uses outlet flow rates and the reactor wall temperature.
+
+\begin{equation}
+	t_{max}= \frac{VP}{\sum_{i \ne biomass}\dot{n}_{i}RT_{mix}}
+	\label{eq_maxrt}
+\end{equation}
+
+\begin{equation}
+	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
+	\label{eq_minrt}
+\end{equation}
+
+The heat duty is calculated using the maximum possibly enthalpy change between the reactants and products assuming complete conversion and the reactor wall temperature in Equation \ref{eq_dh}.
+
+\begin{equation}
+	\Delta H_{max} = \sum_{products}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{out}}C_{p,i}dT\right] 
+	\label{eq_dh}
+\end{equation} 
+\begin{center}
+\begin{math}
+ - \sum_{reactants}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{in,i}}C_{p,i}dT\right]
+\end{math}
+\end{center}
 
 Two measures of carbon conversion are discussed in this memo.  The first is the fraction of carbon in the biomass which is converted to either CO or CO$_2$, as these are the two species which are the precursor to synthetic liquid products in the planned commercial process.  This measure is refered to as carbon yield, although it has been referred to in the past as good conversion, and is given in Equation \ref{eq_c_yield}.
 
@@ -226,6 +251,8 @@ As with the tar cracking reactions, methane cracking reactions do not have appre
 \subsection*{Normalized Heat Duty}
 
 One good test to see if the carbon conversions are driven by heat transfer is to normalize the heat duty by dividing it by the temperature of the reactor wall to the fourth power.  Since previous heat transfer tests have shown that the actual wall temperature is about 50 $^\circ$C lower than what is measured by the skin thermocouples during normal operation, the temperatures were lowered by 50 $^\circ$C.  Graphs showing carbon yield and carbon release plotted against this normalized heat duty are found in Appendix \ref{app_norm} in Figures \ref{normalized_cyield} and \ref{normalized_crel}.
+
+For carbon yield, the data collapses together a little bit, and begins to form a single function for both 1350 and 1450 $^\circ$C data.  This indicates that the heat duty had a large role in the carbon yield, but there were other factors playing a role in this measure.  This could be because the heat duty normalization does not take convection into account.  The carbon release, on the other hand, appears to line up between 1350 $^\circ$C and 1450 $^\circ$C very well.  These two plots show that the heat transfer from radiation is a primary driving force in the laboratory gasifier, but it was not the sole driving force for these experiments.
 
 %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%
