@@ -1,0 +1,841 @@
+\documentclass[11pt,twocolumn]{article}
+\usepackage{caption}
+\usepackage{anysize}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage{balance}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepackage{tabulary}
+\usepackage{placeins}
+
+\marginsize{.75in}{.75in}{.75in}{1in}
+\pagestyle{fancy}
+\rhead{\today}
+\lhead{\includegraphics[height=2.0cm]{../logo.jpg}}
+\rfoot{\thepage}
+\cfoot{}
+\renewcommand{\headrulewidth}{0pt} %removes line from fancy header
+\renewcommand{\thispagestyle}[1]{} %placers header and footer on first page 
+\renewcommand{\abstractname}{Summary}
+\setlength{\columnsep}{25pt}
+\date{}
+\title{Laboratory Gasification Memo\\Partial Pressure of Steam and Residence Time Experiments \vspace{-6ex}}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    
+An experimental campaign was completed to explore the suspected dependence of carbon conversion on the partial pressure of steam as well as the residence time.  Partial pressure of CO$_2$ was held constant at 7 psi, and total pressure was set to 50 psig.  It was found that the partial pressure of steam had an effect on both carbon yield and carbon release at 1350 $^\circ$C and 1450 $^\circ$C but did not have a statistically significant effect on methane or tar yields at either temperature.  The maximum residence time had an effect on carbon conversions only at 1450 $^\circ$C, and shorter residence times lead to higher conversions in those cases.  Possible explanations and recommendations for further analysis and experimentation are given in this memo.
+
+    \end{abstract}
+  \end{@twocolumnfalse}
+]
+l
+\section*{Experimental Methods}
+
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale = 1.5]
+	\draw (0,0) -- (3,0);
+	\draw (0,0) -- (0,3);
+	\draw (0.5,-0.1) -- (0.5,0.1) node[below = 8pt] {1.8}
+		(1.5,-0.1) -- (1.5,0.1) node[below = 8pt] {2.2} node[below = 20pt]{t$_{res,max}$ (s)}
+		(2.5,-0.1) -- (2.5,0.1) node[below = 8pt] {2.6}
+		(-0.1,0.5) -- (0.1,0.5) node[left = 6pt] {26}
+		(-0.1,1.5) -- (0.1,1.5) node[left = 6pt] {30} node[xshift = -30pt, rotate = 90]{P$_{H_2O}$ (psi)}
+		(-0.1,2.5) -- (0.1,2.5) node[left = 6pt] {34};
+	\filldraw [black] (0.5,0.5) circle (1pt)
+		(2.5,0.5) circle (1pt)
+		(1.5,1.5) circle (1pt)
+		(0.5,2.5) circle (1pt)
+		(2.5,2.5) circle (1pt);
+\end{tikzpicture}
+\caption{Two factorial experimental matrix used to vary maximum residence time and partial pressure of water.}
+\label{factorial}
+\end{figure}
+
+Because of the difficulty in manually designing an experimental matrix in which the $\Delta$H$_{max}$/A is explicitly controlled as a factor, a large number of potential inlet conditions were simulated using Sundrop Fuel's analysis software.  Argon flow rate was set to 2 SLPM, and total pressure was 50 psig.  The biomass mass flow rate was randomly chosen using an even distribution between 2 and 4 lbs/hr.  Steam flow rate and temperatures were chosen in the same manner between 12 and 24 mL/min and 300 and 500 $^\circ$C, respectively.  A makeup flow rate of nitrogen was set to be between 0 and 20 SLPM.  The total flow rate of entrainment gas was set such that there were 6 SLPM for every lb/hr of biomass flow.
+
+Once the total inlet molar flow rate was known for the potential run, the portion of the entrainment gas which was CO$_2$ was set using Equation \ref{eq_co2} such that the partial pressure of CO$_2$ was 7 psi.   The remainder of the entrainment gas flow rate was made to be nitrogen.
+
+\begin{equation}
+\dot{n}_{CO_2} = \dot{n}_{tot}\frac{P_{CO_2}}{P_{tot}}
+\label{eq_co2}
+\end{equation}
+
+Temperatures for the outer reactor wall were set to be 1350 $^\circ$C and 1450 $^\circ$C for two separate experimental matrices.  The inner diameter of the tube was 1.5".  The maximum residence time, or space time, was calculated assuming inlet conditions using Equation \ref{eq_maxrt}.  Once the experiment had been completed, the minimum residence time was calculated using outlet molar flow rates and assuming the product gases immediately reached the outer wall temperature of middle of the SiC tube.  Equation \ref{eq_minrt} calculates the minimum residence time.
+
+\begin{equation}
+	t_{max}= \frac{VP}{\sum_{i \ne biomass}\dot{n}_{i}RT_{mix}}
+	\label{eq_maxrt}
+\end{equation}
+
+\begin{equation}
+	t_{min} = \frac{VP}{(\sum_{i \ne H_{2}O}\dot{n}_{i}+\dot{n}_{H_{2}O,0})RT_{wall}}
+	\label{eq_minrt}
+\end{equation}
+
+Before the experiment took place, the heat duty ($\Delta$H$_{max}$/A) was with Equation \ref{eq_dh} calculated assuming complete conversion would take place and the products reached the reactor outer wall temperature.  Potential experiments were filtered such that the $\Delta$H$_{max}$/A was near 60 kW m$^{-2}$.  More runs were filtered out to ensure that the adiabatic mixing temperature of the reactants would not get near the condensation temperature of steam at 50 psig (about 148 $^\circ$C).  Finally, points were chosen to match the desired targets for space time and total inlet steam partial pressure shown in Figure \ref{factorial}.  All experimental set points can be found in Appendix \ref{app_exp}.
+
+%\begin{minipage}{\columnwidth}
+\begin{equation}
+	\Delta H_{max} = \sum_{products}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{out}}C_{p,i}dT\right] 
+	\label{eq_dh}
+\end{equation} 
+\begin{center}
+\begin{math}
+ - \sum_{reactants}n_{i}\left[\Delta H_{i}^{\circ}+\int_{T^{\circ}}^{T_{in,i}}C_{p,i}dT\right]
+\end{math}
+\end{center}
+%\end{minipage}
+
+
+Two measures of carbon conversion are discussed in this memo.  The first is the fraction of carbon in the biomass which is converted to either CO or CO$_2$, as these are the two species which are the precursor to synthetic liquid products in the planned commercial process.  This measure is referred to as carbon yield, although it has been referred to in the past as good conversion, and is given in Equation \ref{eq_c_yield}.
+
+\begin{equation}
+	Y_{CO+CO_2} = \frac{\dot{n}_{CO,out}+\dot{n}_{CO_2,out} - \dot{n}_{CO_2,in}}{\dot{n}_{C_{biomass},in}}
+	\label{eq_c_yield}
+\end{equation}
+
+The second measure is carbon release, which has been referred to in the past as total conversion.  This was calculated using Equation \ref{eq_c_release} and is a representation of the fraction of carbon in the biomass which is converted to any gaseous species detected by the mass spectrometer.
+
+\begin{equation}
+	X_{C} = \frac{\dot{n}_{C_{gas},out}- \dot{n}_{CO_2,in}}{\dot{n}_{C_{biomass},in}}
+	\label{eq_c_release}
+\end{equation}
+
+Tar loading is a measure of the mass of tars detected by the mass spectrometer (C$_6$H$_6$, C$_7$H$_8$, and C$_{10}$H$_8$) in a standard volume of product gas.  This value was calculated using Equation \ref{eq_tar}.
+
+\begin{equation}
+	C_{tar} = \frac{\dot{m}_{C_6H_6}+\dot{m}_{C_7H_8} + \dot{m}_{C_{10}H_8}}{\dot{V}(\frac{P}{P_{std}})(\frac{T_{std}}{T})}
+	\label{eq_tar}
+\end{equation}
+
+Finally, the last measure discussed in this memo is methane yield.  It is a representation of the fraction of carbon in the biomass which is converted to methane, and it was calculated using Equation \ref{eq_ch4}.  A table defining all variables used in this memo can be found in Appendix \ref{app_var}.
+
+\begin{equation}
+	Y_{CH_4} = \frac{\dot{n}_{CH_4}}{\dot{n}_{C_{biomass},in}}
+	\label{eq_ch4}
+\end{equation}
+
+
+\section*{Results and Discussion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Carbon Yield}
+
+ANOVA results for carbon yield, given in Tables \ref{anova_cyield} and \ref{anova_cyield_tmin}, showed that there was an effect of partial pressure of steam on conversion of biomass carbon to CO and CO$_2$ at both 1350 and 1450 $^\circ$C.  There were effects of both the minimum and maximum residence times on the carbon yield at 1450 $^\circ$C, but neither measure had an effect at 1350 $^\circ$C.  At both temperatures, a shorter residence time led to higher carbon yields, as shown in the plots in Appendix \ref{app_plots_cyield}. At 1350 $^\circ$C, there seemed to be an interaction effect between the minimum residence time and the partial pressure of steam on the carbon yield.
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of designed experimental campaign for carbon yield.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,max}$						&	0.1974						&	\textcolor{red}{0.0057}	\\
+		P$_{H_2O}$						&	\textcolor{red}{0.0039}			&	\textcolor{red}{0.0019}	\\
+		t$_{res,max}\times$ P$_{H_2O}$		&	0.0812						&	0.7289				\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_cyield}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of minimum residence time and partial pressure of water on carbon yield.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,min}$						&	0.0694						&	\textcolor{red}{0.0001}	\\
+		P$_{H_2O}$						&	\textcolor{red}{0.0060}			&	\textcolor{red}{\textless 0.0001}	\\
+		t$_{res,min}\times$ P$_{H_2O}$		&	\textcolor{red}{0.0400}			&	0.2459				\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_cyield_tmin}
+\end{table}
+
+It's interesting to note that the results for both residence times mirrored what was seen in a previous experimental campaign where maximum residence time and $\Delta$H$_{max}$/A were explicitly controlled as factors.  The results sparked interest previously, because general kinetic insight would lead one to predict that longer space times should lead to better conversions, not vice versa.  The fact that the same results were observed in a different experimental matrix hints at the possibility that there was another factor effecting the carbon yields that was correlated with the residence times.
+
+One possible factor that would be very tightly correlated with the residence time is the gas velocity in the reactor.  Simplifying the flow pattern in the reactor and assuming plug flow, the minimum and maximum velocities are functions of the reactor length together with the maximum and minimum residence times, respectively.  These relationships are shown in Equations \ref{eq_umin} and \ref{eq_umax}.  The minimum velocity would be closest to what is seen at the entrance of the reactor, and the maximum velocity would be nearest to what may be occurring at the outlet of the reactor.
+
+
+\begin{equation}
+u_{min} = \frac{l}{t_{res,max}}
+\label{eq_umin}
+\end{equation}
+
+\begin{equation}
+u_{max} = \frac{l}{t_{res,min}}
+\label{eq_umax}
+\end{equation}
+
+If the velocity of the gas was affecting the conversion of carbon in the biomass to CO and CO$_2$, it could have been due to heat transfer effects; higher gas velocities would lead to higher convective heat transfer coefficients.  These results may be further evidence that the overall heat transfer rate between the tube wall and the reactants is a more important driving force in carbon conversion than the residence time.  This conclusion could be further supported through estimating radiative and convective heat transfer coefficients for completed gasification experiments with computer models and seeing the effect the coefficients have on carbon yields.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Carbon Release}
+
+ANOVA results for the effects of residence times and partial pressure of steam on total carbon release are given in Tables \ref{anova_release} and \ref{anova_release_tmin}.  Similar to carbon yield, carbon release had a dependence on partial pressure of water at both 1350 and 1450 $^\circ$C.  Both maximum and minimum residence time affected the carbon yield at 1450 $^\circ$C.  However, unlike carbon yield, carbon release showed a statistically significant dependence on the minimum residence time at 1350 $^\circ$C that was not present for the maximum residence time.  Plots in Appendix \ref{app_plots_crelease} show results for the experiments.
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of designed experimental campaign for carbon release.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,max}$						&	0.0804						&	\textcolor{red}{0.0039}	\\
+		P$_{H_2O}$						&	\textcolor{red}{0.0256}			&	\textcolor{red}{0.0051}	\\
+		t$_{res,max}\times$ P$_{H_2O}$		&	0.8947						&	0.7544				\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_release}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of minimum residence time and partial pressure of water on carbon release.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,min}$						&	\textcolor{red}{0.0363}			&	\textcolor{red}{\textless 0.0001}	\\
+		P$_{H_2O}$						&	\textcolor{red}{0.0388}			&	\textcolor{red}{0.0002}	\\
+		t$_{res,min}\times$ P$_{H_2O}$		&	0.4340						&	0.1932				\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_release_tmin}
+\end{table}
+
+This apparent dependence of the total carbon release on only the minimum residence time could be a result of the fact that the minimum residence time is calculated using conditions at the exit of the reactor.  Higher conversions would mean more gas was released from the solids, leading to higher volumetric flow rates and higher velocities at the exit of the reactor.  Although, if there was an actual physical effect, it could give interesting insight into the importance of different heat transfer modes in different parts of the reactor.  
+
+It is believed, and has been supported with computer models, that there is a zone at the entrance of the reactor which resembles a continuous stirred tank reactor.  This would mean this zone has very turbulent gas flow patterns and higher convective heat transfer coefficients.  The exit of the reactor probably has more of a laminar flow pattern, which would lead to very low convective heat transfer rates.  Increasing the initial velocity may have less of an effect on conversion, because the convective heat transfer is already higher at the entrance of the reactor.  Increasing the velocity at the exit of the reactor, where convective heat transfer is likely low because of the laminar flow pattern, could have more of a profound effect on carbon conversion.  Also, the fact that the minimum residence time was much more statistically significant at 1450 $^\circ$C could be due to the fact that higher conversions at this temperature led to much lower amounts of solids at the bottom of the reactor and increased the importance of convective heat transfer to the gas from the tube wall in this area.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Tar Loading}
+
+ANOVA results, shown in Tables \ref{anova_tar} and \ref{anova_tar_tmin}, did not show any effects from minimum residence time, maximum residience time, or the partial pressure of steam on the production of tars.  Results are plotted in Appendix \ref{app_plots_tar}.
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of designed experimental campaign for tar loading.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,max}$						&	0.8412						&	0.4901			\\
+		P$_{H_2O}$						&	0.4180						&	0.5533			\\
+		t$_{res,max}\times$ P$_{H_2O}$		&	0.2223						&	0.4228			\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_tar}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of minimum residence time and partial pressure of water on tar loading.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C			\\
+		\midrule
+		t$_{res,min}$						&	0.7755					&	0.3675			\\
+		P$_{H_2O}$						&	0.4392					&	0.4980			\\
+		t$_{res,min}\times$ P$_{H_2O}$		&	0.3548					&	0.4106			\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_tar_tmin}
+\end{table}
+
+The results differed slightly with what was seen in a previously completed experimental matrix changing $\Delta$H$_{max}$/A and maximum space time.  These experiments showed an effect of residence time on the tar loading at 1350 $^\circ$C such that longer space times led to lower tar levels.  However, that matrix had wider ranging maximum space times between 1.6 seconds and 3.1 seconds compared to 1.8 seconds and 2.8 seconds for this set of experiments.  This was because of the limitations this campaign set on how much maximum residence time could be adjusted on the system with a fixed $\Delta$H$_{max}$/A.  It's possible that an effect would have been apparent if shorter residence times could have been achieved in these tests. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Methane Yield}
+
+Similarly to tar loading, methane yield did not show any dependencies on the factors tested in these experiments.  Results from ANOVA are in Tables \ref{anova_ch4} and \ref{anova_ch4_tmin}, and they are plotted in Appendix \ref{app_plots_ch4}.  Again, these results differed from the previously completed experimental matrix where residence time had an effect on methane production at both temperatures, and longer residence times led to less methane.  It's possible that having a wider range of residence times could have made an affect apparent.
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of designed experimental campaign for methane yield.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C		\\
+		\midrule
+		t$_{res,max}$						&	0.0573						&	0.7161			\\
+		P$_{H_2O}$						&	0.0678						&	0.3773			\\
+		t$_{res,max}\times$ P$_{H_2O}$		&	0.1209						&	0.5752			\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_ch4}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{ANOVA results on effects of minimum residence time and partial pressure of water on methane yield.}
+	\begin{tabular}{r c c}
+		\toprule
+		\multicolumn{1}{c}{\multirow{2}{*}{Effect}}		& 	\multicolumn{2}{c}{Prob \textless F	}	\\
+		{}								&	1350 $^\circ$C					&	1450 $^\circ$C		\\
+		\midrule
+		t$_{res,min}$						&	\textcolor{red}{0.0482}		&	0.6862			\\
+		P$_{H_2O}$						&	0.1054					&	0.3490			\\
+		t$_{res,min}\times$ P$_{H_2O}$		&	0.3255					&	0.7152			\\
+		\bottomrule
+	\end{tabular}
+	\label{anova_ch4_tmin}
+\end{table}
+
+\section*{Conclusion}
+
+The experimental campaign showed the effects of residence time and partial pressure of steam on the gasification of biomass.  Partial pressure of steam had an effect on both carbon yield and carbon release at 1350 and 1450 $^\circ$C.  Maximum residence time only had an effect on carbon yield and carbon release at 1450 $^\circ$C.  However, minimum residence time had an effect on the total carbon release at both temperatures.  Neither residence time or partial pressure of steam had an effect on methane or tar yields in this set of experiments.
+\balance
+
+Further analysis and experiments can shed some light on the physical effects behind the results.  Better understanding what the convective heat transfer in different areas within the reactor could shed some light on why it appears there are decreasing conversions with increasing residence times.  
+
+\newpage
+\appendix
+\onecolumn
+
+\section{Carbon Yield Plots}
+\label{app_plots_cyield}
+
+\begin{minipage}{\textwidth}
+\centering
+% Maximum Residence Time vs X_good Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		ylabel= Carbon Yield,
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = X_good_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = X_good_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Carbon yield plotted against maximum residence time and colored by the partial pressure of water.  At 1450 $^\circ$C, there was a dependence on both maximum residence time and partial pressure of steam.  However, at 1350 $^\circ$C, there was only a dependence on partial pressure of steam.  These observations are backed up by ANOVA results.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+
+\begin{minipage}{\textwidth}
+\centering
+% Minimum Residence Time vs X_good Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		ylabel= Carbon Yield,
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = X_good_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = X_good_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Carbon yield plotted against minimum residence time and colored by partial pressure of steam.  Similar results were observed when looking at minimum residence time rather than maximum residence time.  ANOVA results showed an interaction effect between the minimum residence time and partial pressure of steam at 1350 $^\circ$C.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Carbon Release Plots}
+\label{app_plots_crelease}
+
+\begin{minipage}{\textwidth}
+\centering
+% Maximum Residence Time vs X_tot Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		ylabel= Carbon Release,
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = X_tot_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=1}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = X_tot_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Total carbon release from biomass plotted against maximum residence time, colored by the partial pressure of water.  Similar to carbon yield, carbon release showed dependence on both partial pressure of steam and maximum residence time only at 1450 $^\circ$C.  ANOVA results showed a dependence on only partial pressure of steam at 1350 $^\circ$C.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+
+\begin{minipage}{\textwidth}
+\centering
+% Minimum Residence Time vs X_tot Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		ylabel= Carbon Release,
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = X_tot_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = X_tot_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Carbon release vs. minimum residence time and colored according to partial pressure of steam.  Unlike the maximum residence time, minimum residence time was found to be an important factor in carbon release at both 1350 $^\circ$C and 1450 $^\circ$C according to ANOVA.  Partial pressure of steam also showed an effect on carbon release at both temperatures.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tar Loading Plots}
+\label{app_plots_tar}
+
+\begin{minipage}{\textwidth}
+\centering
+% Maximum Residence Time vs Tar Yield Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		ylabel= Tar Loading (mg Nm$^{-3}$),
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill, precision=0}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = tar_loading_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill, precision=0}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg,, 
+			y = tar_loading_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Tar loading vs. maximum residence time, colored by the partial pressure of steam.  ANOVA showed that neither partial pressure of steam or maximum residence time had an effect on the tar loading at either 1350 $^\circ$C or 1450 $^\circ$C.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+
+\begin{minipage}{\textwidth}
+\centering
+% Minimum Residence Time vs Tar Yield Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		ylabel= Tar Loading (mg Nm$^{-3}$),
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill, precision=0}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = tar_loading_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed zerofill, precision=0}, 
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = tar_loading_avg, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Tar loading plotted against minimum residence time and colored against partial pressure of steam.  Again, there were no statistically significant effects found from ANOVA results at either temperature.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methane Yield Plots}
+\label{app_plots_ch4}
+
+\begin{minipage}{\textwidth}
+\centering
+% Maximum Residence Time vs ch4 yield Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		ylabel= Methane Yield,
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=3}, 
+		scaled y ticks=false,
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = CH4_yield_corr, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Maximum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=3}, 
+		scaled y ticks=false,
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = space_time_avg, 
+			y = CH4_yield_corr, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Methane yield vs. maximum residence time, colored by partial pressure of water.  ANOVA results showed no statistically significant dependence of methane yeild on either maximum residence time or partial pressure of steam.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+
+\begin{minipage}{\textwidth}
+\centering
+% Minimum Residence Time vs ch4 yield Colored by ppH2O %
+	\begin{tikzpicture}
+	\begin{axis} [scale = .9,
+		title =  1450 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		ylabel= Methane Yield,
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=3}, 
+		scaled y ticks=false,
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}, 
+		colorbar horizontal, 
+		colorbar style = {
+			at={(1.15,-.35)},anchor=north,
+			xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=0}, 
+			xlabel=P$_{H_2O}$ (psi),
+			xlabel style = {yshift = 1.7cm}}
+]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = CH4_yield_corr, 
+			meta = pp_H2O_avg]  
+	{pH2O_1450.csv};
+	\end{axis}
+	\begin{axis} [scale = .9, at={(7.5cm,0)},
+		title =  1350 $^\circ$C,
+		xlabel = Minimum Residence Time (s), 
+		yticklabel style = {/pgf/number format/.cd,fixed, zerofill, precision=3}, 
+		scaled y ticks=false,
+		xticklabel style = {/pgf/number format/.cd,fixed zerofill,precision=2}]
+	\addplot[
+		scatter, 
+		only marks, 
+		scatter src = explicit,] 
+		table [
+			col sep = comma,
+			x = tau_min, 
+			y = CH4_yield_corr, 
+			meta = pp_H2O_avg]  
+	{pH2O_1350.csv};
+	\end{axis}
+
+	\end{tikzpicture}
+	\captionof{figure}{Methane yield plotted against minimum residence time and colored according to partial pressure of steam.  The only significant effect found through ANOVA was minimum residence time at 1350 $^\circ$C.}
+	\label{maxrt_vs_cyield}
+\end{minipage}
+
+
+
+
+\section{Experimental Setpoints}
+\begin{minipage}{\textwidth}
+\captionof{table}{Setpoints for partial pressure of steam vs. gas velocity experiments.  Pressure is 50 psig, and argon flow is 2 SLPM for all runs.  Partial pressure of CO$_2$ is 7 psi, and $\Delta$H$_{Max}$/A is .}
+\label{app_exp}
+\begin{tabulary}{\linewidth}{C C C C C C C C C}
+	\toprule
+	Target P$_{H_2O}$ (psi) 		& Target t$_{res,min}$ (s)		& Temp. ($^\circ$C)	& Biomass (lb/hr)	& Ent. N$_2$ (SLPM)	& Ent. CO$_2$ (SLPM)	& Makeup N$_2$ (SLPM)	& Steam (g/min)	& Steam ($^\circ$C)	\\
+	\midrule
+	26						& 2.6				& 1450			& 3.2			& 14.4			& 4.7				& 5.1				& 12.9			& 433	\\
+	26						& 1.8				& 1450			& 2.4			& 8.1			& 6.5				& 19.7				& 17.9			& 483	\\
+	30						& 2.2				& 1450			& 3.0			& 12.9			& 5.0				& 5.0				& 16.0			& 486	\\
+	34						& 2.6				& 1450			& 3.0			& 13.4			& 4.7				& 0					& 17.0			& 354	\\
+	34						& 1.8				& 1450			& 2.5			& 8.4			& 6.3				& 10.9				& 22.9			& 411	\\				
+	26						& 2.6				& 1350			& 3.0			& 11.8			& 6.0				& 6.7				& 21.5			& 463	\\
+	26						& 1.8				& 1350			& 2.7			& 9.6			& 6.7				& 18.9				& 18.5			& 449	\\
+	30						& 2.2				& 1350			& 3.1			& 13.4			& 5.4				& 6.0				& 17.4			& 404	\\
+	34						& 2.6				& 1350			& 3.2			& 14.1			& 5.0				& 1.2				& 18.0			& 306	\\
+	34						& 1.8				& 1350			& 3.4			& 16.1			& 4.6				& 2.6				& 12.5			& 490	\\
+	\bottomrule					
+\end{tabulary}
+\end{minipage}
+
+\section{Experimental Results}
+\label{app_results}
+
+\begin{minipage}{\textwidth}
+\captionof{table}{Selected results from the experimental campaign.}
+\begin{tabulary}{\linewidth}{C C C C C C C C C C}
+\toprule
+Run ID &  Temp. ($^\circ$C)  &  Max Res Time (s) &  Min Res Time (s) &  P$_{H_2O}$	 (psi)	&	$\Delta$H$_{max}$/A (kW m$^{-2}$) &  Carbon Yield \hspace{5pt} &  Carbon Release &  Tar Loading (mg Nm$^{-3}$) &  CH$_4$ Yield \\
+\midrule
+
+561  &       1450 &            2.24 &    0.365 &      30.9	&	58.5 &       0.741 &      0.776 &             40.1 &          0.0182 \\
+562  &       1450 &            1.82 &    0.334 &      34.5	&	58.4 &       0.791 &      0.828 &             16.6 &          0.0191 \\
+563  &       1450 &            2.64 &    0.371 &      26.7	&	60.1 &       0.730 &      0.766 &             37.4 &          0.0190 \\
+564  &       1450 &            1.82 &    0.340 &      26.4	&	57.4 &       0.755 &      0.794 &             7.91 &          0.0178 \\
+565  &       1450 &            2.62 &    0.372 &      35.2	&	57.8 &       0.774 &      0.803 &             6.36 &          0.0141 \\
+566  &       1450 &            2.64 &    0.373 &      26.8	&	59.6 &       0.727 &      0.763 &             8.43 &          0.0190 \\
+567  &       1450 &            2.22 &    0.364 &      30.8	&	58.3 &       0.746 &      0.778 &             3.88 &          0.0160 \\
+568  &       1450 &            1.82 &    0.332 &      34.6	&	58.4 &       0.791 &      0.826 &             2.86 &          0.0175 \\
+569  &       1450 &            2.63 &    0.379 &      35.3	&	58.0 &       0.749 &      0.782 &             6.17 &          0.0186 \\
+570  &       1450 &            1.82 &    0.338 &      26.4	&	57.8 &       0.757 &      0.798 &             7.55 &          0.0194 \\
+571  &       1450 &            2.22 &    0.361 &      30.7	&	58.6 &       0.748 &      0.782 &             8.37 &          0.0180 \\
+572  &       1350 &            2.23 &    0.385 &      31.1	&	58.7 &       0.652 &      0.734 &              598 &          0.0595 \\
+573  &       1350 &            1.82 &    0.358 &      34.4	&	59.4 &       0.669 &      0.761 &            1190 &          0.0668 \\
+574  &       1350 &            2.59 &    0.411 &      27.4	&	58.5 &       0.644 &      0.720 &              769 &          0.0546 \\
+575  &       1350 &            2.59 &    0.391 &      34.8	&	59.3 &       0.655 &      0.748 &            1510 &          0.0673 \\
+576  &       1350 &            1.82 &    0.356 &      26.7	&	57.9 &       0.647 &      0.746 &            1350 &          0.0669 \\
+577  &       1350 &            2.23 &    0.380 &      31.3	&	59.3 &       0.654 &      0.746 &            1450 &          0.0650 \\
+578  &       1350 &            1.84 &    0.360 &      26.7	&	58.6 &       0.631 &      0.721 &            1030 &          0.0613 \\
+579  &       1350 &            2.59 &    0.394 &      34.5	&	59.0 &       0.652 &      0.735 &            1140 &          0.0605 \\
+580  &       1350 &            1.83 &    0.362 &      34.5	&	59.2 &       0.666 &      0.753 &            1000 &          0.0633 \\
+581  &       1350 &            2.58 &    0.408 &      27.4	&	58.8 &       0.645 &      0.725 &            1030 &          0.0565 \\
+582  &       1350 &            2.24 &    0.387 &      31.0	&	58.8 &       0.641 &      0.721 &              873 &          0.0580 \\
+
+\bottomrule
+\end{tabulary}
+\end{minipage}
+
+
+
+\section{Variable Legend}
+\label{app_var}
+
+
+\begin{minipage}{\textwidth}
+\centering
+\captionof{table}{}
+\begin{tabular}{r l}
+\toprule
+Variable					&	Definition	\\
+\midrule
+A						&	Surface area of the inside surface of the reactor tube		\\
+C$_{tar}	$				&	Tar loading in the product gas in mg Nm$^{-3}$	\\
+$\Delta$H$_{max}$			&	Maximum enthalpy change of the reactants assuming complete conversion	\\
+$\dot{m}_{i,out}$			&	Mass flow rate of species $i$ flowing out of the reactor	\\
+$\dot{n}_{C_{biomass},in}$	&	Molar flow rate of carbon in the biomass flowing into the reactor	\\
+$\dot{n}_{C_{gas},out}$		&	Molar flow rate of carbon in all gaseous species flowing out of the reactor	\\
+$\dot{n}_{i,in}	$			&	Molar flow rate of gaseous species $i$ into the reactor	\\
+$\dot{n}_{i,out}$			&	Molar flow rate of gaseous species $i$ out of the reactor	\\
+P						&	Pressure	\\
+P${i}$					&	Partial pressure of species $i$	\\
+P$_{std}$					&	Standard pressure	\\
+T						&	Temperature	\\
+T$_{mix}$				&	Adiabatic mixing temperature of all reactants, excluding biomass, at the reactor inlet \\
+T$_{std}$					&	Standard temperature	\\
+t$_{res,max}$				& 	Maximum residence time, or space time	\\
+t$_{res,min}$				&	Minimum possible residence time	\\
+$\dot{V}$					&	Volumetric flow rate	\\
+X$_{C}$					&	Carbon release from carbon in the biomass	\\
+Y$_{CH_4}$				&	Methane yield from carbon in the biomass \\
+Y$_{CO+CO_2}	$			&	Carbon yield to CO and CO$_2$ from carbon in the biomass	\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\end{document}
+
